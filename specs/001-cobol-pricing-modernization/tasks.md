@@ -33,8 +33,11 @@ flowchart TD
   - Owner: Claude
   - Evidence: `docs/cobol-analysis/program-inventory.md`. Covers all files in `upload/` (26 source files: 9 programs, 16 copybooks, plus the `OMGPR_Field_Inventory.xlsx` reference workbook), including the four programs added mid-analysis (`A6O012U`, `A6O013U`, `A6O016U`, `CUP120`). CONFIRMED/INFERRED/BLOCKED labels used throughout; consolidated missing-dependency list in §7 (notably `A6O015U`, `CUS120`, `A6P001WB`, and ~135 DB2 tables with no supplied DCLGEN).
 
-- [ ] T002 [P] [CLAUDE] Create `docs/cobol-analysis/call-graph.md` with CICS links, request/response structures, routing conditions, and unresolved targets.
+- [x] T002 [P] [CLAUDE] Create `docs/cobol-analysis/call-graph.md` with CICS links, request/response structures, routing conditions, and unresolved targets.
   - Depends on: none
+  - Owner: Claude
+  - Evidence: `docs/cobol-analysis/call-graph.md` — standalone artifact (not embedded in program-inventory.md), 7 edge-by-edge rules (R-CALL-001..007) re-verified directly from A6X01.CBL, A6O011U.CBL, CUP100's CUP120 call site, and A6U01's NDP call site (all re-read for this task, not carried forward from T001's summary), plus a consolidated unresolved-targets table. Findings include: A6X01's own header comment claims a conditional product-type lookup that the code no longer performs (now unconditional); the routing letter 'O' has three unrelated meanings across this codebase (kit-product-type here vs. two other domains elsewhere) disambiguated explicitly; A6O011U's exact 3-stage kit orchestration (category lookup, then explosion, then per-component pricing looped once per exploded item); two edges (A6U01->A6P001WB NDP call, CUP100->CUP120) are raw dynamic CALLs with no CICS-level failure trap, structurally different from every LINK-based edge; the NDP path's on/off feature-flag check is present in source but entirely commented out, so it now fires unconditionally; CUS120 (behind the CUP120 shell) is identified as the single largest evidence gap in the whole codebase since it's missing logic, not just schema.
+  - Acceptance: caller/callee, COMMAREA, CICS response handling, and product-type routing documented.
   - Acceptance: caller/callee, COMMAREA, CICS response handling, and product-type routing documented.
 
 - [x] T003 [P] [CLAUDE] Create `docs/mappings/omgpr-data-dictionary.csv` and `.md` with every field, PIC, storage, sign, scale, occurrence, classification, default, 88 values, proposed C# type, length, and offset/confidence.
