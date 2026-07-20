@@ -92,7 +92,11 @@ flowchart TD
 
 ### Gate G1 — Discovery Review
 
-- [ ] G1 [SHARED] Codex reviews T001–T010 for implementability; Claude resolves evidence gaps or marks blockers. No pricing-rule implementation starts before approval.
+- [x] G1 [SHARED] Codex reviews T001–T010 for implementability; Claude resolves evidence gaps or marks blockers. No pricing-rule implementation starts before approval.
+  - Owner: Codex
+  - Reviewer: Codex
+  - Review: `docs/reviews/g1-implementability-review.md` (currently only on local disk in the `omni-codex` worktree, not yet committed/pushed — content independently verified by Claude by reading the file directly)
+  - Evidence: Codex re-reviewed T001–T010 directly from `origin/agent/claude-discovery` at `ff0c9f0e31e0dd85055c2ef8a62033fa2ffb21e6`; decision is APPROVED WITH SCOPED DOWNSTREAM BLOCKERS. Each prior gap is classified per-task as resolved, partially resolved with a named downstream blocker, or explicitly BLOCKED due to unavailable source (accepted per this repo's own conventions, not treated as a rejection reason). Scoped downstream blockers recorded: (1) preserve BLOCKED status for A6O015U/CUS120/A6P001WB/CUR120/OMGPK/missing DCLGENs, (2) reconcile the OMGPR 1,789-byte contract against a live compiler layout before compatibility decoding begins — relevant to T016/T018, (3) confirm platform rounding-tie mode before using T010's scenarios for parity acceptance, (4) keep OMGPK/A6O015U/CUS120/A6P001WB internals blocked until authoritative sources exist.
 
 ## Phase 2 — .NET Foundation
 
@@ -118,8 +122,10 @@ flowchart TD
 
 ## Phase 3 — OMGPR Compatibility
 
-- [ ] T016 [CLAUDE] Produce `docs/mappings/omgpr-test-vectors.json` with confirmed positive, negative, zero, scale, spaces, low values, and error-field cases.
+- [x] T016 [CLAUDE] Produce `docs/mappings/omgpr-test-vectors.json` with confirmed positive, negative, zero, scale, spaces, low values, and error-field cases.
   - Depends on: T003, G1
+  - Owner: Claude
+  - Evidence: `docs/mappings/omgpr-test-vectors.json` — 23 vectors across 8 representative fields spanning every OMGPR storage type (DISPLAY alphanumeric, DISPLAY date-as-text, COMP binary at two sizes, signed and unsigned COMP-3, dedicated error-output fields), each citing its copybook group path/PIC/offset from the T003 data dictionary. All numeric/binary byte values independently verified via script (Python's cp037 EBCDIC codec, struct.pack two's-complement), not hand-computed-and-trusted. Encoding is parameterized across two explicit, named profiles (mainframe_ebcdic default vs. microfocus_ascii_native alternate) rather than one hardcoded assumption, grounded in direct in-source evidence (pervasive MFMIGR change-tags confirming a historical Micro Focus migration occurred) rather than a hypothetical. Flags OMGPR-I-CONTRACT (the field Codex's G1 review specifically named) with dedicated positive/negative/zero vectors, and notes the field's true encoding profile remains an open question pending live capture — matching Codex's own G1 downstream blocker #2 verbatim.
   - Acceptance: every vector cites copybook definition; unknown encoding/byte order parameterized.
 
 - [ ] T017 [CODEX] Implement configurable alphanumeric, COMP, and COMP-3 primitives in Pricing.Compatibility.

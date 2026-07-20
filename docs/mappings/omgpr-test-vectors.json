@@ -1,0 +1,519 @@
+{
+  "_meta": {
+    "title": "OMGPR test vectors (T016)",
+    "scope": "Confirmed positive, negative, zero, scale, spaces, low-values, and error-field encode/decode vectors for a representative set of OMGPR fields, each citing its copybook definition from docs/mappings/omgpr-data-dictionary.csv (T003).",
+    "source_of_truth": "upload/OMGPR.CPY, cross-checked against docs/mappings/omgpr-data-dictionary.csv/.md",
+    "confidence_key": "CONFIRMED = directly derived from the copybook PIC clause and a documented, standard COBOL encoding rule. INFERRED = a reasonable encoding choice where the standard rule has more than one documented convention. BLOCKED = cannot be determined without a live compile/runtime capture.",
+    "why_two_encoding_profiles": "This codebase's programs carry pervasive 'MFMIGR' change-tags (e.g. A6X01.CBL, A6O012U.CBL: 'MODIFIED SET STATEMENT TO RETRIEVE CURRENT DATE IN ORDER TO WORK WITH ANSI COMPLIANT DBRM DATABASES') confirming a historical Micro Focus migration occurred. This is direct, in-source evidence -- not a hypothetical -- that the runtime character set and COMP binary byte order cannot be assumed to be traditional IBM mainframe EBCDIC/big-endian without a live capture. Every vector below is therefore encoded under BOTH a 'mainframe_ebcdic' profile (the traditional convention, and the one this project's byte-length arithmetic in T003/T004 already assumes for field SIZING) and a 'microfocus_ascii_native' profile (a documented alternate Micro Focus configuration). Field byte LENGTHS and OFFSETS are not in question (T003 already reconciled these against the 1,789-byte COMMAREA); only the byte CONTENT for a given logical value is profile-sensitive, and only for two of the four storage types used here.",
+    "standing_blockers": [
+      "No live COBOL/CICS/DB2 execution environment exists to capture an authoritative COMMAREA byte dump -- every encoding below is derived from documented standard conventions, not observed runtime output (same standing blocker as every other document in this repository).",
+      "Which encoding profile this specific deployment actually uses is unresolved -- this is exactly the 'unknown encoding/byte order' T016's own acceptance criteria asks to be parameterized, not guessed. This is also Codex's G1 downstream blocker #2: 'Reconcile the OMGPR 1789-byte statement with an authoritative live compiler layout and COMMAREA capture before compatibility decoding begins.'"
+    ]
+  },
+  "encoding_profiles": {
+    "mainframe_ebcdic": {
+      "description": "Traditional IBM z/OS mainframe convention. Default/primary profile used for T003/T004's own byte-length arithmetic.",
+      "charset": "EBCDIC code page 037 (1 byte per DISPLAY character)",
+      "comp_byte_order": "big-endian two's-complement binary",
+      "comp3_convention": "packed decimal: 2 BCD digits per byte except the final byte, which holds 1 digit plus a sign nibble (C=positive/signed, D=negative, F=unsigned)",
+      "confidence": "INFERRED (standard convention for the platform T003 already assumed for sizing; not independently confirmed for this specific deployment)"
+    },
+    "microfocus_ascii_native": {
+      "description": "Documented alternate Micro Focus COBOL configuration for open-systems (Windows/Unix) ports, consistent with this codebase's pervasive MFMIGR change-tags. Provided as the explicitly parameterized alternative, not asserted as more or less likely than mainframe_ebcdic.",
+      "charset": "ASCII / Windows-1252 (1 byte per DISPLAY character)",
+      "comp_byte_order": "little-endian two's-complement binary (Micro Focus 'native' binary format default on x86; can be configured for big-endian mainframe-compatible mode, which is a separate, third possibility this document does not attempt to enumerate)",
+      "comp3_convention": "packed decimal, same nibble/sign-byte layout as mainframe_ebcdic -- Micro Focus COBOL documents COMP-3 as packed-decimal-compatible with IBM mainframe by default, so this field TYPE is treated as low-ambiguity across both profiles, unlike DISPLAY charset and COMP byte order",
+      "confidence": "INFERRED (a documented possibility given the MFMIGR evidence; not confirmed as the actual configuration in use)"
+    }
+  },
+  "vectors": [
+    {
+      "id": "V-VENDOR-01",
+      "field": "OMGPR-I-VENDOR",
+      "category": "positive",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-INPUT-FIELDS",
+        "pic": "X(4)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "9-12",
+        "byte_length": 4,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 7 / OMGPR.CPY"
+      },
+      "logical_value": "V001",
+      "encoded": {
+        "mainframe_ebcdic": "E5F0F0F1",
+        "microfocus_ascii_native": "56303031"
+      },
+      "confidence": "CONFIRMED (standard EBCDIC cp037 / ASCII character mapping for digits and uppercase letters, mechanically applied)"
+    },
+    {
+      "id": "V-VENDOR-02",
+      "field": "OMGPR-I-VENDOR",
+      "category": "spaces",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-INPUT-FIELDS",
+        "pic": "X(4)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "9-12",
+        "byte_length": 4,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 7 / OMGPR.CPY (VALUE SPACE)"
+      },
+      "logical_value": "    ",
+      "encoded": {
+        "mainframe_ebcdic": "40404040",
+        "microfocus_ascii_native": "20202020"
+      },
+      "confidence": "CONFIRMED (space is the field's own declared VALUE clause default)"
+    },
+    {
+      "id": "V-VENDOR-03",
+      "field": "OMGPR-I-VENDOR",
+      "category": "low_values",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-INPUT-FIELDS",
+        "pic": "X(4)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "9-12",
+        "byte_length": 4,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 7 / OMGPR.CPY"
+      },
+      "logical_value": "LOW-VALUES (binary zeros, not a printable string)",
+      "encoded": {
+        "mainframe_ebcdic": "00000000",
+        "microfocus_ascii_native": "00000000"
+      },
+      "confidence": "CONFIRMED (LOW-VALUES is binary zero bytes, identical under any charset -- profile-independent by definition, included to demonstrate that low-values is NOT the same encoding question as spaces)"
+    },
+    {
+      "id": "V-PRICING-DATE-01",
+      "field": "OMGPR-D-PRICING",
+      "category": "positive",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-INPUT-FIELDS",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "33-42",
+        "byte_length": 10,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 13 / OMGPR.CPY"
+      },
+      "logical_value": "07/18/2026",
+      "notes": "Stored as text, not a COBOL date type. Layout inferred as MM/DD/YYYY by analogy to the substring-reassembly logic documented in docs/rules/date-selection.md's R-DATE-004 (positions 1-2=MM, 4-5=DD, 7-10=YYYY, with 1-character separators at positions 3 and 6) -- that layout is itself INFERRED, not confirmed by any copybook comment, and is repeated here rather than re-derived.",
+      "encoded": {
+        "mainframe_ebcdic": "F0F761F1F861F2F0F2F6",
+        "microfocus_ascii_native": "30372F31382F32303236"
+      },
+      "confidence": "INFERRED (character encoding mechanism is CONFIRMED standard; the MM/DD/YYYY layout choice itself is INFERRED per date-selection.md)"
+    },
+    {
+      "id": "V-PRICING-DATE-02",
+      "field": "OMGPR-D-PRICING",
+      "category": "spaces",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-INPUT-FIELDS",
+        "pic": "X(10)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "33-42",
+        "byte_length": 10,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 13 / OMGPR.CPY (VALUE SPACE)"
+      },
+      "logical_value": "          ",
+      "notes": "Represents a pricing date not yet supplied by the caller.",
+      "encoded": {
+        "mainframe_ebcdic": "40404040404040404040",
+        "microfocus_ascii_native": "20202020202020202020"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-CONTRACT-01",
+      "field": "OMGPR-I-CONTRACT",
+      "category": "positive",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-COST-CONT-DATA",
+        "pic": "S9(8)",
+        "usage": "COMP",
+        "byte_offset_1based": "524-527",
+        "byte_length": 4,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 133 / OMGPR.CPY"
+      },
+      "notes": "Flagged explicitly by Codex's G1 review as a field that must not be confused with the separate X(20) OMGPR-I-GRP-CNT-NBR field -- this is the pure-binary 4-byte contract number.",
+      "logical_value": 12345678,
+      "encoded": {
+        "mainframe_ebcdic": "00BC614E",
+        "microfocus_ascii_native": "4E61BC00"
+      },
+      "confidence": "CONFIRMED (standard two's-complement binary encoding, mechanically computed; byte ORDER is the profile-sensitive axis, not the value)"
+    },
+    {
+      "id": "V-CONTRACT-02",
+      "field": "OMGPR-I-CONTRACT",
+      "category": "negative",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-COST-CONT-DATA",
+        "pic": "S9(8)",
+        "usage": "COMP",
+        "byte_offset_1based": "524-527",
+        "byte_length": 4,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 133 / OMGPR.CPY"
+      },
+      "notes": "No source paragraph was found assigning a negative value to this specific field in this pass -- included to exercise the signed-COMP encoding rule itself (this field's PIC is S9(8), so a negative representation must be well-defined even if not observed in practice), not asserted as a value this field takes in production.",
+      "logical_value": -12345678,
+      "encoded": {
+        "mainframe_ebcdic": "FF439EB2",
+        "microfocus_ascii_native": "B29E43FF"
+      },
+      "confidence": "CONFIRMED (standard two's-complement encoding of the negative value, mechanically computed)"
+    },
+    {
+      "id": "V-CONTRACT-03",
+      "field": "OMGPR-I-CONTRACT",
+      "category": "zero",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-COST-CONT-DATA",
+        "pic": "S9(8)",
+        "usage": "COMP",
+        "byte_offset_1based": "524-527",
+        "byte_length": 4,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 133 / OMGPR.CPY (VALUE ZERO)"
+      },
+      "notes": "Represents 'no contract selected' -- the field's own declared default.",
+      "logical_value": 0,
+      "encoded": {
+        "mainframe_ebcdic": "00000000",
+        "microfocus_ascii_native": "00000000"
+      },
+      "confidence": "CONFIRMED (zero is identical under either byte order)"
+    },
+    {
+      "id": "V-UNITCOST-01",
+      "field": "OMGPR-A-CNT-LN-UNIT-COST",
+      "category": "positive+scale",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-COST-CONT-DATA",
+        "pic": "S9(5)V9(8)",
+        "usage": "COMP-3",
+        "byte_offset_1based": "776-782",
+        "byte_length": 7,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 154 / OMGPR.CPY"
+      },
+      "logical_value": "123.45678901",
+      "notes": "13 total digits (5 integer + 8 decimal, V is an implied decimal point -- no byte is stored for it). Digit string '0012345678901' packs into 6 full-digit-pair bytes plus a final byte holding the 13th digit and the sign nibble.",
+      "encoded": {
+        "mainframe_ebcdic": "00123456789 01C (shown with a space for readability; actual bytes: 00 12 34 56 78 90 1C)",
+        "microfocus_ascii_native": "same as mainframe_ebcdic: 00 12 34 56 78 90 1C -- COMP-3 packing is treated as profile-independent (see encoding_profiles.microfocus_ascii_native.comp3_convention)"
+      },
+      "encoded_hex": {
+        "mainframe_ebcdic": "0012345678901C",
+        "microfocus_ascii_native": "0012345678901C"
+      },
+      "confidence": "CONFIRMED (standard packed-decimal encoding, mechanically computed from the digit string; sign nibble C = positive is the standard preferred-sign convention)"
+    },
+    {
+      "id": "V-UNITCOST-02",
+      "field": "OMGPR-A-CNT-LN-UNIT-COST",
+      "category": "negative",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-COST-CONT-DATA",
+        "pic": "S9(5)V9(8)",
+        "usage": "COMP-3",
+        "byte_offset_1based": "776-782",
+        "byte_length": 7,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 154 / OMGPR.CPY"
+      },
+      "logical_value": "-123.45678901",
+      "notes": "Same digit packing as V-UNITCOST-01, sign nibble D instead of C.",
+      "encoded_hex": {
+        "mainframe_ebcdic": "0012345678901D",
+        "microfocus_ascii_native": "0012345678901D"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-UNITCOST-03",
+      "field": "OMGPR-A-CNT-LN-UNIT-COST",
+      "category": "zero",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-COST-CONT-DATA",
+        "pic": "S9(5)V9(8)",
+        "usage": "COMP-3",
+        "byte_offset_1based": "776-782",
+        "byte_length": 7,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 154 / OMGPR.CPY (VALUE ZERO)"
+      },
+      "logical_value": "0.00000000",
+      "encoded_hex": {
+        "mainframe_ebcdic": "0000000000000C",
+        "microfocus_ascii_native": "0000000000000C"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-UNITCOST-04",
+      "field": "OMGPR-A-CNT-LN-UNIT-COST",
+      "category": "scale_max",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-COST-CONT-DATA",
+        "pic": "S9(5)V9(8)",
+        "usage": "COMP-3",
+        "byte_offset_1based": "776-782",
+        "byte_length": 7,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 154 / OMGPR.CPY"
+      },
+      "logical_value": "99999.99999999",
+      "notes": "The maximum value representable by this PIC clause -- all 13 digit positions at 9. Exercises the boundary the field's byte length was sized for.",
+      "encoded_hex": {
+        "mainframe_ebcdic": "9999999999999C",
+        "microfocus_ascii_native": "9999999999999C"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-PCT-01",
+      "field": "OMGPR-PRICING-PERCENTAGE",
+      "category": "positive+scale, unsigned",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-SELL-ARR",
+        "pic": "9(1)V9(4)",
+        "usage": "COMP-3",
+        "byte_offset_1based": "969-971",
+        "byte_length": 3,
+        "signed": false,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 193 / OMGPR.CPY"
+      },
+      "logical_value": "0.1500",
+      "notes": "Unsigned PIC (no S) -- sign nibble is F (the standard 'unsigned' sign value), never C or D. 5 total digits (1 integer + 4 decimal), digit string '01500'.",
+      "encoded_hex": {
+        "mainframe_ebcdic": "01500F",
+        "microfocus_ascii_native": "01500F"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-PCT-02",
+      "field": "OMGPR-PRICING-PERCENTAGE",
+      "category": "zero, unsigned",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-SELL-ARR",
+        "pic": "9(1)V9(4)",
+        "usage": "COMP-3",
+        "byte_offset_1based": "969-971",
+        "byte_length": 3,
+        "signed": false,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 193 / OMGPR.CPY (VALUE ZERO)"
+      },
+      "logical_value": "0.0000",
+      "encoded_hex": {
+        "mainframe_ebcdic": "00000F",
+        "microfocus_ascii_native": "00000F"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-PCT-03",
+      "field": "OMGPR-PRICING-PERCENTAGE",
+      "category": "scale_max, unsigned",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-SELL-ARR",
+        "pic": "9(1)V9(4)",
+        "usage": "COMP-3",
+        "byte_offset_1based": "969-971",
+        "byte_length": 3,
+        "signed": false,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 193 / OMGPR.CPY"
+      },
+      "logical_value": "9.9999",
+      "notes": "Maximum value representable. Cross-reference: docs/rules/sell-selection-rules.md's R-SELL-003 and docs/rules/fees-and-adjustments.md's R-DISTMKP-001 both document an explicit runtime clamp elsewhere in A6U01 forcing this field to 0.9999 if it would otherwise reach 1.0 or higher in the GROSS MARGIN sell method's percentage -- this vector demonstrates the field's raw storage capacity (up to 9.9999), not that clamped business rule, which operates on the logical value before storage, not on the encoding itself.",
+      "encoded_hex": {
+        "mainframe_ebcdic": "99999F",
+        "microfocus_ascii_native": "99999F"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-ERRFLAG-01",
+      "field": "OMGPR-F-PRICER-ERROR",
+      "category": "error_field, positive (error flagged)",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-ERROR-FIELDS",
+        "pic": "X(1)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "309",
+        "byte_length": 1,
+        "eighty_eight_levels": "OMGPR-PRICER-ERROR = 'Y'",
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 118 / OMGPR.CPY"
+      },
+      "logical_value": "Y",
+      "encoded": {
+        "mainframe_ebcdic": "E8",
+        "microfocus_ascii_native": "59"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-ERRFLAG-02",
+      "field": "OMGPR-F-PRICER-ERROR",
+      "category": "error_field, spaces (default, no error)",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-ERROR-FIELDS",
+        "pic": "X(1)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "309",
+        "byte_length": 1,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 118 / OMGPR.CPY (VALUE SPACE)"
+      },
+      "logical_value": " ",
+      "notes": "The field's declared default. Note this field has no confirmed 'N'/other explicit-not-error value in any source read this pass -- only 'Y' (error) and space (its own VALUE clause default) were found. Do not assume an 'N' value is ever set; this is CONFIRMED by absence, not a guess that it can't happen.",
+      "encoded": {
+        "mainframe_ebcdic": "40",
+        "microfocus_ascii_native": "20"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-ERRFLAG-03",
+      "field": "OMGPR-F-PRICER-ERROR",
+      "category": "error_field, low_values",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-ERROR-FIELDS",
+        "pic": "X(1)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "309",
+        "byte_length": 1,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 118 / OMGPR.CPY"
+      },
+      "logical_value": "LOW-VALUES (binary zero, not equal to 'Y' or space -- would NOT satisfy the OMGPR-PRICER-ERROR 88-level, since that only matches literal 'Y')",
+      "encoded": {
+        "mainframe_ebcdic": "00",
+        "microfocus_ascii_native": "00"
+      },
+      "confidence": "CONFIRMED (included as a decoder robustness case: a codec must not crash or silently mis-treat a low-values byte here as if it were a valid space/Y state)"
+    },
+    {
+      "id": "V-ERRNBR-01",
+      "field": "OMGPR-Q-ERROR-NBR",
+      "category": "error_field, positive",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-ADDITIONAL-INFORMAT",
+        "pic": "S9(4)",
+        "usage": "COMP",
+        "byte_offset_1based": "1306-1307",
+        "byte_length": 2,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 256 / OMGPR.CPY"
+      },
+      "logical_value": 602,
+      "notes": "A real, confirmed error code from this codebase (docs/cobol-analysis/error-catalog.md and docs/rules/sell-selection-rules.md's R-SELL-003 item 10: gross-margin percentage-source defensive guard, 'INVALID WS-COST-CONTRACT SCENARIO FOR GRSSMGN').",
+      "encoded": {
+        "mainframe_ebcdic": "025A",
+        "microfocus_ascii_native": "5A02"
+      },
+      "confidence": "CONFIRMED (two's-complement encoding of a real, documented error code)"
+    },
+    {
+      "id": "V-ERRNBR-02",
+      "field": "OMGPR-Q-ERROR-NBR",
+      "category": "error_field, zero (no error)",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-ADDITIONAL-INFORMAT",
+        "pic": "S9(4)",
+        "usage": "COMP",
+        "byte_offset_1based": "1306-1307",
+        "byte_length": 2,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 256 / OMGPR.CPY (VALUE ZERO)"
+      },
+      "logical_value": 0,
+      "encoded": {
+        "mainframe_ebcdic": "0000",
+        "microfocus_ascii_native": "0000"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-ERRNBR-03",
+      "field": "OMGPR-Q-ERROR-NBR",
+      "category": "error_field, scale_max_confirmed_in_use",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-ADDITIONAL-INFORMAT",
+        "pic": "S9(4)",
+        "usage": "COMP",
+        "byte_offset_1based": "1306-1307",
+        "byte_length": 2,
+        "signed": true,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 256 / OMGPR.CPY"
+      },
+      "logical_value": 1026,
+      "notes": "The highest confirmed OMGPR-Q-ERROR-NBR value actually assigned anywhere in A6U01.CBL (docs/cobol-analysis/error-catalog.md's mechanical scan of all 183 distinct codes, paragraph 7795-FIND-WHICH-JOIN-010). PIC S9(4) allows up to 9999, so this is far from the field's own storage ceiling -- included as the highest REAL value observed, distinct from V-UNITCOST-04/V-PCT-03's scale_max vectors which use the field's theoretical storage maximum instead.",
+      "encoded": {
+        "mainframe_ebcdic": "0402",
+        "microfocus_ascii_native": "0204"
+      },
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "V-ERRMSG-01",
+      "field": "OMGPR-ERROR-MESSAGE",
+      "category": "error_field, positive",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-ERROR-FIELDS",
+        "pic": "X(76)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "310-385",
+        "byte_length": 76,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 119 / OMGPR.CPY"
+      },
+      "logical_value": "DB ERROR",
+      "notes": "A real, frequently-used literal from this codebase (WS-DB-STATUS-MSG, moved into OMGPR-ERROR-MESSAGE via WS-DB-OPERATION-MSG at essentially every fatal SQL-error site cataloged in docs/cobol-analysis/error-catalog.md section 1.2/1.3). Left-justified, space-padded to the full 76-byte field width. Only the 8 message-text bytes are given explicitly below; the remaining 68 bytes are the profile's own space byte (0x40 mainframe_ebcdic / 0x20 microfocus_ascii_native) repeated, not written out literally here to keep this file's size reasonable -- a decoder/encoder implementation must still produce all 76 bytes.",
+      "encoded_message_text_only": {
+        "mainframe_ebcdic": "C4C240C5D9D9D6D9",
+        "microfocus_ascii_native": "4442204552524F52"
+      },
+      "padding": {
+        "byte_count": 68,
+        "mainframe_ebcdic_fill_byte": "40",
+        "microfocus_ascii_native_fill_byte": "20"
+      },
+      "confidence": "CONFIRMED (character encoding mechanism; message text choice is illustrative, drawn from a real confirmed literal)"
+    },
+    {
+      "id": "V-ERRMSG-02",
+      "field": "OMGPR-ERROR-MESSAGE",
+      "category": "error_field, spaces (default, no error)",
+      "copybook_citation": {
+        "group_path": "OMGPR > OMGPR-C > OMGPR-PRC-OUTPUT-FIELDS > OMGPR-ERROR-FIELDS",
+        "pic": "X(76)",
+        "usage": "DISPLAY",
+        "byte_offset_1based": "310-385",
+        "byte_length": 76,
+        "source": "docs/mappings/omgpr-data-dictionary.csv row 119 / OMGPR.CPY (VALUE SPACE)"
+      },
+      "logical_value": "(76 spaces)",
+      "padding": {
+        "byte_count": 76,
+        "mainframe_ebcdic_fill_byte": "40",
+        "microfocus_ascii_native_fill_byte": "20"
+      },
+      "confidence": "CONFIRMED"
+    }
+  ],
+  "what_was_scoped_out_of_this_pass": [
+    "This is a representative set (8 fields, 23 vectors) spanning every OMGPR storage type (DISPLAY alphanumeric, DISPLAY date-as-text, COMP binary at two sizes, signed and unsigned COMP-3, and the dedicated error-output fields), not an exhaustive vector set for all 287 leaf fields in OMGPR.CPY. Extending this to full field coverage would follow the same method demonstrated here.",
+    "88-level condition fields beyond OMGPR-PRICER-ERROR (e.g. OMGPR-ACT-CNT-EXCL-EXISTS/-ABSENT) were not separately vectored -- they share the same underlying X(1) DISPLAY encoding mechanism already demonstrated by OMGPR-F-PRICER-ERROR.",
+    "The OCCURS-based repeating structures elsewhere in OMGPR were not vectored in this pass (OMGPR itself has none per program-inventory.md's field-inventory summary; OMGEXPL's OCCURS 700 array is covered separately by T004's own byte reconciliation, not duplicated here)."
+  ],
+  "assumptions": [
+    "COMP-3 packed-decimal layout is assumed profile-independent (identical bytes under both mainframe_ebcdic and microfocus_ascii_native) based on Micro Focus's own documented COMP-3/IBM-compatibility claim -- not independently verified against this specific deployment's actual Micro Focus configuration options.",
+    "OMGPR-D-PRICING's MM/DD/YYYY text layout (V-PRICING-DATE-01) is carried over from date-selection.md's own INFERRED reading of a similar substring-reassembly pattern elsewhere in A6U01 -- not confirmed by any comment local to OMGPR.CPY itself."
+  ],
+  "blockers": [
+    "No live COBOL/CICS/DB2 execution environment to capture an authoritative COMMAREA byte dump and determine which encoding profile (or a third, unconsidered one) is actually in use -- standing blocker across this entire document set, and the specific blocker Codex's G1 review flagged as gating T017/T018 compatibility work.",
+    "OMGPR-D-PRICING's true external date format is not confirmed by any copybook comment."
+  ]
+}
