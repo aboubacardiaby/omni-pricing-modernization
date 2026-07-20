@@ -1,0 +1,34 @@
+Field,PIC,ByteLength,Offset(1-based),Group,Confidence,Notes
+OMGEXPL-PACK-PRODNO,X(12),12,1,Input,CONFIRMED,"Kit/pack product number to explode; required (validated non-blank, error 61201)"
+OMGEXPL-INP-EFF-DATE,X(10),10,13,Input,CONFIRMED,"Effective date; if blank, defaults to current date; if supplied, validated via SYH208/SYU208 (error 61202 if invalid)"
+OMGEXPL-REQUEST-TYPE,X(01),1,23,Input,CONFIRMED,"88: OMGEXPL-GET-COMP-ONLY='C' (default), OMGEXPL-GET-LEVL-ONLY='L', OMGEXPL-GET-STRUCTURE='S', OMGEXPL-DEFAULT=' ' (normalized to 'C'). Any other value -> error 61203"
+OMGEXPL-ROLLUP-COST-SW,X(01),1,24,Input,INFERRED/BLOCKED (see notes),"88: OMGEXPL-ROLLUP-COSTS='Y', OMGEXPL-NO-ROLLUP-COSTS='N', OMGEXPL-DEFAULT-ROLLUP=' '. LOW-VALUES also accepted. Any other value -> error 61204. Passed through to OMGPK; actual rollup arithmetic is inside A6O015U (BLOCKED, not supplied)"
+OMGEXPL-T-NEXT-PRODUCT-NO,X(08),8,25,Input,INFERRED/BLOCKED (see notes),Declared but no MOVE/reference found in A6O012U.CBL's own logic -- BLOCKED/unused in this program; may be consumed only by A6O015U
+OMGEXPL-T-INPUT-FILLER,X(24),24,33,Input,CONFIRMED,Filler/reserved
+OMGEXPL-PRODUCT-TYPE,X(01),1,57,Output-header,INFERRED/BLOCKED (see notes),Pass-through from OMGPK-PRODUCT-TYPE (A6O015U output); domain not confirmed (BLOCKED)
+OMGEXPL-PACK-STATUS,X(01),1,58,Output-header,INFERRED/BLOCKED (see notes),"Declared but no MOVE found in A6O012U.CBL -- BLOCKED, never populated by this program"
+OMGEXPL-CUSTOM-SOURCE,X(01),1,59,Output-header,CONFIRMED,Pass-through from OMGPK-CUSTOM-SOURCE
+OMGEXPL-BASE-UOM,X(02),2,60,Output-header,CONFIRMED,Pass-through from OMGPK-BASE-UOM; the pack's own base unit of measure
+OMGEXPL-OH-FEE,9(05)V9(08),13,62,Output-header,CONFIRMED,"Pass-through from OMGPK-OH-FEE; overhead fee amount for the pack, DISPLAY numeric"
+OMGEXPL-OH-EFF-DATE,X(10),10,75,Output-header,CONFIRMED,Pass-through from OMGPK-OH-EFF-DATE
+OMGEXPL-OH-EXP-DATE,X(10),10,85,Output-header,CONFIRMED,Pass-through from OMGPK-OH-EXP-DATE
+OMGEXPL-TP-FEE-COST,9(05)V9(08),13,95,Output-header,CONFIRMED,"Pass-through from OMGPK-TP-FEE-COST; third-party fee, cost basis"
+OMGEXPL-TP-COST-EFF-DATE,X(10),10,108,Output-header,CONFIRMED,Pass-through from OMGPK-TP-COST-EFF-DATE
+OMGEXPL-TP-COST-EXP-DATE,X(10),10,118,Output-header,CONFIRMED,Pass-through from OMGPK-TP-COST-EXP-DATE
+OMGEXPL-TP-FEE-SELL,9(05)V9(08),13,128,Output-header,CONFIRMED,"Pass-through from OMGPK-TP-FEE-SELL; third-party fee, sell basis"
+OMGEXPL-TP-SELL-EFF-DATE,X(10),10,141,Output-header,CONFIRMED,Pass-through from OMGPK-TP-SELL-EFF-DATE
+OMGEXPL-TP-SELL-EXP-DATE,X(10),10,151,Output-header,CONFIRMED,Pass-through from OMGPK-TP-SELL-EXP-DATE
+OMGEXPL-NUMBER-OF-ITEMS,9(03),3,161,Output-header,CONFIRMED,"Overwritten with SUB-OMEXPL (actual rows populated this call), not the raw OMGPK pass-through -- capped at 700, no overflow error"
+OMGEXPL-COMPLETE-EXPLODE-SW,X(01),1,164,Output-header,INFERRED/BLOCKED (see notes),Pass-through from OMGPK-COMPLETE-EXPLODE-SW; domain not confirmed (BLOCKED)
+OMGEXPL-NEXT-SUBPACK-PROD-NO,X(12),12,165,Output-header,INFERRED/BLOCKED (see notes),Declared but no MOVE found in A6O012U.CBL's own logic -- BLOCKED/unused in this program
+OMGEXPL-COMP-INFO (OCCURS 700),group,23100,177,Output-array,CONFIRMED,"Repeating component/sub-pack row, 33 bytes/occurrence x 700 = 23100 bytes. Child field offsets below are relative to the START OF EACH OCCURRENCE (add (N-1)*33 for occurrence N)."
+  OMGEXPL-SUB-PACK-NUM,X(12),12,177,Output-array-child (offset relative to occurrence start),CONFIRMED,"Which sub-pack this row belongs to (blank in component-only view, see kit-processing.md)"
+  OMGEXPL-COMP-PROD-NO,X(12),12,189,Output-array-child (offset relative to occurrence start),CONFIRMED,"Component (or sub-pack, in structure view) product number"
+  OMGEXPL-COMP-UOM,X(02),2,201,Output-array-child (offset relative to occurrence start),CONFIRMED,Component's unit of measure
+  OMGEXPL-COMP-QTY,9(05),5,203,Output-array-child (offset relative to occurrence start),CONFIRMED,"For level-2 components, RESULT of multiplying by parent subpack quantity (NK1209 fix) -- not a raw pass-through"
+  OMGEXPL-COMP-PROD-TYPE,X(01),1,208,Output-array-child (offset relative to occurrence start),CONFIRMED,"'C'=component, 'S'=sub-pack (re-classified from OMGPK's '1'/'2'/'S')"
+  OMGEXPL-LEVEL,9(01),1,209,Output-array-child (offset relative to occurrence start),CONFIRMED,"Nesting level (1 or 2), copied from OMGPK-COMP-PROD-TYPE(SUB) for component rows"
+OMGEXPL-ERROR-RESPONSE-FLAG,X(01),1,23277,Output-error,CONFIRMED,"88: OMGEXPL-ABEND='A', OMGEXPL-ERROR='E', OMGEXPL-WARNING='W'"
+OMGEXPL-ERROR-NUMBER,X(05),5,23278,Output-error,CONFIRMED,"61201-61204, 61210 (this program's own errors) or whatever A6O015U/downstream sets"
+OMGEXPL-ERROR-MSG,X(80),80,23283,Output-error,CONFIRMED,Free-text error message
+OMGEXPL-SQL-CODE,X(05),5,23363,Output-error,CONFIRMED,"Captured SQLCODE, edited via WS-EDITED-SQLCODE (PIC -Z999)"
