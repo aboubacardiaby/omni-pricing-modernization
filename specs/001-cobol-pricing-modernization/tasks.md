@@ -148,7 +148,7 @@ flowchart TD
 
 ### Gate G2 — Compatibility Review
 
-- [ ] G2 [SHARED] Claude reviews codecs against copybooks and vectors; Codex resolves findings. Encoding and byte order must be confirmed or remain deployment blockers.
+- [x] G2 [SHARED] Claude reviews codecs against copybooks and vectors; Codex resolves findings. Encoding and byte order must be confirmed or remain deployment blockers.
   - Owner: Codex
   - Reviewer: Claude
   - Status: **NOT APPROVED — reviewed, findings outstanding.** Claude does not self-approve gates it reviews; approval is contingent on Codex resolving the findings below and Claude re-verifying, consistent with G1's precedent (Codex reviewed/approved Claude's T001-T010 work; here the roles are reversed).
@@ -170,6 +170,15 @@ flowchart TD
   - Findings 5-6 (low): **acceptable dispositions** — profile record is now directly constructible with independent axes; strict COMP-3 nibble validation retained with an explicit documented rationale.
   - **New finding (not one of the original six), found during re-review:** `OmgprEncoder.WriteError` writes `PricerErrorFlag`/`ErrorMessage`/`ErrorNumber` (`OMGPR-Q-ERROR-NBR`) on the has-error path, but never writes `ErrorSeverityCode` (`OMGPR-Q-ERROR-CODE`) on that same path — it is only ever cleared to 0 in the no-error branch. A real error therefore gets a correct, freshly-encoded `OMGPR-Q-ERROR-NBR` alongside a *stale*, pass-through-from-the-inbound-record `OMGPR-Q-ERROR-CODE`, contradicting this project's own T006 finding (`docs/cobol-analysis/error-catalog.md`) that the original COBOL populates both fields together on every error path (severity bucket frequently hardcoded to 70 for DB2-fatal-class errors). Handed back to Codex; not severe enough to be a full regression to NOT-APPROVED-across-the-board on its own, but must be resolved (or explicitly scoped out with the same kind of documented rationale used for the pass-through representative fields) before this reviewer approves G2.
   - Changes remain local/uncommitted in the `omni-codex` worktree — same commit/push blocker as recorded at G1 (OS-level sandbox ACL + no network egress); not this reviewer's concern to resolve.
+
+  ---
+
+  - **Final re-review 2026-07-21, against Codex's response to the residual finding (`docs/reviews/g2-compatibility-handoff.md`'s "response to re-review f71c7e0" entry) and the local (uncommitted) fixes in `omni-codex`.** Status: **APPROVED.**
+  - Verified directly: `Pricing.Domain.Models.PricingError` (and all four derived types) now carries an independent `LegacySeverityCode` alongside `LegacyErrorCode`. `OmgprEncoder.WriteError` now writes both `OMGPR-Q-ERROR-NBR` (via `ParseLegacyErrorCode`, range -9999..9999 matching `S9(4)`) and `OMGPR-Q-ERROR-CODE` (via `ParseLegacySeverityCode`, range 0..99 matching its confirmed 88-level domain) together on the has-error path, and both throw `InvalidOperationException` if either legacy value is missing — the exact stale-severity gap from the prior round is closed, not papered over. `OmgprEncoderTests.MapsConfirmedLegacyErrorFields` asserts the confirmed 602/070 pairing (matching T016's `V-ERRNBR-01` and T006's DB2-fatal-severity-70 convention) at the correct byte offsets (1305/2 COMP, 1307/3 DISPLAY); `RejectsErrorWithoutIndependentLegacySeverity` covers the missing-severity case.
+  - Independently re-ran the full suite in this environment (`DOTNET_ROLL_FORWARD=LatestMajor dotnet test Pricing.sln`, working around the missing net8.0 runtime as in the prior round): `Pricing.UnitTests` 79/79, `Pricing.CharacterizationTests` 1/1, `Pricing.ParityTests` 1/1, `Pricing.IntegrationTests` 4/4 — **85/85, matching Codex's self-reported counts exactly**, third consecutive round where the self-reported numbers held up under independent execution.
+  - One trivial, non-blocking note for a future pass (not withholding approval over it): there is no explicit test asserting `ParseLegacySeverityCode` rejects an out-of-range value (e.g. "150"), unlike the equivalent already-tested case for the error-number side (`RejectsInvalidLegacyErrorCode`) — the code path is symmetric and low-risk, so this is a coverage suggestion, not a finding.
+  - **Per G2's own text, encoding and byte order remain explicit deployment blockers** (per the T018 ASSUMPTION record at `d264fde` and this document's own T018 entry) until a live compiled listing or COMMAREA capture confirms them — this gate's approval covers implementation fidelity against the current evidence and assumptions, not a claim that the assumptions themselves are proven.
+  - Changes remain local/uncommitted in the `omni-codex` worktree (same structural commit/push blocker as G1) — Codex should commit and push when the environment allows; this does not block G2 approval since the reviewed content was verified directly from disk both times.
 
 ## Phase 4 — Product and Customer Context
 
