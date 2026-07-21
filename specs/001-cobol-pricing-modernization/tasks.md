@@ -345,9 +345,11 @@ flowchart TD
 
 ## Phase 9 — Kit Pricing
 
-- [ ] T048 [CLAUDE] Finalize confirmed kit decision table after missing A6O012U/A6O013U sources or interface evidence is obtained.
+- [x] T048 [CLAUDE] Finalize confirmed kit decision table after missing A6O012U/A6O013U sources or interface evidence is obtained.
+  - Owner: Claude
   - Depends on: T004
   - Acceptance: every inferred behavior resolved or explicitly blocked.
+  - Evidence: `docs/cobol-analysis/kit-processing.md` finalized. `A6O012U.CBL`/`A6O013U.CBL` reconfirmed present in `upload/` (T048's precondition was already satisfied earlier in this project's history). The document's sole remaining `INFERRED` classification (R-KIT-003's array-ordering dependency) was reclassified as an explicit CONFIRMED/BLOCKED split rather than left as a soft assumption: CONFIRMED that `A6O012U`'s own `4000-FIND-PARENT-PROD` requires sub-pack rows to precede their child level-2 rows (directly readable from its single-forward-pass, no-lookahead structure), BLOCKED whether `A6O015U` (not supplied) actually guarantees that ordering. Zero rule-level `INFERRED` markers remain in the document; every open item now traces to an explicitly named BLOCKED source (`A6O015U`, `OMGPK.CPY`, or the unsupplied external caller), not an unresolved guess.
 
 - [ ] T049 [CODEX] Implement IKitExplosionRepository, initially wrapping the legacy dependency when reimplementation evidence is incomplete.
   - Depends on: T048, T023

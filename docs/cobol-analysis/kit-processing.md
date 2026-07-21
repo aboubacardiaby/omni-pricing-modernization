@@ -20,6 +20,15 @@ fact, per this repository's standing instruction not to invent missing called-pr
 **Confidence key:** CONFIRMED (directly read/mechanically derived from source), INFERRED
 (reasonable but unverified assumption), BLOCKED (cannot be determined from supplied files).
 
+**T048 finalization (2026-07-21):** re-verified `A6O012U.CBL`/`A6O013U.CBL` are both fully
+supplied in `upload/` (T048's precondition — "after missing A6O012U/A6O013U sources... is
+obtained" — was satisfied earlier in this project's history, before this pass) and confirmed
+neither program leaves anything about `A6O012U`'s own behavior undecided. The one remaining
+INFERRED item (R-KIT-003's array-ordering dependency) has been reclassified as an explicit
+CONFIRMED/BLOCKED split rather than left as a soft assumption — see the "Assumptions and
+remaining BLOCKED items" section below. No new source files changed any conclusion in this
+document; this pass tightened classification precision only.
+
 ---
 
 ## Control-flow map (CONFIRMED)
@@ -172,9 +181,19 @@ PROCEDURE DIVISION
    quietly incomplete result rather than a diagnosable error.
 10. Errors: none
 11. Confidence: CONFIRMED for the mechanism and the bug-fix history (the change-ID comment
-    directly explains the fix's purpose). INFERRED that `A6O015U` always returns sub-pack rows
-    before their child level-2 components in array order (required for this lookup to work, not
-    independently verified since `A6O015U` is not supplied).
+    directly explains the fix's purpose), and CONFIRMED that `4000-FIND-PARENT-PROD`'s
+    single-pass sequential search only produces correct results if sub-pack (`'S'`) rows precede
+    their child level-2 rows in `OMGPK-COMP-INFO` array order — this is directly readable from
+    `A6O012U`'s own code (a level-2 row's parent lookup only searches slots already recorded in
+    `WS-SUB-PACK-ARRAY`, i.e. `'S'` rows seen earlier in the same pass; there is no second pass or
+    reordering). **Explicitly BLOCKED, not INFERRED, per T048's finalization pass:** whether
+    `A6O015U` actually *guarantees* this ordering on every call is unknowable from the supplied
+    files — `A6O015U`'s own source is not supplied, so this is a hard evidence gap, not a
+    plausible-but-unverified guess. If `A6O015U` ever returns a level-2 row before its parent
+    sub-pack row, `4000-FIND-PARENT-PROD` silently fails to find it (R-KIT-003 item 9's
+    silent-drop path) with no diagnostic — a reimplementation must either reproduce this ordering
+    dependency exactly (single forward pass, no lookahead/reordering) or obtain `A6O015U`'s source
+    to confirm the ordering guarantee actually holds before relying on it.
 
 ## Capacity (component/sub-pack array limits, no overflow error)
 1. ID/Name: R-KIT-004 Array capacity limits with silent truncation, not an overflow error
@@ -286,15 +305,31 @@ PROCEDURE DIVISION
 - **`SYH208`/`SYU208`'s own date-validation logic** — treated as a black-box shared utility, not
   independently examined (out of scope for kit-processing specifically).
 
-## Assumptions
+## Assumptions and remaining BLOCKED items (T048 finalization pass, 2026-07-21)
 
-1. `A6O015U` is assumed to return `OMGPK-COMP-INFO` rows with sub-pack (`'S'`) entries appearing
-   before the level-2 component rows that reference them, since `4000-FIND-PARENT-PROD`'s
-   sequential-array lookup only works correctly under that ordering (R-KIT-003 item 3) — not
-   independently verified.
-2. The `'A'`/`'E'`/`'W'` severity distinction on `OMGEXPL-ERROR-RESPONSE-FLAG` is assumed to
-   matter only to callers outside `A6O012U` itself, since this program's own logic treats `'A'`
-   and `'E'` identically (both skip `0020-PROCESS`) — not confirmed against any actual caller.
+**T048 status: every previously-INFERRED behavior in this document has been reclassified as
+either CONFIRMED (about `A6O012U`'s own code, which is fully supplied) or explicitly BLOCKED
+(about `A6O015U`'s internal behavior, which is not supplied) — none remain in an ambiguous
+"reasonable guess" state.** `A6O012U.CBL` and `A6O013U.CBL` were both confirmed present in
+`upload/` and re-checked against this document during this pass; neither program's own text left
+any behavior undecided — every remaining open item traces to `A6O015U`/`OMGPK.CPY` not being
+supplied, which no amount of re-reading the supplied files can resolve.
+
+1. **BLOCKED (reclassified from INFERRED — see R-KIT-003 item 11 for the full reasoning):**
+   whether `A6O015U` actually guarantees that sub-pack (`'S'`) rows precede their child level-2
+   rows in `OMGPK-COMP-INFO` array order. What IS confirmed: `A6O012U`'s own
+   `4000-FIND-PARENT-PROD` requires that ordering to function correctly (single forward pass, no
+   lookahead), and silently drops any level-2 row whose parent hasn't been seen yet. This can only
+   be closed by obtaining `A6O015U`'s source or a live/captured trace of its actual output
+   ordering — re-reading `A6O012U.CBL`/`A6O013U.CBL` cannot resolve it, since neither program
+   contains or calls `A6O015U`'s logic.
+2. **BLOCKED (already stated as BLOCKED in R-KIT-001 item 10; restated here for completeness):**
+   whether the `'A'`/`'E'`/`'W'` severity distinction on `OMGEXPL-ERROR-RESPONSE-FLAG` matters to
+   any caller outside `A6O012U`. Confirmed fact: `A6O012U`'s own logic treats `'A'` and `'E'`
+   identically (both skip `0020-PROCESS`). What the distinction is *for* is a property of the
+   caller, not of `A6O012U` — BLOCKED because no caller's source is supplied (`program-inventory.md`
+   §7 lists "whatever online transaction driver invokes `CUP100` and `A6X01`" as unsupplied; the
+   equivalent driver for `A6O012U` is likewise not supplied).
 
 ## Blockers
 
