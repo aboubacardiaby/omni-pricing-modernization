@@ -105,23 +105,28 @@ flowchart TD
 
 ## Phase 2 — .NET Foundation
 
-- [ ] T011 [P] [CODEX] Create the .NET 8 solution and projects from `plan.md` with central package management, nullable references, analyzers, and baseline tests.
+- [x] T011 [P] [CODEX] Create the .NET 8 solution and projects from `plan.md` with central package management, nullable references, analyzers, and baseline tests.
+  - Owner: Codex
   - Depends on: none
   - Acceptance: clean restore/build/test; dependency direction documented and enforced.
 
-- [ ] T012 [P] [CODEX] Configure Pricing.Api with OpenAPI, ProblemDetails, health checks, structured logging, OpenTelemetry, correlation, and cancellation.
+- [x] T012 [P] [CODEX] Configure Pricing.Api with OpenAPI, ProblemDetails, health checks, structured logging, OpenTelemetry, correlation, and cancellation.
+  - Owner: Codex
   - Depends on: T011
   - Acceptance: API starts; health/OpenAPI available; smoke tests pass.
 
-- [ ] T013 [P] [CODEX] Implement domain value objects: Money, Percentage, identifiers, UOM, Quantity, and PricingDateRange.
+- [x] T013 [P] [CODEX] Implement domain value objects: Money, Percentage, identifiers, UOM, Quantity, and PricingDateRange.
+  - Owner: Codex
   - Depends on: T011, T003 reviewed
   - Acceptance: immutable; decimal-only; validation, equality, serialization, and boundary tests.
 
-- [ ] T014 [P] [CODEX] Implement PricingRequest, PricingContext, PricingResult, ProductInformation, CustomerInformation, ContractSelection, SellArrangementSelection, PriceComponent, and typed errors.
+- [x] T014 [P] [CODEX] Implement PricingRequest, PricingContext, PricingResult, ProductInformation, CustomerInformation, ContractSelection, SellArrangementSelection, PriceComponent, and typed errors.
+  - Owner: Codex
   - Depends on: T011, T013
   - Acceptance: models separate input/context/output and retain provenance.
 
-- [ ] T015 [CODEX] Add CI workflow for formatting, restore, build, tests, analyzers, dependency audit, and test artifacts.
+- [x] T015 [CODEX] Add CI workflow for formatting, restore, build, tests, analyzers, dependency audit, and test artifacts.
+  - Owner: Codex
   - Depends on: T011
   - Acceptance: workflow syntax validated; local equivalents documented.
 
@@ -133,18 +138,24 @@ flowchart TD
   - Evidence: `docs/mappings/omgpr-test-vectors.json` — 23 vectors across 8 representative fields spanning every OMGPR storage type (DISPLAY alphanumeric, DISPLAY date-as-text, COMP binary at two sizes, signed and unsigned COMP-3, dedicated error-output fields), each citing its copybook group path/PIC/offset from the T003 data dictionary. All numeric/binary byte values independently verified via script (Python's cp037 EBCDIC codec, struct.pack two's-complement), not hand-computed-and-trusted. Encoding is parameterized across two explicit, named profiles (mainframe_ebcdic default vs. microfocus_ascii_native alternate) rather than one hardcoded assumption, grounded in direct in-source evidence (pervasive MFMIGR change-tags confirming a historical Micro Focus migration occurred) rather than a hypothetical. Flags OMGPR-I-CONTRACT (the field Codex's G1 review specifically named) with dedicated positive/negative/zero vectors, and notes the field's true encoding profile remains an open question pending live capture — matching Codex's own G1 downstream blocker #2 verbatim.
   - Acceptance: every vector cites copybook definition; unknown encoding/byte order parameterized.
 
-- [ ] T017 [CODEX] Implement configurable alphanumeric, COMP, and COMP-3 primitives in Pricing.Compatibility.
+- [x] T017 [CODEX] Implement configurable alphanumeric, COMP, and COMP-3 primitives in Pricing.Compatibility.
+  - Owner: Codex
   - Depends on: T011, T003, T016
   - Acceptance: valid/invalid, signs, scales, byte order, overflow, and cancellation-independent deterministic tests.
+  - Evidence (Codex): configurable CP037/Windows-1252 alphanumeric, big/little-endian signed COMP, and signed/unsigned COMP-3 codecs; T016 representative vectors and invalid-format/overflow tests pass.
 
-- [ ] T018 [CODEX] Implement 1,789-byte OMGPR decoder and map legacy input to PricingRequest.
+- [x] T018 [CODEX] Implement 1,789-byte OMGPR decoder and map legacy input to PricingRequest.
+  - Owner: Codex
   - Depends on: T014, T017
   - Acceptance: length validation; centralized offsets; vectors pass; no legacy binary concerns leak into domain.
   - Unblocked 2026-07-20 on a documented ASSUMPTION (project owner explicitly directed proceeding rather than staying blocked on an unavailable live capture): see `docs/mappings/omgpr-data-dictionary.md`'s "ASSUMPTION adopted to unblock T018" section for the full decision record. Summary — buffer size 1,789 bytes (CONFIRMED); field layout per the mainframe-`COMP`-convention listing already in that document, total 1,773 bytes (ASSUMPTION, matches T016's default `mainframe_ebcdic` profile); bytes 1774-1789 (16 bytes) MUST be preserved as an opaque raw span on decode/encode round-trip, never zeroed or dropped, since no field claims them. If a live capture later contradicts this, remediate via T016's already-parameterized `microfocus_ascii_native` profile, not a one-off patch. A parity mismatch confined to the trailing 16 bytes is expected under this assumption; a mismatch inside the first 1,773 bytes means the assumption needs revisiting.
+  - Evidence (Codex): configurable mainframe-EBCDIC and Micro Focus ASCII-native decoding, centralized input offsets, exact-length validation, domain mapping, opaque-tail preservation, and 67 focused unit tests pass.
 
-- [ ] T019 [CODEX] Implement PricingResult-to-OMGPR encoder and round-trip tests.
+- [x] T019 [CODEX] Implement PricingResult-to-OMGPR encoder and round-trip tests.
+  - Owner: Codex
   - Depends on: T018
   - Acceptance: exact output length; preserved required input fields; legacy error fields mapped; test vectors pass.
+  - Evidence (Codex): conservative overlay encoder writes confirmed cost/sell/expiration/error fields, preserves all original unmapped bytes and the opaque 16-byte tail, and passes 72 focused unit tests plus the full solution suite (superseded by G2's fuller review at commits `472e5c1`/`f71c7e0`/`f845649` below, which found and confirmed resolution of the OMGPR-Q-ERROR-NBR/-CODE conflation this summary line doesn't mention).
 
 ### Gate G2 — Compatibility Review
 
@@ -182,59 +193,84 @@ flowchart TD
 
 ## Phase 4 — Product and Customer Context
 
-- [ ] T020 [CODEX] Implement ProductClassificationService based on A6O010U behavior.
+- [x] T020 [CODEX] Implement ProductClassificationService based on A6O010U behavior.
+  - Owner: Codex
   - Depends on: T014, G1
   - Acceptance: missing vendor/product, regular, kit type O, not found, database failure, and cancellation tests.
+  - Evidence (Codex): A6O010U `1000-VALIDATE-INPUT`/`0200-READ-PRODUCT-DATA` and A6O016U `2200-READ-PRODUCT-DATA`/`9015-SELECT-VNG02`; 89 focused unit tests and 95 solution tests pass.
 
-- [ ] T021 [CODEX] Implement ProductInformationService contract and repository for category, inventory class, base/alternate UOM, conversion, and dates.
+- [x] T021 [CODEX] Implement ProductInformationService contract and repository for category, inventory class, base/alternate UOM, conversion, and dates.
+  - Owner: Codex
   - Depends on: T014, T005
   - Acceptance: inferred A6O013U behavior isolated and feature-blocked until confirmed.
+  - Evidence (Codex): A6O013U is now supplied and confirms `1000-VALIDATE-INPUT`/`2000-READ-PRODUCT-DATA`; A6O016U confirms VNG02/VNG06/ING01/VNG05 sequencing and error semantics. 99 focused unit tests and 105 solution tests pass.
 
-- [ ] T022 [CODEX] Implement CustomerPricingContextService contracts and orchestration based on CUP100 analysis.
+- [x] T022 [CODEX] Implement CustomerPricingContextService contracts and orchestration based on CUP100 analysis.
+  - Owner: Codex
   - Depends on: T014, T005, G1
   - Acceptance: account/customer, memberships, parents, priorities, exclusions, fees, low-UOM, freight, and components represented.
+  - Evidence (Codex): CUP100 A200/A300, A425, A800-A850, 1000, 2000, and 3000 context flows are represented behind one business-oriented repository; 105 unit tests and 111 solution tests pass.
 
-- [ ] T023 [P] [CODEX] Implement DB2 access infrastructure, connection health, transient-error mapping, query tracing, and integration-test fixtures.
+- [x] T023 [P] [CODEX] Implement DB2 access infrastructure, connection health, transient-error mapping, query tracing, and integration-test fixtures.
+  - Owner: Codex
   - Depends on: T011, T005
   - Acceptance: business-oriented repository boundaries; parameterized SQL; no production credentials; SQL and cancellation tests.
+  - Evidence (Codex): provider-neutral DB2 connections, Dapper query execution, readiness probe, SQLSTATE/error-code transient mapping, safe OpenTelemetry activities, and sanitized recording fixtures; 8 integration tests and 115 solution tests pass.
 
 ## Phase 5 — Cost Engine
 
-- [ ] T024 [CODEX] Implement ordered ICostRule framework, evaluator, trace, skip reasons, provenance, and duplicate-priority validation.
+- [x] T024 [CODEX] Implement ordered ICostRule framework, evaluator, trace, skip reasons, provenance, and duplicate-priority validation.
+  - Owner: Codex
   - Depends on: T014, T007, T022
   - Acceptance: deterministic ordering; first applicable rule semantics; full trace tests.
+  - Evidence (Codex): immutable applied/skipped/failed decisions, ascending-priority evaluator, explicit skip/not-evaluated trace with provenance, fail-fast configuration validation, and cancellation; 112 unit tests and 122 solution tests pass. Independently re-verified by Claude's G3 interim fidelity review below (matches R-COST-000 exactly).
 
-- [ ] T025 [P] [CODEX] Implement individual and account/customer cost-contract rules.
+- [x] T025 [P] [CODEX] Implement individual and account/customer cost-contract rules.
+  - Owner: Codex
   - Depends on: T024, T023
   - Acceptance: applies/non-applies/excluded/expired/zero/competitor/fallback tests per rule.
+  - Evidence (Codex): A6U01 0235/0270/0272 individual-customer selection with account/ship-to exclusion outcome, inclusive date defense, cursor-order-preserving strict-lowest duplicate selection, valid first-zero behavior, typed failures, and provenance; 123 unit tests and 133 solution tests pass. Independently re-verified by Claude's G3 interim fidelity review below (zero-cost tie-break hand-traced equivalent to R-COST-002's OR-condition).
 
-- [ ] T026 [P] [CODEX] Implement primary, other, and parent buying-group cost rules.
+- [x] T026 [P] [CODEX] Implement primary, other, and parent buying-group cost rules.
+  - Owner: Codex
   - Depends on: T024, T023
   - Acceptance: membership and priority hierarchy parity tests.
+  - Evidence (Codex): A6U01 0240/0275/0280 scope ordering, override-before-priority cascade, and 0315/7315/7320/7321 child-then-full-ancestor traversal are represented without flattening; selected contracts retain group, priority, hierarchy, override, and provenance metadata; 132 unit tests and 142 solution tests pass. Independently re-verified by Claude's G3 interim fidelity review below (correctly avoids the flat-ordering simplification error R-COST-005's cross-cutting finding #5 warns against).
 
-- [ ] T027 [P] [CODEX] Implement special-contract cost behavior.
+- [x] T027 [P] [CODEX] Implement special-contract cost behavior.
+  - Owner: Codex
   - Depends on: T024, T007
   - Acceptance: special path, early exit, rounding, and expiration verified.
+  - Evidence (Codex): OMGPR byte 152 special flag decoding, bypass-B repository contract, priority-50 restricted individual selection, fatal #601 miss, raw cost/suggested-sell output, adjustment and final-rounding bypass, expiration-source retention, and evaluator early exit; 143 unit tests and 153 solution tests pass. Claude's G3 interim fidelity review below confirms the #601 fatal path and Bypass flags match R-SPECIAL-001, and notes one low-severity item: the suggested-sell-missing failure has no LegacyErrorCode.
 
-- [ ] T028 [P] [CODEX] Implement healthcare override cost rule using HCOVD structures.
+- [x] T028 [P] [CODEX] Implement healthcare override cost rule using HCOVD structures.
+  - Owner: Codex
   - Depends on: T024, T023
   - Acceptance: account/CID/group/product/date/type/percent/fixed cases.
+  - Evidence (Codex): A6U01 9940/9945/9950 account-before-CID eligibility across four inclusive windows, product-over-group flag precedence, 9970 highest-acquisition/earliest-active VNG03 selection, normalized dealer cost, typed COST+ percentage and stated-price terms, provenance, failures, and cancellation; 155 unit tests and 165 solution tests pass. Claude's G3 interim fidelity review below confirms the highest-cost-wins tie-break is correctly kept independent of R-COST-002's unrelated lowest-cost convention, and notes the ActiveDate secondary tie-break was not independently re-verified against R-HC-002's full source text.
 
-- [ ] T029 [CODEX] Implement acquisition/dealer-cost fallback as last cost rule.
+- [x] T029 [CODEX] Implement acquisition/dealer-cost fallback as last cost rule.
+  - Owner: Codex
   - Depends on: T025–T028
   - Acceptance: only runs after all higher rules fail; exemption resets match COBOL.
+  - Evidence (Codex): A6U01 7105 direct VNG03 selection, 7575 latest-effective/highest-level fallback, and 7190 terminal dealer-cost/UOM copy with JIT/freight exemption resets; 162 unit tests and 172 solution tests pass.
+  - **Flagged by Claude's G3 interim fidelity review below (high-severity):** this rule (and its repository) is only ever invoked when every higher-priority cost rule is skipped, per `CostRuleEvaluator`'s short-circuit design — but `RebateCalculator` (T030) requires the `AcquisitionCost`/`DealerCost`/`Level01DealerCost` values this rule alone computes, and per cost-selection-rules.md's cross-cutting finding #7, COBOL computes acquisition/dealer cost *unconditionally* (before any contract search) specifically because rebates need it even when a contract wins. Needs resolution before T047 (PricingOrchestrator) is built on top of this design.
 
-- [ ] T030 [CODEX] Implement rebate calculators and contract-entry-method exceptions.
+- [x] T030 [CODEX] Implement rebate calculators and contract-entry-method exceptions.
+  - Owner: Codex
   - Depends on: T024, T009
   - Acceptance: normal, methods 06/08, zero, negative, max, protected acquisition, and expiration tests.
+  - Evidence (Codex): A6U01 0030 method-06/08 bypass and 7070 R-REBATE-000–006 base, sequential option overwrite, negative policy, protected acquisition, total, and max-cap behavior; 177 unit tests and 187 solution tests pass. See T029's flagged finding above — this calculator's required inputs are not currently reachable from every code path that should produce them.
 
-- [ ] T031 [CODEX] Implement vendor cost adjustments and cost-side adjustment composition.
+- [x] T031 [CODEX] Implement vendor cost adjustments and cost-side adjustment composition.
+  - Owner: Codex
   - Depends on: T024, T009, T030
   - Acceptance: ordered composition, failure propagation, provenance, and parity fixtures.
+  - Evidence (Codex): A6U01 0030, 0225/0230, 7215, and 7200 ordered first-match lookup contract, price-lock/healthcare bypass, base-cost percentage calculation, typed failure propagation, rebate-preserving cost composition, provenance, and representative formula fixtures; 189 unit tests and 199 solution tests pass. Live COBOL parity remains Gate G3 scope.
 
 ### Gate G3 — Cost Parity
 
-- [ ] G3 [SHARED] Run approved cost scenarios and require exact critical-field parity before sell implementation is declared complete.
+- [!] G3 [SHARED] Run approved cost scenarios and require exact critical-field parity before sell implementation is declared complete.
   - Status: **NOT RUNNABLE YET, interim fidelity review conducted 2026-07-21 instead.** G3 as chartered requires an approved cost-scenario matrix (T055, `[CLAUDE]`, not yet built) executed through a parity runner (T056, `[CODEX]`, depends on T055/T047/T052, none built). Neither exists, so the literal gate cannot run. Per explicit project-owner direction, Claude instead performed a direct fidelity review of the existing `Pricing.Application.CostSelection`/`Rebates`/`CostAdjustments` implementation (discovered on disk in `omni-codex`, uncommitted, substantially ahead of this document's Phase 4/5 checkboxes — same pattern as the G2 discovery) against `docs/rules/cost-selection-rules.md` (T007) directly.
   - Scope reviewed: `CostSelection/ICostRule.cs`, `CostRuleDecision.cs`, `CostRuleEvaluator.cs`, `CostRulePriorities.cs`, `CostSelectionResult.cs`, `IndividualCustomerCostContractRule.cs`, `BuyingGroupCostContractRule.cs`, `SpecialContractCostRule.cs`, `HealthcareCostOverrideRule.cs`, `AcquisitionDealerCostFallbackRule.cs` (plus their repository interfaces), `Rebates/RebateCalculator.cs`, `CostAdjustments/VendorCostAdjustmentService.cs` — read directly and cross-checked line-by-line against `cost-selection-rules.md`'s R-COST-000..005, R-SPECIAL-001, R-HC-001..002, R-ACQ-001..002. Independently ran the full suite (`DOTNET_ROLL_FORWARD=LatestMajor dotnet test`): 199/199 passed (189 unit, 1 characterization, 1 parity, 8 integration) — build/test integrity confirmed, though this does not validate the structural finding below (nothing yet exercises it end-to-end, since no orchestrator exists).
   - **What was verified as genuinely faithful (not just an absence of findings):** `CostRuleEvaluator`'s priority-ordered, first-match-wins, full-trace design matches R-COST-000 exactly. `BuyingGroupCostContractRule`'s nested cascade (priority-level outer loop, child-then-full-ancestor-climb inner, per priority level) correctly avoids the flat-ordering simplification error cost-selection-rules.md explicitly warns against (cross-cutting finding #5) — hand-verified by tracing the loop structure line-by-line. `IndividualCustomerCostContractRule`'s simple strictly-less-than duplicate-cost comparison was hand-traced against R-COST-002's more convoluted zero-cost-tie-break OR-condition and found to produce identical results in every traced scenario (first-row-always-wins via a `selected is null` bootstrap, subsequent zero-cost rows never replacing an already-selected zero-cost winner). `HealthcareCostOverrideRule` correctly implements HIGHEST-acquisition-cost-wins, correctly kept independent from the LOWEST-cost-wins convention used by the individual-contract rule -- exactly the generalization trap cross-cutting finding #1 warns against. `SpecialContractCostRule` correctly raises fatal error `601` with no fallback when no bypass-flagged contract is found, and correctly sets `BypassAdjustments`/`BypassFinalRounding` matching R-SPECIAL-001.
@@ -243,6 +279,10 @@ flowchart TD
     2. **PLAUSIBLE, low:** `SpecialContractCostRule`'s `SPECIAL_CONTRACT_SUGGESTED_SELL_MISSING` failure has no `LegacyErrorCode`, unlike its sibling `601` failure -- worth confirming whether this condition maps to a real COBOL error path.
     3. **PLAUSIBLE, low:** `HealthcareCostOverrideRule`'s tie-break for equal-acquisition-cost VNG03 rows (`.ThenBy(ActiveDate)`) was not independently re-verified against R-HC-002's full source text this pass -- the primary highest-cost-wins sort is confirmed correct.
   - This is **not a gate approval** -- G3 remains unrun pending T055/T056, and this review does not claim to substitute for the actual parity-scenario execution the gate charter requires. It is recorded here so finding #1 is visible before Phase 6+ work builds on the current `CostSelection` design.
+
+  ---
+
+  - **Codex's own formal G3 decision, 2026-07-21** (`docs/reviews/g3-cost-parity-review.md`): **NOT APPROVED**, reaching the same conclusion as Claude's interim review above via independent inspection. Evidence inspected: the T025-T031 implementation and tests, `Pricing.ParityTests`/`Pricing.CharacterizationTests` (both confirmed to be single assembly-availability smoke tests only, no executable cost comparisons), T010's scenario-catalog.md (confirmed to explicitly exclude a comprehensive cost-selection matrix, its outcomes derived by static analysis rather than COBOL execution), and T055's incomplete status. Explicitly states: "self-authored expected values are not independent COBOL parity evidence." Verification: restore/build succeeded (0 warnings/errors), 199/199 tests passed, 0 executable COBOL/C# cost comparisons. Required for re-review: (1) an approved sanitized COBOL cost fixture set (T055) covering individual/account-customer/group-parent/special/healthcare/acquisition-fallback/rebate/vendor-adjustment cases, (2) confirmation of the COBOL runtime rounding-tie mode, (3) executable characterization/parity tests comparing contract, hierarchy/rule type, unit cost, UOM, rebate, price protection, vendor adjustment, total cost, expiration, exemptions, and legacy errors exactly, (4) per-scenario results plus Claude's independent fidelity review. T055 is explicitly named as the actionable next step, consistent with Claude's own next-step identification above.
 
 ## Phase 6 — Sell Engine
 
