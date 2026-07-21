@@ -138,6 +138,49 @@ padding," not "possible active truncation."
 
 ---
 
+## ASSUMPTION adopted to unblock T018 (2026-07-20)
+
+T018 (`[CODEX]`, implement the OMGPR decoder) was blocked pending a live compiled-layout capture
+that no supplied file provides and none is expected in the near term. **The project owner
+explicitly directed this task to proceed on a documented ASSUMPTION rather than remain blocked
+indefinitely** — this section records that decision so it is traceable, not silently baked into
+generated code. Per `CLAUDE.md`, this is recorded as `ASSUMPTION` (a deliberate, flagged
+substitute for missing evidence), not `CONFIRMED`; it must not be read as fact by any later task.
+
+**Decision:**
+1. **Buffer size: 1,789 bytes.** Use the hardcoded, CONFIRMED value from the four programs
+   (`OMGPR-PARM-LENGTH`, three `COMMAREA PIC X(1789)` declarations) as the decoder's fixed input/
+   output length. This value is CONFIRMED (source-cited), not part of the assumption itself.
+2. **Field layout: mainframe `COMP` convention, total 1,773 bytes.** Decode `OMGPR-C`'s 287 leaf
+   fields per this document's existing field-by-field listing (offsets already computed under this
+   convention) — i.e. use the **default** profile, not the minimal-bytes alternate. This choice is
+   made for consistency with `docs/mappings/omgpr-test-vectors.json`'s (T016) own default
+   `mainframe_ebcdic` profile, so the two artifacts Codex builds against (data dictionary, test
+   vectors) do not silently disagree on which convention is "default."
+3. **Bytes 1774-1789 (16 bytes): explicit unmapped trailing region, not silently discarded.** No
+   field in `OMGPR.CPY` accounts for this span (see Reconciliation above — the workbook's original
+   claim that this space was *needed* by real fields was found to be a byte-counting error, not a
+   genuine field). The decoder must preserve these 16 bytes as an opaque raw byte span (e.g. a
+   `byte[16]` or equivalent) on round-trip, not zero it, not assume it is blank/padding-only, and
+   not map it to any named field. T019's encoder must write back whatever was captured here, not a
+   fixed fill value — this keeps the round-trip lossless even though the content's meaning is
+   unknown.
+4. **Alternate profile stays available, not deleted.** If a live capture ever contradicts this
+   assumption (most likely by revealing the platform is actually Micro Focus ASCII-native, per the
+   `MFMIGR` evidence already documented across this codebase), the correct remediation is switching
+   to the already-parameterized `microfocus_ascii_native` profile (T016), not a one-off patch —
+   `OMGPR-Q-ORD-LIN-ORDERED`/`OMGPR-L-CNT-LINE` are the only two fields whose byte offset actually
+   shifts between conventions (see the `COMP` methodology note above); every other field's offset is
+   identical either way.
+
+**Escape hatch:** if a live COMMAREA capture or compile listing becomes available later, this
+ASSUMPTION must be re-checked before any T018/T019 output is treated as production-parity-verified.
+A parity-test mismatch confined to the trailing 16-byte span should be treated as expected under
+this assumption, not as evidence of a decoder defect — but a mismatch anywhere in the first 1,773
+bytes would indicate the assumption itself needs revisiting.
+
+---
+
 ## Full field listing, grouped by top-level structure
 
 `OMGPR-C` (the record body) totals **1773 bytes** across 29 direct-child entries: 2 named sub-groups (e.g. `OMGPR-PRC-INPUT-FIELDS`, `OMGPR-PRC-OUTPUT-FIELDS`) and 27 individual fields declared directly at the same level under `OMGPR-C` (mostly the later change-batches — `KS0912`/`BM0421`/`DP0722`/`SJ1022`/`SJ0821` additions — that were appended without being nested inside either major sub-group), listed below in declaration order. Nested indentation reflects the copybook's own group nesting.

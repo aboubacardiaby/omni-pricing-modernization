@@ -140,6 +140,7 @@ flowchart TD
 - [ ] T018 [CODEX] Implement 1,789-byte OMGPR decoder and map legacy input to PricingRequest.
   - Depends on: T014, T017
   - Acceptance: length validation; centralized offsets; vectors pass; no legacy binary concerns leak into domain.
+  - Unblocked 2026-07-20 on a documented ASSUMPTION (project owner explicitly directed proceeding rather than staying blocked on an unavailable live capture): see `docs/mappings/omgpr-data-dictionary.md`'s "ASSUMPTION adopted to unblock T018" section for the full decision record. Summary — buffer size 1,789 bytes (CONFIRMED); field layout per the mainframe-`COMP`-convention listing already in that document, total 1,773 bytes (ASSUMPTION, matches T016's default `mainframe_ebcdic` profile); bytes 1774-1789 (16 bytes) MUST be preserved as an opaque raw span on decode/encode round-trip, never zeroed or dropped, since no field claims them. If a live capture later contradicts this, remediate via T016's already-parameterized `microfocus_ascii_native` profile, not a one-off patch. A parity mismatch confined to the trailing 16 bytes is expected under this assumption; a mismatch inside the first 1,773 bytes means the assumption needs revisiting.
 
 - [ ] T019 [CODEX] Implement PricingResult-to-OMGPR encoder and round-trip tests.
   - Depends on: T018
