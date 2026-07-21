@@ -7,10 +7,17 @@ account/customer, group, parent, special, healthcare, and acquisition fallback.
 
 **Source of truth:** COBOL as read directly in `upload/A6U01.CBL` (26,657 lines) and `OMGPR.CPY`.
 Line citations refer to `A6U01.CBL` unless a different file is named. No DCLGEN copybooks for
-`CCG01`, `CCG03`, `CCG05`, `CCG06`, `CCG07`, `CCG09`, `CCG10`, `CCG11`, `CCG27`, `CUG06`, `CUG07`,
-`CUG09`, `CUG10`, `CUG11`, `CUG12`, `CUG13`, `BGG01`, `BGG02`, `BGG03`, `VNG02`, `VNG03` are
-supplied in `upload/` — every field sourced from these is marked BLOCKED or INFERRED at the point
-it is used, never assumed.
+`CCG01`, `CCG03`, `CCG05`, `CCG06`, `CCG07`, `CCG09`, `CCG10`, `CCG11`, `CCG27`, `CUG09`, `CUG12`,
+`CUG13`, `BGG01`, `BGG02`, `VNG03` are supplied in `upload/` — every field sourced from these is
+marked BLOCKED or INFERRED at the point it is used, never assumed.
+
+**Updated — second upload batch (2026-07-20 pass):** DCLGEN copybooks for `CUG06`, `CUG07`,
+`CUG10`, `CUG11`, `BGG03`, `CCG25`, and `VNG02` are now supplied and read in full
+(`docs/cobol-analysis/program-inventory.md` §4.2). Field-level BLOCKED/INFERRED notes citing these
+six tables below are upgraded to CONFIRMED where the field in question matches a field actually
+present in the new copybook; see R-COST-001 item 9, R-COST-003, R-COST-004, and R-COST-005 for the
+specific upgrades. This does not change any rule's *behavior* — only its evidence confidence — since
+the field-level shapes now confirmed match what had already been INFERRED from usage.
 
 **Depends on (per `tasks.md`):** T001 (`docs/cobol-analysis/program-inventory.md`, complete) and
 T005 (`docs/cobol-analysis/sql-query-inventory.csv` + `db2-table-inventory.md`, complete). Table
@@ -144,6 +151,13 @@ lowest-cost-wins duplicate resolution) -> `0272-COMPARE-COST`/`0273-CHECK-PRIORI
     literally filters on the bypass-code field per the comment's description — the SQL text
     itself was not independently re-transcribed in this pass (deferred to the T005 SQL CSV rows
     for 9037-SQL-ROW-CNT-010/9040-SQL-SELECT-010).
+
+**Update (second upload batch):** `7360-VERIFY-FOR-EXCL`'s underlying table, `CCG25`, now has a
+supplied DCLGEN (`CCG25.CPY`, CONFIRMED): `CCG25-I-CONTRACT` (S9(9) COMP), `CCG25-I-ACCOUNT`
+(S9(9) COMP), `CCG25-C-SHIP-TO-SUFFIX` (X(3) — matches item 9's "default '000' ship-to first, then
+the specific ship-to" description), `CCG25-D-EFFECT`/`CCG25-D-EXPIRE` (X(10), EXPIRE nullable),
+`CCG25-T-COMMENT` (X(35)). This confirms the exclusion check's key shape but the exact WHERE-clause
+predicate inside `7360-VERIFY-FOR-EXCL` remains unconfirmed (T005 SQL CSV, not re-transcribed here).
 
 ### R-COST-002 Duplicate individual contracts: lowest-cost-wins resolution
 1. ID/Name: R-COST-002 Lowest-cost selection among duplicate individual contracts
@@ -342,6 +356,22 @@ BG level and `7320-SEL-PARENT-COST-010`/`7321-SEL-PARENT-COST-01-010` to climb a
     customer-side equivalent paragraphs' byte-for-byte parity with the account side (confirmed
     structurally parallel at the 0275/0280 level, not re-verified at this deeper 0315-equivalent
     level).
+
+**Update (second upload batch) — field-level confirmation for R-COST-003/004/005's table
+citations:** DCLGEN copybooks for `CUG10`, `CUG11` (account BG-priority), `CUG06`, `CUG07`
+(customer BG-priority equivalents), and `BGG03` (parent buy-group) are now supplied and read in
+full. Confirmed field shapes: `CUG10-I-ACCOUNT` (S9(8) COMP), `CUG10-D-ACCT-BG-PRI-EFF`/`-EXP`
+(X(10), EXP nullable); `CUG11-I-ACCOUNT` (S9(8) COMP), `CUG11-D-ACCT-BG-PRI-EFF` (X(10)),
+`CUG11-I-BUY-GROUP` (S9(8) COMP), `CUG11-S-BG-MEMBER` (S9(8) COMP), `CUG11-Q-ACCT-BG-PRIORITY`
+(S9(4) COMP — the priority-level ordinal R-COST-005 walks), `CUG11-Q-PREF-TIER-LEVEL` (S9(4) COMP,
+cited in R-COST-003 item 7), `CUG11-D-BG-TIER-START` (X(10)); `CUG06`/`CUG07` mirror
+`CUG10`/`CUG11` exactly with `I_CUSTOMER` in place of `I_ACCOUNT`; `BGG03-I-BUY-GROUP` (S9(8) COMP,
+nullable), `BGG03-I-BUY-GROUP-PARENT` (S9(8) COMP NOT NULL — the field R-COST-005 item 7 cites at
+line 7501), `BGG03-D-PARTNER-EXPIRE`/`-EFFECT`/`-START` (X(10), EXPIRE nullable). This upgrades the
+"table exists, fields used by name only" confidence to CONFIRMED field-level shape; the SQL
+WHERE-clause/cursor-ORDER-BY predicates that select among rows in these tables remain deferred to
+the T005 SQL CSV as before — only the target record layouts are newly confirmed, not the query
+logic.
 
 ---
 

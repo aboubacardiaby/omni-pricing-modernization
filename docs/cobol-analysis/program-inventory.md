@@ -505,23 +505,37 @@ is read-only against DB2.**
 | `CUTPRICE_COMPONENT` | `CUVPRCMP.CPY` (CONFIRMED) | `CUP100` (`5000-SQL-SELECT-PRICE-COMP`) |
 
 ### 4.2 Tables referenced whose DCLGEN copybook is NOT supplied — BLOCKED
-**`CUP100`:** `CUG40`, `CUG41`, `CCG25`, `BGG03`, `BGG23`, `BGG24`, `CUG02`, `CUG03`, `CUG06`,
-`CUG07`, `CUG10`, `CUG11`, `CUG53`, `CUG17`, `CUTMST`, `CUR120` (also its consuming record,
-`CUR120.CPY`, is not supplied even though CUP100 calls a `CUP120` subprogram that presumably
-populates it).
 
-**`A6O011U`:** `VNG02`, `VNG05` (referenced only via inline `EXEC SQL SELECT`, no `EXEC SQL
-INCLUDE`; column names visible in the SQL text but not the full DCLGEN).
+*Updated after a second upload batch of 22 files supplied `BGG03.CPY`, `BGG23.CPY`, `BGG24.CPY`,
+`CCG25.CPY`, `CUG02.CPY`, `CUG03.CPY`, `CUG06.CPY`, `CUG07.CPY`, `CUG10.CPY`, `CUG11.CPY`,
+`CUG17.CPY`, `CUG40.CPY`, `CUG41.CPY`, `CUG53.CPY`, `CUR120.CPY`, `CUVMST.CPY`, `VNG02.CPY`,
+`VNG05.CPY` (plus `A6O010U.CBL`, `CUP100.CBL`, `DFHRESP.CPY`, `SQLCA.CPY` — clean re-uploads/
+standard system copybooks, no new content). Items struck through were resolved by that batch.*
+
+**`CUP100`:** ~~`CUG40`~~, ~~`CUG41`~~, ~~`CCG25`~~, ~~`BGG03`~~, ~~`BGG23`~~, ~~`BGG24`~~,
+~~`CUG02`~~, ~~`CUG03`~~, ~~`CUG06`~~, ~~`CUG07`~~, ~~`CUG10`~~, ~~`CUG11`~~, ~~`CUG53`~~,
+~~`CUG17`~~ — **RESOLVED**, full DCLGEN (or, for `CUR120`/`CUTMST`, the equivalent full working-storage
+record layout) now supplied and read in full; field-level detail incorporated into T007/T008/T009
+as applicable. ~~`CUTMST`~~ — **RESOLVED**: `CUVMST.CPY` (269 lines, `CUM-` prefix) is CONFIRMED as
+the `CUTMST` record layout (its own change-history comment at line 24 reads "ADD NEW FIELD TO
+CUTMST"); note this copybook has no `EXEC SQL DECLARE` block, so unlike the others it is a plain
+working-storage layout, not a DB2 DCLGEN in the strict sense — CUTMST's underlying storage
+mechanism (VSAM vs. DB2) is still not independently confirmed. ~~`CUR120`~~ — **RESOLVED**:
+`CUR120.CPY` (164 lines) supplied and read in full — the CUP120/CUP121 data-interchange record;
+see T009 (`docs/rules/fees-and-adjustments.md`) for the JIT/CMF-fee field detail now confirmed from
+it. `CUP120`/`CUS120` (the programs that populate `CUR120`) remain unsupplied — see §7.
+
+**`A6O011U`:** ~~`VNG02`~~, ~~`VNG05`~~ — **RESOLVED**, full DCLGEN now supplied (both include a
+complete `EXEC SQL DECLARE ... TABLE` block, not just inline-SQL column shapes).
 
 **`A6O016U`** (referenced only via inline `EXEC SQL SELECT`, no `EXEC SQL INCLUDE` for any of
-these — SQL-text-level column shapes CONFIRMED, full DCLGEN still BLOCKED): `VNG02`
-(`I_VENDOR`, `I_VND_PRODUCT`, `C_PRODUCT_TYPE`, `C_VND_PROD_BASE_UM`), `VNG06` (`I_VENDOR`,
-`I_VND_PRODUCT`, `S_PROD_CATEGORY`, `D_CAT_PROD_EFFECT`, `D_CAT_PROD_EXPIRE` + a null-indicator
-column), `ING01` (`I_DIVISION`, `I_VENDOR`, `I_VND_PRODUCT`, `C_DIV_INV_PRC_LVL`, `F_STOCK_ITEM`,
-`A_DIV_INV_FREIGHT`, `C_INV_CLASS`, `C_INV_SUB_CLASS`), `VNG05` (`I_VENDOR`, `I_VND_PRODUCT`,
-`C_VD_PRD_ALT_UM`, `A_VD_PRD_ALT_UMF`). This corroborates and extends the `VNG02`/`VNG05` column
-list already seen from `A6O011U`'s own inline SQL (§1.6/§1.3) and adds `VNG06`/`ING01` as two more
-tables with SQL-text-level (not full-DCLGEN) confirmation.
+these): ~~`VNG02`~~ (`I_VENDOR`, `I_VND_PRODUCT`, `C_PRODUCT_TYPE`, `C_VND_PROD_BASE_UM`) —
+**RESOLVED**, full DCLGEN now supplied. `VNG06` (`I_VENDOR`, `I_VND_PRODUCT`, `S_PROD_CATEGORY`,
+`D_CAT_PROD_EFFECT`, `D_CAT_PROD_EXPIRE` + a null-indicator column), `ING01` (`I_DIVISION`,
+`I_VENDOR`, `I_VND_PRODUCT`, `C_DIV_INV_PRC_LVL`, `F_STOCK_ITEM`, `A_DIV_INV_FREIGHT`,
+`C_INV_CLASS`, `C_INV_SUB_CLASS`) — **still BLOCKED**, full DCLGEN not supplied.
+~~`VNG05`~~ (`I_VENDOR`, `I_VND_PRODUCT`, `C_VD_PRD_ALT_UM`, `A_VD_PRD_ALT_UMF`) — **RESOLVED**,
+full DCLGEN now supplied.
 
 **`A6O012U`:** `OMGPK` (the raw pack-explosion record exchanged with the still-missing `A6O015U`)
 — **NOT present in `upload/` — BLOCKED**, though extensively INFERRED in shape from usage (§1.8).
@@ -529,14 +543,18 @@ Also `SYR000`, `SYR208`, `SYH208` (all `COPY`, not `EXEC SQL INCLUDE` — shared
 copybooks, `SYH208` invoked as inline procedural logic rather than data) — **all three NOT present
 in `upload/` — BLOCKED**, purpose unconfirmed beyond "date validation" for `SYH208`.
 
-**`A6U01`** (~134 `EXEC SQL INCLUDE` DCLGEN targets, grouped by family; **all BLOCKED** — field
-layouts cannot be confirmed):
+**`A6U01`** (~134 `EXEC SQL INCLUDE` DCLGEN targets, grouped by family; **BLOCKED except where
+struck through** — field layouts for struck-through tables are now confirmed via the same
+copybooks supplied for `CUP100`'s use of these tables, §4.2 above):
 - **`CCG*` (contract) family:** CCG01, CCG03, CCG04, CCG05, CCG06, CCG07, CCG09, CCG10, CCG11,
-  CCG13, CCG14, CCG15, CCG16, CCG21, CCG25, CCG27.
-- **`CUG*` (customer) family:** CUG03, CUG06, CUG07, CUG08, CUG09, CUG10, CUG11, CUG12, CUG13,
-  CUG18, CUG19, CUG20, CUG21, CUG22, CUG23, CUG24, CUG25, CUG26, CUG27, CUG29, CUG31, CUG33,
-  CUG34, CUG55, CUG56, CUG57, CUG60, CUG61, CUG62, CUG63, CUG64, CUG65.
-- **`BGG*` (buy group) family:** BGG01, BGG02, BGG03, BGG10, BGG11, BGG19, BGG20, BGG25.
+  CCG13, CCG14, CCG15, CCG16, CCG21, ~~CCG25~~ (**RESOLVED**), CCG27.
+- **`CUG*` (customer) family:** ~~CUG03~~, ~~CUG06~~, ~~CUG07~~ (all **RESOLVED**), CUG08, CUG09,
+  ~~CUG10~~, ~~CUG11~~ (**RESOLVED**), CUG12, CUG13, CUG18, CUG19, CUG20, CUG21, CUG22, CUG23,
+  CUG24, CUG25, CUG26, CUG27, CUG29, CUG31, CUG33, CUG34, CUG55, CUG56, CUG57, CUG60, CUG61,
+  CUG62, CUG63, CUG64, CUG65.
+- **`BGG*` (buy group) family:** BGG01, BGG02, ~~BGG03~~ (**RESOLVED**), BGG10, BGG11, BGG19,
+  BGG20, BGG25. (`BGG23`/`BGG24` were not previously listed here — they surfaced only via the new
+  upload batch and are referenced by `CUP100`, not confirmed as `A6U01` dependencies.)
 - **`SAG*` (sell assignment) family:** SAG01 through SAG26 (all 26).
 - **`VNG*` (vendor) family:** VNG01, VNG02, VNG03, VNG04, VNG05, VNG06, VNG07, VNG14, VNG15,
   VNG16, VNG19, VNG20, VNG21, VNG22, VNG23, VNG24, VNG31, VNG32, VNG33, VNG34, VNG35, VNG36.
@@ -725,11 +743,12 @@ struck through below were resolved by that batch; new items surfaced by reading 
 - Whatever online transaction driver invokes `CUP100` and `A6X01`. Not supplied.
 
 **Copybooks/DCLGENs referenced but not supplied:**
-- `CUR120` — still BLOCKED (despite being consumed field-by-field in `CUP100`; `CUP120`/`CUS120`
-  would be the program that populates it, and `CUS120` is still missing).
-- `VNG02`, `VNG05`, `VNG06`, `ING01` — still BLOCKED for a *full* DCLGEN, though `A6O016U` (§1.6)
-  now gives SQL-text-level column confirmation for the specific columns these five programs
-  (`A6O011U`, `A6O016U`) actually use.
+- ~~`CUR120`~~ — **RESOLVED**, `CUR120.CPY` supplied and read in full (see §4.2). `CUP120`/`CUS120`
+  (the programs that populate it) remain missing, so the *computation* that produces `CUR120`'s
+  values is still BLOCKED even though the *data shape* is now CONFIRMED.
+- ~~`VNG02`~~, ~~`VNG05`~~ — **RESOLVED**, full DCLGEN supplied (see §4.2). `VNG06`, `ING01` —
+  still BLOCKED for a *full* DCLGEN, though `A6O016U` (§1.6) gives SQL-text-level column
+  confirmation for the specific columns `A6O011U`/`A6O016U` actually use.
 - `OMGPK` — **NEW.** Raw pack-explosion record exchanged between `A6O012U` and the missing
   `A6O015U`. Extensively INFERRED in shape from usage, but not a supplied file.
 - `SYR000`, `SYR208`, `SYH208` — **NEW.** Shared/system utility copybooks `COPY`'d by `A6O012U`;

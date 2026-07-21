@@ -10,10 +10,18 @@ task's wording.
 
 **Source of truth:** COBOL as read directly in `upload/A6U01.CBL` (26,657 lines) and `OMGPR.CPY`.
 Line citations refer to `A6U01.CBL` unless a different file is named. No DCLGEN copybooks for
-`VNG01`, `VNG02`, `VNG03`, `VNG05`, `VNG16`, `VNG17`, `VNG19`, `VNG20`, `VNG31`, `VNG32`, `VNG33`,
-`VNG34`, `VNG35`, `VNG37`, `VNG40`, `BGG25`, `ING01`, `CUS120`, `CUP120` are supplied in `upload/`
-— every field sourced from these is marked BLOCKED or INFERRED at the point it is used, never
-assumed.
+`VNG01`, `VNG03`, `VNG16`, `VNG17`, `VNG19`, `VNG20`, `VNG31`, `VNG32`, `VNG33`, `VNG34`, `VNG35`,
+`VNG37`, `VNG40`, `BGG25`, `ING01`, `CUS120`, `CUP120` are supplied in `upload/` — every field
+sourced from these is marked BLOCKED or INFERRED at the point it is used, never assumed.
+
+**Updated — second upload batch (2026-07-20 pass):** `VNG02.CPY`, `VNG05.CPY` (now full DCLGEN,
+previously usage-only), and — not part of this document's original header list but now supplying
+detail used throughout the JIT/LUOM/Freight sections below — `CUR120.CPY`, `CUG53.CPY`,
+`CUG17.CPY`, `BGG23.CPY`, `BGG24.CPY` are newly supplied and read in full
+(`docs/cobol-analysis/program-inventory.md` §4.2). See R-JIT-001/002/003/006, R-LUOM-001/002/003,
+`R-FREIGHT-006`, and `R-PANDAC-000` below for the resulting field-level upgrades. `CUP120`/`CUS120`
+(the programs that populate `CUR120`) remain unsupplied — this batch confirms `CUR120`'s data
+*shape*, not the *computation* behind its JIT/CMF fee values.
 
 **Depends on (per `tasks.md`):** T001 (`docs/cobol-analysis/program-inventory.md`, complete) and
 T005 (`docs/cobol-analysis/sql-query-inventory.csv` + `db2-table-inventory.md`, complete). Table
@@ -483,7 +491,16 @@ CID freight table confirmed by T005 SQL evidence as `VN_CID_VN_FREIGHT` (VNG40 h
 3. Preconditions: none beyond having already run the freight waterfall
 4. Data deps: VNG02-C-CUSTOM-IND, OMGPR-F-EXEMPT-CUSTOM-FLAG, OMGPR-F-EXEMPT-SANC-FLAG,
    OMGPR-F-EXEMPT-NON-SANC-FLAG, OMGPR-F-EXEMPT-IND-FLAG, OMGPR-F-EXEMPT-NON-CONT-FLAG,
-   CCG09-I-RPT-GRP, OMGPR-F-GRP-CNT-FEES, BGG01-I-DIVISION, WS-INDIV-CNT, WS-COST-CONT-FND
+   CCG09-I-RPT-GRP, OMGPR-F-GRP-CNT-FEES, BGG01-I-DIVISION, WS-INDIV-CNT, WS-COST-CONT-FND.
+   **Update (second upload batch): the five `OMGPR-F-EXEMPT-*` flags' upstream source table,
+   `CUG53` (DCLGEN TABLE `CU_AC_FREIGHT_FLAG`), is now supplied and read in full — exact match
+   confirmed:** `CUG53-F-FRT-FLAG` (general freight flag), `CUG53-F-GRP-SANC`
+   (-> `OMGPR-F-EXEMPT-SANC-FLAG`), `CUG53-F-GRP-NON-SANC` (-> `-NON-SANC-FLAG`), `CUG53-F-IND`
+   (-> `-IND-FLAG`), `CUG53-F-NON-CONT` (-> `-NON-CONT-FLAG`), `CUG53-F-CUSTOM`
+   (-> `-CUSTOM-FLAG`), all `X(1)`, keyed by `CUG53-I-ACCOUNT` (S9(9) COMP) with
+   `CUG53-D-EFF-DATE`/`-D-EXP-DATE` (X(10), EXP nullable) and a `CUG53-I-BUY-GROUP` (S9(8) COMP)
+   column also present but not cited by name in this paragraph. `VNG02-C-CUSTOM-IND` (X(1)) is
+   likewise now confirmed via the supplied `VNG02.CPY`.
 5. Priority (CONFIRMED, mutually-exclusive cascade of exactly one exemption category applies):
    (a) IF VNG02-C-CUSTOM-IND='Y': custom-account exemption flag governs, full stop (does not fall
    through to any of b-e). (b) ELSE IF WS-COST-CONT-FND (cost contract exists): sanctioned-group
@@ -542,7 +559,20 @@ Program/paragraph: A6U01.CBL, `7225-PRO-JIT-ADJ-010` (lines 13020-13341), called
 3. Preconditions: caller re-checks OMGPR-F-JIT-EXEMPT<>'Y' AND OMGPR-F-ST-JIT-CUSTOMER='Y' AND
    service-fee code in {R,P,C,A} before even calling this paragraph
 4. Data deps: OMGPR-JIT-SERVICE-FEE and all OMGPR-JIT-* inputs, populated upstream via CUP100's
-   A400-GET-JIT-ADJ from CUR120 (ultimately CUP120/CUS120 — BLOCKED, not supplied)
+   A400-GET-JIT-ADJ from CUR120 (ultimately CUP120/CUS120 — BLOCKED, not supplied). **Update
+   (second upload batch): `CUR120.CPY` is now supplied and read in full, confirming the exact
+   field shapes CUP100 moves into OMGPR (though not the computation that populates `CUR120`
+   itself, which remains CUP120/CUS120's still-BLOCKED job):** `CUR120-F-ST-JIT-CUSTOMER` (X(1)),
+   `CUR120-JIT-SERVICE-FEE` (X(1), the A/C/R/P code this rule gates on),
+   `CUR120-JIT-FEE-BREAK-OUT-SW` (X(1)), `CUR120-JIT-SERVICE-FEE-PCT` (S9(1)V9(4) COMP-3),
+   `CUR120-JIT-LABEL-CHRG-TYPE`/`-AMT` (X(1) / S9(2)V9(4) COMP-3),
+   `CUR120-JIT-APPLY-CHRG-TYPE`/`-AMT` (X(1) / S9(2)V9(4) COMP-3),
+   `CUR120-JIT-BREAK-CHRG-TYPE`/`-AMT` (X(1) / S9(2)V9(4) COMP-3),
+   `CUR120-JIT-LUOM-CHRG-AMT` (S9(2)V9(4) COMP-3, `HR0415` addition),
+   `CUR120-JIT-LUM-FEE-PCT`/`-EXTRA-DELIV-FEE-PCT`/`-NON-OM-SLCT-FEE-PCT` (all S9(1)V9(4) COMP-3 —
+   these three back R-JIT-002 item 5's "four sub-amounts" service-fee split). The scale/decimal
+   placement question previously open for these percentage/amount fields is now CONFIRMED, not
+   INFERRED.
 5. Priority: every other JIT rule below is conditional on this gate. Code meanings (CONFIRMED,
    header comment + branching at 13320-13340):
    | Code | Meaning | Calc base | Embedded in line item? |
@@ -621,7 +651,10 @@ Program/paragraph: A6U01.CBL, `7225-PRO-JIT-ADJ-010` (lines 13020-13341), called
 9. Exclusions/fallbacks: OMGPR-F-LUOM-ELIG-SW is the exclusion gate — its own copybook comment
    states "LUOM CHARGES WILL BE COMPUTED ONLY IF ACCOUNT IS ELIGIBLE FOR THIS CHARGE. THIS SWITCH
    IS SET IN CUS120 AND PASSED THROUGH CUP100/CUP110" — origin is the still-BLOCKED CUS120 member;
-   this task cannot state which accounts qualify, only that A6U01 trusts whatever CUS120 decided
+   this task cannot state which accounts qualify, only that A6U01 trusts whatever CUS120 decided.
+   **Update: `CUR120-F-LUOM-ELIG-SW` (X(1), `SA0403` addition, incident #461097 per its own comment)
+   is CONFIRMED as the exact intermediate carrier of this flag between CUS120 and OMGPR — the
+   field shape is now known, though CUS120's eligibility rule that sets it remains BLOCKED.**
 10. Errors: none in this fragment
 11. Confidence: CONFIRMED for the control-flow finding; BLOCKED for CUS120's actual eligibility
     rule
@@ -676,7 +709,10 @@ Program/paragraph: A6U01.CBL, `7225-PRO-JIT-ADJ-010` (lines 13020-13341), called
 10. Errors: none
 11. Confidence: CONFIRMED for the mechanism. INFERRED that 'O' means "Owens-sourced" (by analogy
     to A6O016U's 'O'=Owens-kit/'S'=supplier-kit product-type convention) — not confirmed from any
-    comment in this specific paragraph.
+    comment in this specific paragraph. **Update: `OMGPR-C-PRIVATE-LBL`'s upstream field,
+    `VNG02-C-PRIVATE-LBL` (X(1)), is now CONFIRMED to exist and match this shape (`VNG02.CPY`
+    supplied) — but `VNG02.CPY` carries no comment giving 'O''s letter-value meaning either, so the
+    "Owens-sourced" reading is still INFERRED, not upgraded to CONFIRMED.**
 
 ### R-JIT-006 Total JIT fee routes to cost or sell bucket; line-item visibility suppression
 1. ID/Name: R-JIT-006 JIT total routing and line-item suppression flag
@@ -720,8 +756,9 @@ Program/paragraph: A6U01.CBL `0165-PRO-PANDAC-010` (2855-2874) -> `0170-SEL-PAND
 3. Preconditions: VNG01-F-VEND-PANDAC = 'Y' (vendor participates in PANDAC) AND
    VNG02-F-PANDAC-ITEM = 'Y' (item/product is PANDAC-eligible) — both re-checked, once at the
    caller (7195) and again inside 0165 itself (redundant but harmless double-gate)
-4. Data deps: VNG01-F-VEND-PANDAC, VNG02-F-PANDAC-ITEM — VNG01/VNG02 DCLGENs not supplied in
-   upload/, BLOCKED on exact PIC/type, though usage confirms both are Y/N flags
+4. Data deps: VNG01-F-VEND-PANDAC, VNG02-F-PANDAC-ITEM — VNG01 DCLGEN still not supplied, BLOCKED
+   on exact PIC/type (usage confirms Y/N flag). **Update (second upload batch): `VNG02-F-PANDAC-
+   ITEM` is RESOLVED — `VNG02.CPY` now supplied, field confirmed `PIC X(1)`, `RP0511` addition.**
 5. Priority: **CONFIRMED significant finding — the source comments describing this rule's
    behavior are STALE and describe removed logic.** Both the block comment immediately above the
    live call ("PANDAC - IMPLIED SELL ARRANGEMENT ... THE PANDAC FEE BECOMES AN IMPLIED SELL
@@ -948,7 +985,16 @@ Control-flow (CONFIRMED):
 2. Program/paragraph: 0245-PRO-BG-LOW-UOM-010 (6025-6038) + 7885-FIND-VEND-EXCL-010
    (19252-19290)
 3. Preconditions: OMGPR-F-LUOM-VEND-EXCL='Y' (set by CUP100's A830-SEL-LOW-UOM from
-   BGG23-F-LUOM-VEND-EXCL)
+   BGG23-F-LUOM-VEND-EXCL). **Update (second upload batch): `BGG23.CPY` (DCLGEN TABLE
+   `P1.BG_LOW_UOM`) now supplied and read in full — confirms `BGG23-F-LUOM-VEND-EXCL` (X(1)) plus
+   sibling fields on the same row not previously documented anywhere in this project:
+   `BGG23-P-BG-LOW-UOM`/`BGG23-P-BG-BRK-BULK` (both S9(1)V9(4) COMP-3, the LUOM/break-bulk
+   percentage this section's downstream formula (`7896`/`7898`) actually applies — the percentage
+   *value*'s upstream source was previously unconfirmed) and `BGG23-F-BG-LOW-UOM-EXCL` (X(1), a
+   second, LUOM-specific exclusion flag distinct from `F-LUOM-VEND-EXCL`, not currently cited by
+   name anywhere in this document — worth a follow-up trace if `0245`'s SELECT is re-examined).
+   `BGG25` (the vendor-exclusion table actually queried by `7885-FIND-VEND-EXCL-010`) remains
+   BLOCKED — `BGG23` and `BGG25` are two different tables; do not conflate them.**
 4. Data deps: SELECT from BGG25 keyed by OMGPR-I-BUY-GROUP-LUOM, OMGPR-D-BG-LOW-UOM-EFF,
    OMGPR-I-VENDOR. SQLCODE=0 or -811 (duplicate-row-exists reuse pattern) both mean "exclusion
    exists"; 100 or other means "no exclusion" (WHEN OTHER sets WS-BG-LOW-VEXC-EXISTS-SW='N' but
@@ -964,6 +1010,20 @@ Control-flow (CONFIRMED):
 10. Errors: WHEN OTHER on BGG25 select -> error 301, fatal, GO TO 0020-EXIT-PRICER
 11. Confidence: CONFIRMED
 
+**New table surfaced by the second upload batch, not yet tied to any confirmed call site —
+flagged per CLAUDE.md rather than silently assumed:** `BGG24.CPY` (DCLGEN TABLE
+`P1.BG_LOW_UOM_EXCL`) is a **customer-level LUOM exclusion table**, one level more specific than
+`BGG23`'s buy-group-level `F-LUOM-VEND-EXCL`/`F-BG-LOW-UOM-EXCL` flags: `BGG24-I-BUY-GROUP`
+(S9(8) COMP), `BGG24-D-BG-LOW-UOM-EFF` (X(10)), `BGG24-I-CUSTOMER` (S9(8) COMP),
+`BGG24-D-BG-LUOM-EXCL-EFF`/`-EXP` (X(10), EXP nullable) — i.e. a specific customer, within an
+otherwise-LUOM-eligible buy-group, can be individually excluded. No paragraph reading this table
+was found among the programs read for this project (`A6U01`, `CUP100`, and the DAO-tier programs);
+CUP100's inventory (`program-inventory.md` §4.2/§6.3) does not list a `BGG24` SELECT among its
+numbered DB-error paragraphs either. **This is reported as a newly-discovered table whose consumer
+is unconfirmed — it must not be assumed to feed R-LUOM-001's vendor-exclusion gate or any other
+rule in this document until a consuming paragraph is actually located; it may belong to a program
+not in this upload set.**
+
 ### R-LUOM-002 Ordered-quantity-dependent UOM-designator resolution
 1. ID/Name: R-LUOM-002 UOM designator resolution ('L'/'B'/neither)
 2. Program/paragraph: 0245 lines 6074-6082, 7872-LOAD-ALTER-UOM (19050-19156),
@@ -972,11 +1032,16 @@ Control-flow (CONFIRMED):
 4. Data deps: OMGPR-Q-ORD-LIN-ORDERED>1 branch loads all VNG05 alt-UOM rows for
    vendor+product into a working array (each factor pre-multiplied by
    WS-BASE-ORD-CONV-FACTOR, itself parsed from VNG02-T-VND-PROD-UM-DESC's numeric prefix,
-   lines 6047-6059 — INFERRED reliable, VNG02 domain not independently confirmed, DCLGEN not
-   supplied); if VNG05 has no rows, a synthetic entry uses WS-BASE-ORD-CONV-FACTOR +
+   lines 6047-6059); if VNG05 has no rows, a synthetic entry uses WS-BASE-ORD-CONV-FACTOR +
    VNG02-F-UOM-DESIGNATOR (product's own base designator). OMGPR-Q-ORD-LIN-ORDERED<=1 branch does
    a single direct VNG05 lookup keyed by the actual order UOM; SQLCODE=100 falls back to the same
-   VNG02-F-UOM-DESIGNATOR base value.
+   VNG02-F-UOM-DESIGNATOR base value. **Update (second upload batch): RESOLVED, no longer
+   INFERRED/BLOCKED — `VNG02.CPY` and `VNG05.CPY` are now supplied with full DCLGEN.**
+   `VNG02-T-VND-PROD-UM-DESC` (X(5)) and `VNG02-F-UOM-DESIGNATOR` (X(1), `KS0115` addition)
+   confirmed. `VNG05-C-VD-PRD-ALT-UM` (X(2)), `VNG05-A-VD-PRD-ALT-UMF` (S9(6)V9(8) COMP-3, the
+   alt-UOM conversion factor this rule's array is built from), `VNG05-F-ALT-UOM-DESIGNATOR` (X(1)),
+   plus `VNG05-F-ALT-UNIT-OF-SALE-SW`/`-F-ALT-UNIT-OF-USE-SW` (X(1) each, `NR0625` additions, not
+   currently cited by name in this rule) also confirmed.
 5. Priority: the two resolution methods are mutually exclusive (single IF/ELSE on quantity), not
    a try-one-then-other cascade — a genuinely different algorithm depending on quantity: qty>1
    searches for a quantity-divides-evenly match across all alternates; qty<=1 does a direct
@@ -1003,7 +1068,10 @@ Control-flow (CONFIRMED):
 4. Data deps: OMGPR-F-LUOM-ACCOUNT/-GROUP (88-levels on OMGPR-F-LUOM-SW) and
    OMGPR-F-BREAK-BULK-ACCOUNT/-GROUP (88-levels on OMGPR-F-BREAK-BULK-SW) — both set in CUP100's
    A400-GET-JIT-ADJ from CUR120-F-LUOM-ACT-GRP-FEE / CUR120-F-BRK-BULK-ACT-GRP-FEE, ultimately
-   from the still-BLOCKED CUP120/CUS120 chain
+   from the still-BLOCKED CUP120/CUS120 chain. **Update: `CUR120-F-LUOM-ACT-GRP-FEE` and
+   `CUR120-F-BRK-BULK-ACT-GRP-FEE` (both X(1), `HR0415` additions) are now CONFIRMED field shapes
+   via the supplied `CUR120.CPY` — the intermediate carrier is known, CUS120's own account-vs-group
+   determination logic remains BLOCKED as before.**
 5. Priority: for 'L': IF LUOM-ACCOUNT -> use OMGPR-JIT-LUOM-CHRG-AMT (account-specific); ELSE IF
    LUOM-GROUP -> use OMGPR-P-LOW-UOM (buy-group percentage from CUP100's buy-group-priority
    walk); ELSE -> WS-VND-JIT-BB-FEE left unset. For 'B': identical structure with
@@ -1046,8 +1114,10 @@ Control-flow (CONFIRMED):
 4. Data deps: no new SQL in 7898 itself; calls 7707-CHECK-PANDAC-ACCT-FLAG (now CONFIRMED, see
    provenance note above and R-PANDAC-003) and 7227-CHK-FOR-OVERRIDES (still out of scope)
 5. Priority, in the order the code checks them:
-   1. **PANDAC suppression** (lines 19414-19426): IF VNG01-F-VEND-PANDAC='Y' AND
-      VNG02-F-PANDAC-ITEM='Y' AND WS-PANDAC-CUST (now confirmed via CUTADR/7707, date-scoped) ->
+   1. **PANDAC suppression** (lines 19414-19426): IF VNG01-F-VEND-PANDAC='Y' (VNG01 DCLGEN still
+      BLOCKED) AND VNG02-F-PANDAC-ITEM='Y' (**now CONFIRMED**, `X(1)`, `RP0511` addition per the
+      supplied `VNG02.CPY` — matches `program-inventory.md`'s `NK0810`/`RP0511` field-history
+      reading exactly) AND WS-PANDAC-CUST (now confirmed via CUTADR/7707, date-scoped) ->
       every 2022 break-bulk/LUOM fee-component field is blanked/zeroed and the paragraph exits
       immediately — **no break-bulk/LUOM charge of any kind for a PANDAC-eligible
       vendor+item+customer combination, full stop.** PANDAC pricing and break-bulk/LUOM fees do

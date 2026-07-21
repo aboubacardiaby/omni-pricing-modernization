@@ -52,6 +52,16 @@ referenced against `program-inventory.md`'s file list); `BLOCKED` means no copyb
 matching `program-inventory.md` §4.2's already-established list -- this document does not
 re-litigate that finding, only restates it per table for convenience alongside the query evidence.
 
+**Updated for a second upload batch (18 tables moved BLOCKED -> SUPPLIED):** `BGG03`, `BGG23`,
+`BGG24`, `CCG25`, `CUG02`, `CUG03`, `CUG06`, `CUG07`, `CUG10`, `CUG11`, `CUG17`, `CUG40`, `CUG41`,
+`CUG53`, `CUR120`, `CUTMST` (via `CUVMST.CPY`), `VNG02`, `VNG05` -- see `program-inventory.md` §4.2
+for the full copybook list and read-through detail, and `docs/rules/cost-selection-rules.md`,
+`sell-selection-rules.md`, `fees-and-adjustments.md` for the resulting rule-level updates. Note
+`CUTMST`/`CUVMST.CPY` is the one exception to the "DCLGEN = `EXEC SQL DECLARE` block" pattern used
+throughout this document -- it is a plain working-storage record layout with no `EXEC SQL DECLARE`,
+so `CUTMST`'s underlying storage mechanism (VSAM vs. DB2) remains unconfirmed even though its field
+shape is now known.
+
 **A copybook-labeling error found while doing that cross-reference:** `HCOVDGRP.CPY` and
 `HCOVDGPD.CPY` each carry a header comment claiming to be "COPYBOOK FOR TABLE HC_OVRD_PROD_GROUP"
 -- the **same** claimed table name for both files. Matching each copybook's actual field prefixes
@@ -112,7 +122,7 @@ large majority of these tables. `BLOCKED` = no DCLGEN supplied, column-level lay
 | `CCG15` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9015-SQL-SELECT-010 |  | Suggested sell w/ stated cost -- cost-entry-method code 04. |
 | `CCG16` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9020-SQL-SELECT-010 |  | Suggested sell w/ cost-discount % -- cost-entry-method code 05. |
 | `CCG21` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9025-SQL-SELECT-010 |  | Suggested sell w/ fixed rebate -- cost-entry-method code 08. |
-| `CCG25` | BLOCKED | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 1000-VERFIFY-CONTRACT-EXCL, 9655-SELECT-CONT-EXCL, COMPUTATIONAL-3 | Y | Contract exclusion list -- individual/group duplicate-contract exclusion filter. |
+| `CCG25` | SUPPLIED (CCG25.CPY) | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 1000-VERFIFY-CONTRACT-EXCL, 9655-SELECT-CONT-EXCL, COMPUTATIONAL-3 | Y | Contract exclusion list -- individual/group duplicate-contract exclusion filter. |
 | `CCG27` | BLOCKED | A6U01.CBL |  | Contract priority flag (individual path, CC_CNT_PRT_FLG) -- duplicate-contract tie-break. |
 
 ## 10. Miscellaneous / single-table families
@@ -124,9 +134,9 @@ large majority of these tables. `BLOCKED` = no DCLGEN supplied, column-level lay
 | `BG_FRT_VAR_PROD` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9660-SELECT-AS-OF-PROD | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `BG_FRT_VAR_VEND` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9665-SELECT-AS-OF-VEND | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `CC_CNT_PRT_FLG` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9040-SQL-SELECT-010, 9045-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
-| `CUR120` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* COMPUTATIONAL-3 |  | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
+| `CUR120` | SUPPLIED (CUR120.CPY) | CUP100 (1).CBL<br/>*paragraphs:* COMPUTATIONAL-3 |  | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `CUTADR` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 7707-CHECK-PANDAC-ACCT-FLAG | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
-| `CUTMST` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* A350-PRO-CUTMST-INFO |  | Customer master (CUST_TYPE) -- CUP100 A350, feeds `OMGPR-ECOMMERCE-PRICING`/NDP gate. |
+| `CUTMST` | SUPPLIED (CUVMST.CPY, no EXEC SQL DECLARE) | CUP100 (1).CBL<br/>*paragraphs:* A350-PRO-CUTMST-INFO |  | Customer master (CUST_TYPE) -- CUP100 A350, feeds `OMGPR-ECOMMERCE-PRICING`/NDP gate. |
 | `CUVMST` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* COMPUTATIONAL-3 |  | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `DFHRESP` | BLOCKED | A6O010U .CBL; A6O011U.CBL; A6O012U.CBL; A6O013U.CBL; A6X01.CBL<br/>*paragraphs:* COMP-3 |  | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `DVG01` | BLOCKED | A6U01.CBL |  | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
@@ -153,17 +163,17 @@ large majority of these tables. `BLOCKED` = no DCLGEN supplied, column-level lay
 
 | Table | DCLGEN | Consumers (file: paragraphs) | Date-filtered? | Purpose (INFERRED unless noted) |
 |---|---|---|---|---|
-| `CUG02` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* A310-SEL-ACTIVE-CUST, COMPUTATIONAL-3 |  | Active customer status/business type -- CUP100 A310. |
-| `CUG03` | BLOCKED | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9420-SQL-SELECT-010, A200-SEL-ACCOUNT, COMPUTATIONAL-3 |  | Account header (customer/rounding/price-method) -- CUP100 A200. |
-| `CUG06` | BLOCKED | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9570-SQL-SELECT-010, A820-SEL-CUST-PRIORITY, COMPUTATIONAL-3 | Y | Customer buy-group priority header -- group-contract cascade level 6. |
-| `CUG07` | BLOCKED | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9575-SQL-SELECT-010, 9610-SQL-SELECT-010, A820-SEL-CUST-PRIORITY, COMPUTATIONAL-3 | Y | Customer buy-group priority detail -- group-contract cascade level 6; also sell-arrangement tier resolution. |
+| `CUG02` | SUPPLIED (CUG02.CPY) | CUP100 (1).CBL<br/>*paragraphs:* A310-SEL-ACTIVE-CUST, COMPUTATIONAL-3 |  | Active customer status/business type -- CUP100 A310. |
+| `CUG03` | SUPPLIED (CUG03.CPY) | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9420-SQL-SELECT-010, A200-SEL-ACCOUNT, COMPUTATIONAL-3 |  | Account header (customer/rounding/price-method) -- CUP100 A200. |
+| `CUG06` | SUPPLIED (CUG06.CPY) | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9570-SQL-SELECT-010, A820-SEL-CUST-PRIORITY, COMPUTATIONAL-3 | Y | Customer buy-group priority header -- group-contract cascade level 6. |
+| `CUG07` | SUPPLIED (CUG07.CPY) | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9575-SQL-SELECT-010, 9610-SQL-SELECT-010, A820-SEL-CUST-PRIORITY, COMPUTATIONAL-3 | Y | Customer buy-group priority detail -- group-contract cascade level 6; also sell-arrangement tier resolution. |
 | `CUG08` | BLOCKED | A6U01.CBL | Y | Customer x vendor buy-group override -- group-contract cascade level 5. |
 | `CUG09` | BLOCKED | A6U01.CBL | Y | Customer x product-category buy-group override -- group-contract cascade level 4. |
-| `CUG10` | BLOCKED | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9560-SQL-SELECT-010, A810-SEL-ACCT-PRIORITY, COMPUTATIONAL-3 | Y | Account buy-group priority header -- group-contract cascade level 3. |
-| `CUG11` | BLOCKED | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9565-SQL-SELECT-010, 9605-SQL-SELECT-010, A810-SEL-ACCT-PRIORITY, COMPUTATIONAL-3 | Y | Account buy-group priority detail -- group-contract cascade level 3. |
+| `CUG10` | SUPPLIED (CUG10.CPY) | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9560-SQL-SELECT-010, A810-SEL-ACCT-PRIORITY, COMPUTATIONAL-3 | Y | Account buy-group priority header -- group-contract cascade level 3. |
+| `CUG11` | SUPPLIED (CUG11.CPY) | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9565-SQL-SELECT-010, 9605-SQL-SELECT-010, A810-SEL-ACCT-PRIORITY, COMPUTATIONAL-3 | Y | Account buy-group priority detail -- group-contract cascade level 3. |
 | `CUG12` | BLOCKED | A6U01.CBL | Y | Account x vendor buy-group override -- group-contract cascade level 2. |
 | `CUG13` | BLOCKED | A6U01.CBL | Y | Account x product-category buy-group override -- group-contract cascade level 1. |
-| `CUG17` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* 0510-SELECT-CUG17, COMPUTATIONAL-3 |  | Ship-to JIT customer/label flags -- CUP100 A500/0510 (ship-to JIT lookup). |
+| `CUG17` | SUPPLIED (CUG17.CPY) | CUP100 (1).CBL<br/>*paragraphs:* 0510-SELECT-CUG17, COMPUTATIONAL-3 |  | Ship-to JIT customer/label flags -- CUP100 A500/0510 (ship-to JIT lookup). |
 | `CUG18` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9430-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `CUG19` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9240-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `CUG20` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9470-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
@@ -178,9 +188,9 @@ large majority of these tables. `BLOCKED` = no DCLGEN supplied, column-level lay
 | `CUG31` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9475-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `CUG33` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9235-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `CUG34` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9230-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
-| `CUG40` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* COMPUTATIONAL-3 |  | JIT account-adjustment-type cursor driver -- CUP100. |
-| `CUG41` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* COMPUTATIONAL-3 | Y | JIT account adjustment detail (fee %/type) -- CUP100 A400 dependency (via CUR120/CUP120). |
-| `CUG53` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* A425-PRO-CUG53, COMPUTATIONAL-3 | Y | Account freight/exemption flags -- CUP100 A425. |
+| `CUG40` | SUPPLIED (CUG40.CPY) | CUP100 (1).CBL<br/>*paragraphs:* COMPUTATIONAL-3 |  | JIT account-adjustment-type cursor driver -- CUP100. |
+| `CUG41` | SUPPLIED (CUG41.CPY) | CUP100 (1).CBL<br/>*paragraphs:* COMPUTATIONAL-3 | Y | JIT account adjustment detail (fee %/type) -- CUP100 A400 dependency (via CUR120/CUP120). |
+| `CUG53` | SUPPLIED (CUG53.CPY) | CUP100 (1).CBL<br/>*paragraphs:* A425-PRO-CUG53, COMPUTATIONAL-3 | Y | Account freight/exemption flags -- CUP100 A425. |
 | `CUG55` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9660-SQL-SELECT-CUG55 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `CUG56` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9650-SQL-SELECT-CUG56 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `CUG57` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9655-SQL-SELECT-CUG57 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
@@ -197,13 +207,13 @@ large majority of these tables. `BLOCKED` = no DCLGEN supplied, column-level lay
 |---|---|---|---|---|
 | `BGG01` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9290-SQL-SELECT-010, 9445-SQL-SELECT-010 | Y | Buy-group header (division, short name). |
 | `BGG02` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9325-SQL-SELECT-010, 9480-SQL-SELECT-010 | Y | Buy-group membership. |
-| `BGG03` | BLOCKED | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9295-SQL-SELECT-010, 9320-SQL-SELECT-010, 9625-SQL-SELECT-010, A850-SEL-PARENTS, COMPUTATIONAL-3 | Y | Buy-group parent chain -- parent-group walk (cost and sell sides). |
+| `BGG03` | SUPPLIED (BGG03.CPY) | A6U01.CBL; CUP100 (1).CBL<br/>*paragraphs:* 9295-SQL-SELECT-010, 9320-SQL-SELECT-010, 9625-SQL-SELECT-010, A850-SEL-PARENTS, COMPUTATIONAL-3 | Y | Buy-group parent chain -- parent-group walk (cost and sell sides). |
 | `BGG10` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9250-SQL-SELECT-010, 9615-SQL-SELECT-010, 9680-SQL-SELECT, 9681-SQL-SELECT, 9685-SQL-SELECT, 9686-SQL-SELECT | Y | Group-vendor-contract linkage -- group-contract cursors. |
 | `BGG11` | BLOCKED | A6U01.CBL |  | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `BGG19` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9480-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `BGG20` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9525-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
-| `BGG23` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* A830-SEL-LOW-UOM, COMPUTATIONAL-3 | Y | Buy-group low-UOM percentage/vendor-exclusion -- CUP100 A830, `low-uom-break-bulk.md`. |
-| `BGG24` | BLOCKED | CUP100 (1).CBL<br/>*paragraphs:* A840-SEL-LOW-UOM-EXCL, COMPUTATIONAL-3 | Y | Buy-group low-UOM customer exclusion -- CUP100 A840. |
+| `BGG23` | SUPPLIED (BGG23.CPY) | CUP100 (1).CBL<br/>*paragraphs:* A830-SEL-LOW-UOM, COMPUTATIONAL-3 | Y | Buy-group low-UOM percentage/vendor-exclusion -- CUP100 A830, `low-uom-break-bulk.md`. |
+| `BGG24` | SUPPLIED (BGG24.CPY) | CUP100 (1).CBL<br/>*paragraphs:* A840-SEL-LOW-UOM-EXCL, COMPUTATIONAL-3 | Y | Buy-group low-UOM customer exclusion -- CUP100 A840. |
 | `BGG25` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9595-SQL-SELECT-010 | Y | Buy-group low-UOM vendor exclusion -- `low-uom-break-bulk.md` R-LUOM-001. |
 
 ## 4. SAG* -- Sell-assignment family
@@ -242,10 +252,10 @@ large majority of these tables. `BLOCKED` = no DCLGEN supplied, column-level lay
 | Table | DCLGEN | Consumers (file: paragraphs) | Date-filtered? | Purpose (INFERRED unless noted) |
 |---|---|---|---|---|
 | `VNG01` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9500-SQL-SELECT-010 |  | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
-| `VNG02` | BLOCKED | A6O011U.CBL; A6O016U.CBL; A6U01.CBL<br/>*paragraphs:* 9015-SELECT-VNG02, 9490-SQL-SELECT-010, 9490-SQL-SELECT-VNG02, COMP-3 |  | Vendor product master (type/base UOM/custom flag/PANDAC item flag) -- `program-inventory.md` A6O016U. |
+| `VNG02` | SUPPLIED (VNG02.CPY) | A6O011U.CBL; A6O016U.CBL; A6U01.CBL<br/>*paragraphs:* 9015-SELECT-VNG02, 9490-SQL-SELECT-010, 9490-SQL-SELECT-VNG02, COMP-3 |  | Vendor product master (type/base UOM/custom flag/PANDAC item flag) -- `program-inventory.md` A6O016U. |
 | `VNG03` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9200-SQL-SELECT-010, 9300-SQL-SELECT-010, 9305-SQL-SELECT-010, 9310-SQL-SELECT-010, 9675-SELECT-AS-OF-COST, 9676-SELECT-AS-OF-COST... | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `VNG04` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 0217-CHK-PROD-CATE-DEFLT-VEND | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
-| `VNG05` | BLOCKED | A6O011U.CBL; A6O016U.CBL; A6U01.CBL<br/>*paragraphs:* 9050-SELECT-VNG05, 9330-SQL-SELECT-010, 9495-SELECT-VNG05, COMP-3 |  | Vendor product alternate UOM/conversion factor -- `low-uom-break-bulk.md` R-LUOM-002. |
+| `VNG05` | SUPPLIED (VNG05.CPY) | A6O011U.CBL; A6O016U.CBL; A6U01.CBL<br/>*paragraphs:* 9050-SELECT-VNG05, 9330-SQL-SELECT-010, 9495-SELECT-VNG05, COMP-3 |  | Vendor product alternate UOM/conversion factor -- `low-uom-break-bulk.md` R-LUOM-002. |
 | `VNG06` | BLOCKED | A6O016U.CBL; A6U01.CBL<br/>*paragraphs:* 9025-SELECT-VNG06, 9485-SQL-SELECT-010 | Y | Vendor product category -- A6O016U. |
 | `VNG07` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9495-SQL-SELECT-010 |  | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |
 | `VNG14` | BLOCKED | A6U01.CBL<br/>*paragraphs:* 9535-SQL-SELECT-010 | Y | (not cross-referenced to a decision-table doc in this pass -- see raw WHERE/columns in the CSV) |

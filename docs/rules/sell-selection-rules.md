@@ -7,9 +7,16 @@ category, vendor, and default paths.
 
 **Source of truth:** COBOL as read directly in `upload/A6U01.CBL` (26,657 lines) and `OMGPR.CPY`.
 Line citations refer to `A6U01.CBL` unless a different file is named. No DCLGEN copybooks for
-`SAG04/06/07/08/09/10`, `SASSC`, `CUG06/07/10/11/33/34`, `BGG01/02/03`, `ING01`, `VNG02`, `CUG31`
-are supplied in `upload/` — every field sourced from these is marked BLOCKED or INFERRED at the
-point it is used, never assumed.
+`SAG04/06/07/08/09/10`, `SASSC`, `CUG33/34`, `BGG01/02`, `ING01`, `CUG31` are supplied in
+`upload/` — every field sourced from these is marked BLOCKED or INFERRED at the point it is used,
+never assumed.
+
+**Updated — second upload batch (2026-07-20 pass):** DCLGEN copybooks for `CUG06`, `CUG07`,
+`CUG10`, `CUG11`, `BGG03`, `VNG02`, and `CUG03` are now supplied and read in full
+(`docs/cobol-analysis/program-inventory.md` §4.2). See R-SELL-002 and R-SELL-003 below for the
+resulting field-level upgrades — most notably, `CUG03-C-ACCT-PRCE-METHOD`'s 88-level domain
+(`AU`/`ST`/`CC`) is now CONFIRMED as the exact source of `OMGPR-C-ACCT-PRCE-METHOD`, resolving a
+blocker previously noted at R-SELL-003 item 11.
 
 **Depends on (per `tasks.md`):** T001 (`docs/cobol-analysis/program-inventory.md`, complete) and
 T005 (`docs/cobol-analysis/sql-query-inventory.csv` + `db2-table-inventory.md`, complete).
@@ -137,7 +144,10 @@ characterized in isolation from the cost side.
    BGG02-D-BGM-END-MEM and the relevant CUG10/CUG06 buy-group-priority-expiry (group path) — same
    closest-expiration array mechanism as `docs/rules/date-selection.md`'s R-DATE-003, added
    redundantly after each of the three branches (near-identical code blocks, not factored into a
-   shared paragraph — a maintenance observation, not a behavior difference)
+   shared paragraph — a maintenance observation, not a behavior difference). `CUG10`/`CUG06`'s
+   expiry field is now CONFIRMED via their supplied DCLGENs (`CUG10-D-ACCT-BG-PRI-EXP`/
+   `CUG06-D-CUST-BG-PRI-EXP`, both `X(10)`, nullable) — see `cost-selection-rules.md`'s R-COST-005
+   update note for the full field list these two copybooks confirm. `BGG02` remains BLOCKED.
 9. Exclusions/fallbacks: the historical JIT-exempt short-circuit (`GO TO 7180-EXIT` when the line
    has an 'A'/'C'-type JIT service fee) is entirely commented out (BM0523) — only the outer
    `IF OMGPR-F-JIT-EXEMPT = 'Y' CONTINUE ELSE <nothing active>` remains, meaning as currently
@@ -312,15 +322,27 @@ characterized in isolation from the cost side.
     individual/group distinction), it raises error 602 (gross margin, line 10331) or 603 (cost
     plus, line 10461), both fatal, `GO TO 0020-EXIT-PRICER`. These read as "should be unreachable"
     defensive guards rather than expected business conditions — not confirmed whether they are
-    ever actually reachable given the account-pricing-method values that exist in practice
-    (BLOCKED, no DCLGEN for the domain of OMGPR-C-ACCT-PRCE-METHOD).
+    ever actually reachable given the account-pricing-method values that exist in practice.
+    **Update (second upload batch): RESOLVED, no longer BLOCKED.** `CUG03.CPY` (the account master
+    DCLGEN, now supplied) confirms `OMGPR-C-ACCT-PRCE-METHOD`'s upstream source table/field:
+    `CUG03-C-ACCT-PRCE-METHOD PIC X(2)` with exactly three 88-level values —
+    `CUG03-USAGE-PRCE-METHOD` = `'AU'`, `CUG03-STOCK-PRCE-METHOD` = `'ST'`,
+    `CUG03-CONT-PRCE-METHOD` = `'CC'`. The domain is a closed 3-value set (plus presumably
+    space/uninitialized), which makes the 602/603 "should be unreachable" defensive guards look
+    more plausibly genuinely unreachable in practice (any of the 3 valid codes should route to a
+    named sub-case) rather than dead code guarding against unknown values — still not proven
+    unreachable (that requires runtime evidence this project doesn't have), but the domain is no
+    longer an open unknown.
 11. Confidence: CONFIRMED for all 8 named methods' guard conditions and formulas, and for the HC-
     override last-word behavior. BLOCKED for the gross-margin/cost-plus percentage-source
     sub-cascade's own precondition table (which WS-P-SELL-* field is used when) — the branching
     structure (custom -> group-fees/report-group -> division-01-stock -> individual-or-non-
-    division-01 -> error) is confirmed as read, but the underlying VNG02-C-CUSTOM-IND,
-    CCG09-I-RPT-GRP, OMGPR-F-GRP-CNT-FEES, BGG01-I-DIVISION fields' own provenance was not
-    independently re-traced beyond what `cost-selection-rules.md` already documents.
+    division-01 -> error) is confirmed as read, but `CCG09-I-RPT-GRP`, `OMGPR-F-GRP-CNT-FEES`,
+    `BGG01-I-DIVISION` fields' own provenance was not independently re-traced beyond what
+    `cost-selection-rules.md` already documents. **`VNG02-C-CUSTOM-IND`'s field shape is now
+    CONFIRMED** (`VNG02.CPY` supplied: `PIC X(1)`), but the specific letter-value(s) meaning
+    "custom" are still not given by any comment in `VNG02.CPY` or `A6U01` — field existence and
+    type confirmed, value semantics remain INFERRED from usage only.
 
 ---
 
@@ -641,9 +663,10 @@ sell price has already been computed normally**, not instead of it.
    into precise per-column preconditions.
 2. `9955-FIND-HC-SELL-OVERRIDE`'s own table/column detail.
 3. `7765-SEL-PRC-LOCK-010`'s exact CUG31 keying.
-4. Whether sell-method dispatch errors #602/#603 (R-SELL-003 item 10, carried from prior work) are
-   truly unreachable in practice — needs a full domain listing of `OMGPR-C-ACCT-PRCE-METHOD` or
-   confirmation from whoever maintains account-pricing setup, same standing blocker as the prior
-   extraction.
+4. ~~Whether sell-method dispatch errors #602/#603 ... needs a full domain listing of
+   `OMGPR-C-ACCT-PRCE-METHOD`~~ — **PARTIALLY RESOLVED** (second upload batch): the domain is now
+   known (`CUG03-C-ACCT-PRCE-METHOD` = `'AU'`/`'ST'`/`'CC'`, see R-SELL-003 item 10). Whether
+   #602/#603 are truly unreachable given that closed domain still requires runtime confirmation —
+   downgraded from "unknown domain" to "known domain, reachability still unconfirmed."
 5. No DB2/CICS/COBOL execution environment — standing blocker across every document in this set.
 
