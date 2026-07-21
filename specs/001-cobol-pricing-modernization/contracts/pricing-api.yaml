@@ -1,0 +1,253 @@
+openapi: 3.0.3
+info:
+  title: OMNI Pricing API
+  version: 1.0.0
+  description: >-
+    Contract for explainable pricing requests. COBOL remains authoritative until
+    the parity and cutover gates are approved.
+paths:
+  /api/v1/prices/calculate:
+    post:
+      operationId: calculatePrice
+      summary: Calculate a price for a regular product or kit
+      tags:
+        - Pricing
+      parameters:
+        - name: X-Correlation-ID
+          in: header
+          required: false
+          description: Caller-provided correlation identifier.
+          schema:
+            type: string
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingRequest'
+      responses:
+        '200':
+          description: Pricing completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingResult'
+        '400':
+          description: The request is invalid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/PricingProblem'
+        '404':
+          description: A required pricing entity was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/PricingProblem'
+        '422':
+          description: The request is valid but cannot be priced.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/PricingProblem'
+        '500':
+          description: An unexpected pricing failure occurred.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/PricingProblem'
+        '503':
+          description: A required dependency is unavailable.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/PricingProblem'
+components:
+  schemas:
+    PricingRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - division
+        - account
+        - vendor
+        - product
+        - quantity
+        - unitOfMeasure
+        - pricingDate
+        - requestType
+      properties:
+        division:
+          type: string
+          minLength: 1
+        account:
+          type: string
+          minLength: 1
+        vendor:
+          type: string
+          minLength: 1
+        product:
+          type: string
+          minLength: 1
+        quantity:
+          type: number
+          format: decimal
+        unitOfMeasure:
+          type: string
+          minLength: 1
+        shipTo:
+          type: string
+          nullable: true
+        billTo:
+          type: string
+          nullable: true
+        pricingDate:
+          type: string
+          format: date
+        requestType:
+          $ref: '#/components/schemas/PricingRequestType'
+    PricingRequestType:
+      type: string
+      description: Pricing processing path requested by the caller.
+      enum:
+        - Full
+        - CostOnly
+        - SellOnly
+        - Jit
+    PricingResult:
+      type: object
+      additionalProperties: false
+      required:
+        - productType
+        - components
+        - provenance
+        - warnings
+      properties:
+        productType:
+          $ref: '#/components/schemas/ProductType'
+        cost:
+          type: number
+          format: decimal
+          nullable: true
+        sellPrice:
+          type: number
+          format: decimal
+          nullable: true
+        expirationDate:
+          type: string
+          format: date
+          nullable: true
+        contractIdentifier:
+          type: string
+          nullable: true
+        buyingGroupIdentifier:
+          type: string
+          nullable: true
+        ruleType:
+          type: string
+          nullable: true
+        components:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceComponent'
+        provenance:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleProvenance'
+        warnings:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricingWarning'
+    ProductType:
+      type: string
+      enum:
+        - Regular
+        - Kit
+    PriceComponent:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - amount
+        - provenance
+      properties:
+        name:
+          type: string
+          minLength: 1
+        amount:
+          type: number
+          format: decimal
+        provenance:
+          $ref: '#/components/schemas/RuleProvenance'
+    RuleProvenance:
+      type: object
+      additionalProperties: false
+      required:
+        - ruleName
+        - source
+      properties:
+        ruleName:
+          type: string
+          minLength: 1
+        source:
+          type: string
+          description: Source contract, record, program, or other traceable evidence.
+          minLength: 1
+        hierarchyLevel:
+          type: string
+          nullable: true
+        effectiveDate:
+          type: string
+          format: date
+          nullable: true
+        expirationDate:
+          type: string
+          format: date
+          nullable: true
+    PricingWarning:
+      type: object
+      additionalProperties: false
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          minLength: 1
+        message:
+          type: string
+          minLength: 1
+    PricingProblem:
+      type: object
+      additionalProperties: true
+      required:
+        - type
+        - title
+        - status
+      properties:
+        type:
+          type: string
+          format: uri-reference
+        title:
+          type: string
+        status:
+          type: integer
+          format: int32
+          minimum: 400
+          maximum: 599
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri-reference
+        errorCode:
+          type: string
+          description: Stable modern pricing error code.
+        legacyErrorCode:
+          type: string
+          nullable: true
+          description: Corresponding legacy error code when one is confirmed.
+        correlationId:
+          type: string
+security: []

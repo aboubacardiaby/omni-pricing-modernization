@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="System.Text.Encoding.CodePages" />
+    <ProjectReference Include="..\Pricing.Application\Pricing.Application.csproj" />
+    <ProjectReference Include="..\Pricing.Domain\Pricing.Domain.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Dapper" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pricing.Application\Pricing.Application.csproj" />
+    <ProjectReference Include="..\Pricing.Domain\Pricing.Domain.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Pricing.Application\Pricing.Application.csproj" />
+    <ProjectReference Include="..\Pricing.Infrastructure\Pricing.Infrastructure.csproj" />
+    <ProjectReference Include="..\Pricing.Compatibility\Pricing.Compatibility.csproj" />
+  </ItemGroup>
+</Project>

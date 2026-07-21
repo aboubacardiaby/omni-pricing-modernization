@@ -1,0 +1,11 @@
+<Project>
+  <Target Name="ValidateDomainDependencyDirection" BeforeTargets="ResolveProjectReferences"
+          Condition="'$(MSBuildProjectName)' == 'Pricing.Domain'">
+    <ItemGroup>
+      <_ForbiddenDomainReference Include="@(ProjectReference)"
+        Condition="'%(Filename)' == 'Pricing.Api' or '%(Filename)' == 'Pricing.Infrastructure'" />
+    </ItemGroup>
+    <Error Condition="'@(_ForbiddenDomainReference)' != ''"
+           Text="Pricing.Domain must not reference Pricing.Api or Pricing.Infrastructure. Forbidden reference(s): @(_ForbiddenDomainReference)" />
+  </Target>
+</Project>

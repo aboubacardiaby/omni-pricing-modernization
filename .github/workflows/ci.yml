@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore Pricing.sln --nologo
+
+      - name: Verify formatting
+        run: dotnet format Pricing.sln --verify-no-changes --no-restore --verbosity diagnostic
+
+      - name: Build with analyzers
+        run: dotnet build Pricing.sln --configuration Release --no-restore --nologo
+
+      - name: Test
+        run: >-
+          dotnet test Pricing.sln
+          --configuration Release
+          --no-build
+          --no-restore
+          --nologo
+          --logger trx
+          --results-directory TestResults
+
+      - name: Audit dependencies
+        shell: bash
+        run: |
+          set -o pipefail
+          dotnet list Pricing.sln package --vulnerable --include-transitive | tee dependency-audit.txt
+          if grep -Eq '\b(Low|Moderate|High|Critical)\b' dependency-audit.txt; then
+            echo "Vulnerable dependencies were detected."
+            exit 1
+          fi
+
+      - name: Upload verification artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: verification-results
+          path: |
+            TestResults/**/*.trx
+            dependency-audit.txt
+          if-no-files-found: warn
+          retention-days: 14
