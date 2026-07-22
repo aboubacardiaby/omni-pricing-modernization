@@ -409,8 +409,11 @@ flowchart TD
 - [ ] T054 [CODEX] Implement validation, ProblemDetails, modern/legacy error mapping, authentication/authorization hooks, rate/input limits, and audit correlation.
   - Depends on: T006, T012, T053
 
-- [ ] T055 [CLAUDE] Produce sanitized COBOL characterization fixtures with expected decision paths and critical outputs.
+- [x] T055 [CLAUDE] Produce sanitized COBOL characterization fixtures with expected decision paths and critical outputs.
+  - Owner: Claude
   - Depends on: T006–T010
+  - Evidence: `docs/characterization/pricing-scenario-catalog.md` — 41 scenarios (11 cost, 9 sell, 6 rebate, 7 fee, 8 kit), each with sanitized input conditions, expected decision path traced to a specific rule ID, and expected critical outputs hand-computed per the documented formula, extending T010's 17 date/rounding scenarios (not duplicated) to the full T007/T008/T009 scope T010 explicitly deferred. Scenarios SCN-KIT-006/007/008 encode the three mechanism-level divergences from G4's review (kit sell via a separate pack-level call, order-quantity-not-exploded-quantity component pricing, last-component-wins expiration) as the authoritative expected behavior, so the fixture set itself now specifies what the Kit implementation must be changed to match. SCN-KIT-005 (301st sub-pack) is deliberately left BLOCKED rather than given a fabricated expected output. One gap flagged rather than papered over: T031's vendor-cost-adjustment implementation has no corresponding `R-*` rule ID in `fees-and-adjustments.md` to ground a scenario in.
+  - **Explicit framing carried through the whole document, per G3/G4's own finding:** every expected output here was derived by hand-applying documented formulas, not captured from a live COBOL run (no execution environment has ever been available to this project) — this is the "expected" side of a comparison T056 has not yet run, not independent parity evidence on its own. Closing that gap still requires T056 plus either a live COMMAREA capture or an actual COBOL execution adapter.
 
 - [ ] T056 [CODEX] Build ParityRunner to invoke COBOL adapter and C# service for identical inputs and persist comparison results.
   - Depends on: T019, T047, T052, T055
