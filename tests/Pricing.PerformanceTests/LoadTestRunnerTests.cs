@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Immutable;
 using System.Text.Json;
 using PricingLoadRunner;
+using Xunit;
 
 public sealed class LoadTestRunnerTests
 {
@@ -46,7 +47,10 @@ public sealed class LoadTestRunnerTests
         Assert.Null(metrics.TotalDbCalls);
         Assert.Null(metrics.AverageDbCallsPerRequest);
         Assert.Null(metrics.PeakServerWorkingSetBytes);
-        Assert.Equal(["dbCalls", "serverWorkingSet"], metrics.MissingMeasurements);
+        Assert.Collection(
+            metrics.MissingMeasurements,
+            item => Assert.Equal("dbCalls", item),
+            item => Assert.Equal("serverWorkingSet", item));
     }
 
     [Fact]
@@ -61,7 +65,7 @@ public sealed class LoadTestRunnerTests
             Workload("small", components: 1, depth: 1),
             Workload("large", components: 50, depth: 3));
 
-        LoadTestReport report = await new LoadTestRunner(target).RunAsync(plan, TestContext.Current.CancellationToken);
+        LoadTestReport report = await new LoadTestRunner(target).RunAsync(plan, CancellationToken.None);
 
         Assert.Collection(
             report.KitSizeEffects,
@@ -75,7 +79,7 @@ public sealed class LoadTestRunnerTests
         var target = new ConcurrencyTarget();
         LoadPlan plan = Plan(requests: 12, concurrency: 3, Workload("bounded"));
 
-        await new LoadTestRunner(target).RunAsync(plan, TestContext.Current.CancellationToken);
+        await new LoadTestRunner(target).RunAsync(plan, CancellationToken.None);
 
         Assert.InRange(target.PeakConcurrency, 2, 3);
     }
@@ -103,7 +107,7 @@ public sealed class LoadTestRunnerTests
             CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return ValueTask.FromResult(remaining.TryDequeue(out LoadObservation observation)
+            return ValueTask.FromResult(remaining.TryDequeue(out LoadObservation? observation)
                 ? observation
                 : throw new InvalidOperationException("No observation remains."));
         }

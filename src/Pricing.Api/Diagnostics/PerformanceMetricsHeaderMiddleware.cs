@@ -1,6 +1,6 @@
 namespace Pricing.Api.Diagnostics;
 
-using Pricing.Infrastructure.Db2;
+using global::Pricing.Infrastructure.Db2;
 
 public sealed class PerformanceMetricsHeaderMiddleware(
     RequestDelegate next,

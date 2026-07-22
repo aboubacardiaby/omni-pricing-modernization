@@ -2,6 +2,7 @@ namespace Pricing.Infrastructure.Db2;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 public static class Db2ServiceCollectionExtensions
 {
@@ -17,7 +18,7 @@ public static class Db2ServiceCollectionExtensions
             .ValidateDataAnnotations()
             .ValidateOnStart();
         services.AddSingleton<IDb2ConnectionFactory, Db2ConnectionFactory>();
-        services.AddSingleton<IDb2CallCounter, Db2CallCounter>();
+        services.TryAddSingleton<IDb2CallCounter, Db2CallCounter>();
         services.AddSingleton<IDb2QueryExecutor, DapperDb2QueryExecutor>();
         services.AddHealthChecks()
             .AddCheck<Db2ConnectionHealthCheck>("db2", tags: ["ready"]);

@@ -385,9 +385,12 @@ flowchart TD
 - [ ] T058 [CLAUDE] Document COBOL performance baseline method and representative workload dimensions.
   - Depends on: T055
 
-- [~] T059 [CODEX] Implement performance/load tests and report DB calls, latency percentiles, throughput, memory, error rate, and kit-size effects.
+- [x] T059 [CODEX] Implement performance/load tests and report DB calls, latency percentiles, throughput, memory, error rate, and kit-size effects.
   - Owner: Codex
   - T058 verified at Claude commit `df411db`.
+  - Implemented `PricingLoadRunner`, request-scoped DB-call/working-set instrumentation, and `Pricing.PerformanceTests`; report: `docs/performance/csharp-load-test-report.md`.
+  - Verification: performance tests 4/4 passed; solution build completed with 0 warnings/errors; full solution tests passed (see handoff).
+  - Production-like measurements remain explicitly not measured until a configured DB2 endpoint, representative data, and the T058 COBOL numeric baseline are available; missing telemetry is reported as null, never fabricated as zero.
   - Depends on: T053, T058
 
 - [ ] T060 [CODEX] Optimize verified hotspots using indexes/query changes/batching/request caching without changing results.
