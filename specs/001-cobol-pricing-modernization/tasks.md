@@ -339,33 +339,59 @@ flowchart TD
   - Depends on: T010, T013
   - Acceptance: proves stage-sensitive cases and all supported modes.
 
-- [ ] T047 [CODEX] Implement PricingOrchestrator and PricingResultFactory across context, cost, rebate, sell, fees, rounding, expiration, warnings, and errors.
+- [x] T047 [CODEX] Implement PricingOrchestrator and PricingResultFactory across context, cost, rebate, sell, fees, rounding, expiration, warnings, and errors.
+  - Owner: Codex
   - Depends on: T031, T038–T046
   - Acceptance: full regular-item scenario tests and explainable output.
+  - Evidence (Codex): A6U01 0025/0030/0040/0050 regular-item order implemented through explicit context, cost, rebate, sell, and fee stage ports; `PricingResultFactory` applies T046 final rounding, T045 closest expiration, partial-result error handling, warnings, selections, itemized components, and deduplicated provenance. Five focused scenarios and 392 unit/402 solution tests pass; concrete DI adapters remain T053 and live COBOL parity remains blocked under G3.
+  - **Claude's G4 review (2026-07-21) confirms this is scaffolding only:** `ICostPricingStage`/`IRebatePricingStage`/`ISellPricingStage`/`IFeePricingStage` have no concrete implementation anywhere in the codebase — grep across `src/` finds them referenced only in `PricingOrchestrator.cs` itself and hand-rolled test fakes in `PricingOrchestratorTests.cs`. This means G3's finding #1 (the `AcquisitionDealerCostFallbackRule`/`RebateCalculator` wiring gap) has not been resolved, only deferred — the concrete stage where it would actually manifest doesn't exist yet. See the G4 section below for the full restatement.
 
 ## Phase 9 — Kit Pricing
 
 - [x] T048 [CLAUDE] Finalize confirmed kit decision table after missing A6O012U/A6O013U sources or interface evidence is obtained.
-  - Owner: Claude
+  - Owner: Claude (per the user's direct "Execute T048" instruction; Codex's local tasks.md briefly listed this as "reassigned by user" with no basis found in this session's actual instructions — corrected here)
   - Depends on: T004
   - Acceptance: every inferred behavior resolved or explicitly blocked.
   - Evidence: `docs/cobol-analysis/kit-processing.md` finalized. `A6O012U.CBL`/`A6O013U.CBL` reconfirmed present in `upload/` (T048's precondition was already satisfied earlier in this project's history). The document's sole remaining `INFERRED` classification (R-KIT-003's array-ordering dependency) was reclassified as an explicit CONFIRMED/BLOCKED split rather than left as a soft assumption: CONFIRMED that `A6O012U`'s own `4000-FIND-PARENT-PROD` requires sub-pack rows to precede their child level-2 rows (directly readable from its single-forward-pass, no-lookahead structure), BLOCKED whether `A6O015U` (not supplied) actually guarantees that ordering. Zero rule-level `INFERRED` markers remain in the document; every open item now traces to an explicitly named BLOCKED source (`A6O015U`, `OMGPK.CPY`, or the unsupplied external caller), not an unresolved guess.
+  - Update (G4 pass, 2026-07-21): two corrections applied after independently cross-checking against `docs/cobol-analysis/kit-decision-table.md` (Codex's own supplementary A6O011U-level evidence, built to support T049-T052 — see that task's Evidence line): (1) R-KIT-004's item-array limit is 699, not 700 (`PERFORM VARYING...UNTIL SUB >= 700` is a test-before loop, both documents independently reached this); (2) R-KIT-004's sub-pack array is more severe than originally documented — the *write* path (`ADD 1 TO SUB-SUBPACK` at lines 360/451, no bounds check) is unchecked, unlike the correctly-bounded *search* path, meaning a 301st sub-pack is an out-of-bounds array write, not clean truncation. Both corrections verified directly against `A6O012U.CBL`, not taken on Codex's word alone.
 
-- [ ] T049 [CODEX] Implement IKitExplosionRepository, initially wrapping the legacy dependency when reimplementation evidence is incomplete.
+- [x] T049 [CODEX] Implement IKitExplosionRepository, initially wrapping the legacy dependency when reimplementation evidence is incomplete.
+  - Owner: Codex
   - Depends on: T048, T023
+  - Evidence (Codex): Application-owned immutable kit explosion request/result contract plus infrastructure `LegacyKitExplosionRepository` wrapping an injected A6O012U transport client; C/L/S and blank/N/Y switch mapping, returned row order/ordinal, opaque blocked A6O015U fields, fee dates, typed legacy/transport errors, cancellation, explicit 699-row response boundary, and DI registration are covered. Eight focused integration tests and 392 unit/410 solution tests pass; A6O015U remains a legacy dependency.
+  - Claude's G4 review confirms `MaximumReturnedItems = 699` matches the corrected R-KIT-004 limit exactly, and that wrapping (rather than reimplementing) A6O015U's blocked behavior is the correct evidence-respecting choice.
 
-- [ ] T050 [CODEX] Implement component pricing loop through regular PricingOrchestrator with recursion/cycle/depth protection.
+- [x] T050 [CODEX] Implement component pricing loop through regular PricingOrchestrator with recursion/cycle/depth protection.
+  - Owner: Codex
   - Depends on: T047, T049
+  - Evidence (Codex): A6O011U 2000 component-order/first-error loop implemented through `IPricingOrchestrator`; confirmed first-level explosion enables explicit nested sub-pack traversal, path provenance, quantity multiplication, cycle detection, configurable depth limit, invalid product/quantity guards, typed legacy explosion failure, and cancellation. Six focused tests and 398 unit/416 solution tests pass; kit rollup and final component-error propagation remain T051/T052.
+  - Claude's G4 review confirms the recursive-explosion design (always requesting the `L`/FirstLevel view and recursively re-exploding sub-packs as fresh top-level requests, accumulating quantity multipliers in C#) is a well-reasoned strategy that sidesteps R-KIT-003's BLOCKED ordering dependency for the client-side traversal, generalizing quantity rollup beyond the 2 levels A6O012U itself supports.
 
-- [ ] T051 [CODEX] Implement kit rollup for quantities, costs, rebates, adjustments, freight, JIT, vendor adjustments, overhead, third-party fees, and sell.
+- [x] T051 [CODEX] Implement kit rollup for quantities, costs, rebates, adjustments, freight, JIT, vendor adjustments, overhead, third-party fees, and sell.
+  - Owner: Codex
   - Depends on: T050, T004
+  - Evidence (Codex): A6O011U 3000/3100 quantity extension and named rollup buckets implemented for selected/total cost, signed rebates, cost/vendor/sell adjustments, inbound freight, JIT, component sell, root OMGEXPL overhead and third-party cost/sell fees, sell-cost basis, and total sell; ordered itemized lines and provenance remain explainable. Four focused tests and 402 unit/420 solution tests pass. Blocked A6O015U blank-switch semantics are not inferred; T052 retains alternate-UOM, earliest-expiration, and final error propagation.
+  - **Claude's G4 review, two findings:** (1) header overhead/third-party fees are always taken from only the root pack's explosion (`ExplodedKits[0]`), correctly conservative given R-KIT-007's BLOCKED status, but `KitRollupCostMode.IncludeSubPackFees`/`ExcludeSubPackFees` have no differentiated effect anywhere in the rollup calculator itself — latent, not currently manifesting since only `LegacyDefault` is ever passed, but the enum promises more than the implementation delivers. (2) component-to-bucket classification (Freight/JIT/Rebate/etc.) matches on literal display-string `Name` values rather than a structured discriminator — fragile to a future rename in the Fees/Rebates calculators.
 
-- [ ] T052 [CODEX] Implement kit alternative-UOM conversion, earliest expiration, and component error propagation.
+- [x] T052 [CODEX] Implement kit alternative-UOM conversion, earliest expiration, and component error propagation.
+  - Owner: Codex
   - Depends on: T045, T046, T051
+  - Evidence (Codex): A6O011U 4200 merges component and root OH/third-party expirations through T045 with provenance; 4300 field-specific alternate-UOM multiplication uses T046 truncation after sell pricing and deliberately leaves third-party output, generic total cost-adjustment, and sell-adjustment buckets unscaled where COBOL does. Missing factor, component/traversal/rollup errors, warnings, and explainable final `PricingResult` are propagated. Five focused tests and 407 unit/425 solution tests pass; live kit parity remains pending G4.
 
 ### Gate G4 — Kit Parity
 
-- [ ] G4 [SHARED] Compare approved component and rollup cases; critical fields and decision paths must match.
+- [!] G4 [SHARED] Compare approved component and rollup cases; critical fields and decision paths must match.
+  - Owner: Codex
+  - Reviewer: Claude
+  - Status: **NOT RUNNABLE YET, interim fidelity review conducted 2026-07-21 (same situation as G3).** G4 as chartered needs the same approved cost/sell/kit scenario matrix (T055, `[CLAUDE]`, not yet built) and parity runner (T056, `[CODEX]`, depends on T055/T047/T052) that block G3 — neither exists, so no actual COBOL/C# kit comparison has run. Per the same reasoning applied to G3, Claude performed a direct fidelity review of the Kit implementation instead of a formal gate pass/fail.
+  - Scope reviewed: `Pricing.Application.Kits/{IKitExplosionRepository,KitComponentPricingService,KitRollupCalculator,KitResultFinalizer}.cs`, `Pricing.Infrastructure.Kits/LegacyKitExplosionRepository.cs`, and `PricingOrchestrator.cs` (T047) — read directly and cross-checked against `docs/cobol-analysis/kit-processing.md` (T004/T048) and `docs/cobol-analysis/kit-decision-table.md` (Codex's supplementary evidence). Independently ran the full suite (`DOTNET_ROLL_FORWARD=LatestMajor dotnet test`): 425/425 passed (407 unit, 1 characterization, 1 parity, 16 integration).
+  - **What was verified as genuinely faithful:** `LegacyKitExplosionRepository` correctly wraps rather than reimplements A6O015U's BLOCKED internals (matching T049's own charter), and its `MaximumReturnedItems = 699` constant is exactly right per the corrected R-KIT-004 limit. `KitComponentPricingService`'s recursive per-sub-pack traversal (always via the `L`/FirstLevel view, quantity multipliers accumulated in C#) is a well-reasoned design that avoids depending on R-KIT-003's BLOCKED array-ordering assumption for its own traversal logic. `KitRollupCalculator`/`KitResultFinalizer` correctly take header overhead/third-party fees from only the root pack's own explosion, matching R-KIT-007's BLOCKED status for A6O015U's actual sub-pack fee-rollup arithmetic rather than inventing it.
+  - **Findings:**
+    1. **CONFIRMED, high (restates/extends G3 finding #1):** `PricingOrchestrator` is scaffolding only — no concrete cost/rebate/sell/fee stage implementation exists, so `KitComponentPricingService`'s calls to it currently have nothing real behind them. No genuine end-to-end kit pricing run is possible today, independent of T055/T056.
+    2. **CONFIRMED, low-medium:** `KitRollupCostMode.IncludeSubPackFees`/`ExcludeSubPackFees` are accepted by the API but have no implemented effect in `KitRollupCalculator` — latent today (only `LegacyDefault` is ever passed), but the enum surface promises more than exists.
+    3. **PLAUSIBLE, low:** rollup bucket classification by literal component-name string matching is fragile to unrelated renames elsewhere in the codebase.
+  - **Corrections made to `kit-processing.md` during this review** (see T048's updated Evidence line above): the 699-item effective limit, and the more severe unchecked-write finding for the 301st sub-pack — both independently cross-verified against `A6O012U.CBL` directly, not taken from Codex's `kit-decision-table.md` on faith alone.
+  - This is **not a gate approval** — G4 remains unrun pending T055/T056, consistent with G3's disposition.
 
 ## Phase 10 — API and Parity Operations
 

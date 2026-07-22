@@ -20,6 +20,15 @@ fact, per this repository's standing instruction not to invent missing called-pr
 **Confidence key:** CONFIRMED (directly read/mechanically derived from source), INFERRED
 (reasonable but unverified assumption), BLOCKED (cannot be determined from supplied files).
 
+**Companion document:** `docs/cobol-analysis/kit-decision-table.md` (Codex-authored, built to
+support T049-T052's implementation evidence) covers the broader `A6O011U` call sequence — kit
+component pricing/rollup (`3000-COMPUTE-COST`/`3100-MOVE-COSTS`), kit sell
+(`4000-COMPUTE-SELL`), expiration merge (`4200-PROCESS-EXP-DATE`), and alternate-UOM conversion
+(`4300-HANDLE-ALT-UOM-KIT`) — that this document does not itself cover, since this document's
+scope is `A6O012U` specifically. The two documents were independently cross-checked against each
+other during the G4 pass and found consistent, including independently reaching the identical
+699-item-limit and unchecked-301st-sub-pack-write corrections recorded below.
+
 **T048 finalization (2026-07-21):** re-verified `A6O012U.CBL`/`A6O013U.CBL` are both fully
 supplied in `upload/` (T048's precondition — "after missing A6O012U/A6O013U sources... is
 obtained" — was satisfied earlier in this project's history, before this pass) and confirmed
@@ -44,8 +53,8 @@ PROCEDURE DIVISION
        [IF link succeeded]
        -> 3000-MOVE-TO-OMGEXPL
             -> 3100-MOVE-HDR-DATA          (pack-level attributes, straight pass-through)
-            -> PERFORM VARYING SUB ... (loop over OMGPK-COMP-INFO, up to 700 or
-                                         OMGPK-NUMBER-OF-ITEMS, whichever is smaller)
+            -> PERFORM VARYING SUB ... (loop over OMGPK-COMP-INFO, up to 699 or
+                                         OMGPK-NUMBER-OF-ITEMS, whichever is smaller -- see R-KIT-004)
                  -> 3050-HANDLE-ASPER-REQUEST (dispatch by request type -- R-KIT-002)
                       -> 3200-PROCESS-STRUCTURE | 3300-PROCESS-LEVEL | 3400-PROCESS-COMPONENT
                            -> 4000-FIND-PARENT-PROD (level-2 only -- R-KIT-003, quantity rollup)
@@ -195,10 +204,15 @@ PROCEDURE DIVISION
     dependency exactly (single forward pass, no lookahead/reordering) or obtain `A6O015U`'s source
     to confirm the ordering guarantee actually holds before relying on it.
 
-## Capacity (component/sub-pack array limits, no overflow error)
-1. ID/Name: R-KIT-004 Array capacity limits with silent truncation, not an overflow error
-2. Program/paragraph: `3000-MOVE-TO-OMGEXPL`'s `PERFORM VARYING` bound (307-309) and
-   `4000-FIND-PARENT-PROD`'s search bound (500-503)
+## Capacity (component/sub-pack array limits — one clean truncation, one unchecked write)
+1. ID/Name: R-KIT-004 Array capacity limits: clean truncation for items, unchecked subscript for
+   sub-pack recording
+2. Program/paragraph: `3000-MOVE-TO-OMGEXPL`'s `PERFORM VARYING` bound (307-309, item truncation),
+   `4000-FIND-PARENT-PROD`'s search bound (500-503, sub-pack lookup truncation), and the
+   `ADD 1 TO SUB-SUBPACK` sub-pack-recording sites in `3200-PROCESS-STRUCTURE` (line 360) and
+   `3400-PROCESS-COMPONENT` (line 451, `NK1209`-tagged) — **CONFIRMED via direct re-read of
+   `upload/A6O012U.CBL` during the G4 pass, 2026-07-21, cross-verified against an independent
+   finding Codex reached the same way while building T049-T052's evidence.**
 3. Preconditions: applies to every call
 4. Data deps: `WS-MAX-ITEMS-IN-PACK` (`PIC 999 VALUE 700`, matching `OMGEXPL-COMP-INFO`'s own
    `OCCURS 700`) and `WS-MAX-SUB-PACKS` (`PIC 999 VALUE 300`, matching `WS-SUB-PACK-ARRAY`'s
@@ -212,14 +226,37 @@ PROCEDURE DIVISION
    `A6U01` raising explicit "exceeded max limit" errors, albeit inconsistently, for its own
    array bounds) — **`A6O012U` has no equivalent error for either limit.** The main processing
    loop's `PERFORM VARYING SUB ... UNTIL SUB >= WS-MAX-ITEMS-IN-PACK OR SUB > OMGPK-NUMBER-OF-ITEMS
-   OR ...` simply stops at 700 items if `OMGPK-NUMBER-OF-ITEMS` legitimately exceeds that —
+   OR ...` simply stops if `OMGPK-NUMBER-OF-ITEMS` legitimately exceeds the effective limit —
    remaining components are silently never processed, with no error flag, no message, and
-   `OMGEXPL-NUMBER-OF-ITEMS` reporting only the truncated count. The same is true of
-   `4000-FIND-PARENT-PROD`'s 300-slot sub-pack search — a pack with more than 300 distinct
-   sub-packs would silently fail to find parents for sub-packs beyond that limit (falling into
-   R-KIT-003 item 9's silent-drop path). **This is a genuine risk for any sufficiently large
-   kit**, not merely a theoretical edge case, since the limits (700 items, 300 sub-packs) are
-   concrete and reachable for a complex enough pack structure.
+   `OMGEXPL-NUMBER-OF-ITEMS` reporting only the truncated count. **Correction (2026-07-21, G4
+   pass): the effective item limit is 699, not 700.** `PERFORM VARYING ... UNTIL SUB >= 700` is a
+   standard COBOL test-before loop — the `UNTIL` condition is checked before each iteration, so
+   the last value of `SUB` the loop body ever executes with is 699 (the loop exits the moment
+   `SUB` reaches 700, without processing that iteration). `OMGEXPL-COMP-INFO`'s `OCCURS 700`
+   declares 700 slots, but only 699 are ever populated by this loop — this document's earlier
+   text said "stops at 700 items," which is the naive reading of `OCCURS 700` and is one off from
+   the loop's actual behavior. `4000-FIND-PARENT-PROD`'s 300-slot **search** is a separate,
+   correctly-bounded loop (`UNTIL SUB-SEARCH > WS-MAX-SUB-PACKS`) — a pack with more than 300
+   distinct sub-packs would cleanly fail to find parents for sub-packs beyond that limit (falling
+   into R-KIT-003 item 9's silent-drop path), same "graceful degradation" shape as the item
+   truncation above.
+
+   **More severe correction (2026-07-21, G4 pass): the sub-pack array's *write* path has NO bounds
+   check at all — this is not the same clean truncation as the read/search path.** Confirmed by
+   direct re-read of `A6O012U.CBL`: both sites that record a newly-encountered `'S'` (sub-pack) row
+   — `3200-PROCESS-STRUCTURE` line 360 and `3400-PROCESS-COMPONENT` line 451 (`NK1209`) — execute
+   `ADD 1 TO SUB-SUBPACK` immediately followed by `MOVE ... TO WS-SUB-PACK-PROD-NO(SUB-SUBPACK)`
+   (and the paired `-SL-NO`/`-QTY` moves) with **no `IF SUB-SUBPACK > WS-MAX-SUB-PACKS` guard
+   anywhere near either write site** — only the unrelated *search* loop in `4000-FIND-PARENT-PROD`
+   checks against the 300 limit. If a pack legitimately contains more than 300 distinct sub-packs,
+   writing the 301st one is a subscript reference beyond `WS-SUB-PACK-ARRAY`'s declared `OCCURS
+   300` — **this is not "silent truncation," it is an out-of-bounds array write**, whose actual
+   runtime effect (ABEND, silent memory corruption of adjacent working-storage, or a
+   compiler/runtime-dependent no-op) depends entirely on subscript-range-checking compiler options
+   not evidenced anywhere in the supplied source. **This is a genuine risk for any sufficiently
+   large kit**, not merely a theoretical edge case, since the limits (699 items, 300 sub-packs) are
+   concrete and reachable for a complex enough pack structure — and unlike the item-truncation
+   case, this one must not be characterized as safe.
 10. Errors: none — this is the finding
 11. Confidence: CONFIRMED
 
@@ -338,3 +375,9 @@ supplied, which no amount of re-reading the supplied files can resolve.
 2. `OMGPK.CPY` — not supplied; every field's exact `PIC` clause and full field list beyond what
    `A6O012U.CBL` happens to reference by name is unknown.
 3. No DB2/CICS/COBOL execution environment — standing blocker across every document in this set.
+   **This blocker is why R-KIT-004's 301st-sub-pack question (added in the G4 pass) cannot be
+   resolved from source alone**: whether an unchecked `WS-SUB-PACK-ARRAY(301)` write ABENDs,
+   silently corrupts adjacent working-storage, or happens to be a runtime no-op depends on
+   subscript-range-checking compiler/runtime options not evidenced anywhere in the supplied
+   `A6O012U.CBL` text. A reimplementation must enforce an explicit, modern 300-sub-pack limit with
+   a real error rather than assuming any particular COBOL runtime behavior is safe to replicate.
