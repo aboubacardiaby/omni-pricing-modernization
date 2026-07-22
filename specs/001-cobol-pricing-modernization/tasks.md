@@ -424,8 +424,10 @@ flowchart TD
 
 ## Phase 11 — Performance, Shadow, and Cutover
 
-- [ ] T058 [CLAUDE] Document COBOL performance baseline method and representative workload dimensions.
+- [x] T058 [CLAUDE] Document COBOL performance baseline method and representative workload dimensions.
+  - Owner: Claude
   - Depends on: T055
+  - Evidence: `docs/performance/cobol-baseline-method.md` — measurement method (what to instrument at the CICS/DB2 layer, how to correlate COBOL-side and C#-side measurement, a fair-comparison caveat about COBOL's own apparent lack of cross-request caching) plus 6 representative workload dimensions, each grounded in already-CONFIRMED evidence rather than generic assumptions: cost-cascade depth (citing the `OPTIMIZE FOR 1 ROW` cursor hints in `program-inventory.md` §4.3 as direct historical evidence this was already a known cost center), fee-stacking breadth (T009's 37 rules), kit size/depth (the corrected 699-item/300-sub-pack boundaries from the G4 review, plus an explicitly flagged open question about whether the C# recursive per-sub-pack traversal strategy's call-volume scaling matches COBOL's own BLOCKED `A6O015U` behavior), rebate/vendor-adjustment presence, special-contract vs. normal, and order-line count. Explicit throughout that this is a method document, not captured baseline numbers — no execution environment exists to produce those, the same standing blocker as everywhere else in this project. Does not resolve `spec.md`'s open question #4 (actual cutover thresholds) — flagged as a business decision, not something derivable from source.
 
 - [ ] T059 [CODEX] Implement performance/load tests and report DB calls, latency percentiles, throughput, memory, error rate, and kit-size effects.
   - Depends on: T053, T058
