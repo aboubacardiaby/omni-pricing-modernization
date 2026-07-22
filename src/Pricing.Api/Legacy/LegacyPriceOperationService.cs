@@ -139,7 +139,7 @@ public sealed class LegacyPriceOperationService(IPricingCalculationService prici
                 expiration),
             new LegacyInventoryOutput(null, null, null, null, null, null),
             new LegacyBaseOutput(
-                contract?.UnitOfMeasure.Value ?? "EA",
+                contract?.UnitOfMeasure.Value,
                 null,
                 FormatAmount(result.SellPrice, 4),
                 FormatAmount(result.SellPrice, 8),

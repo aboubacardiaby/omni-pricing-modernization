@@ -13,6 +13,7 @@ using Pricing.Application.Orchestration;
 using Pricing.Application.ProductClassification;
 using Pricing.Application.ProductInformation;
 using Pricing.Infrastructure.Db2;
+using Pricing.Infrastructure.SqlServer;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
@@ -77,6 +78,10 @@ if (db2Configuration.Exists())
 {
     builder.Services.AddDb2DataAccess(db2Configuration);
 }
+if (!string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString(SqlServerOptions.ConnectionStringName)))
+{
+    builder.Services.AddSqlServerDataAccess(builder.Configuration);
+}
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IPricingCalculationService>(services =>
 {
@@ -113,6 +118,7 @@ builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService("Pricing.Api"))
     .WithTracing(tracing => tracing
         .AddSource(DapperDb2QueryExecutor.ActivitySourceName)
+        .AddSource(DapperSqlServerQueryExecutor.ActivitySourceName)
         .AddAspNetCoreInstrumentation(options =>
         {
             options.Filter = context => !context.Request.Path.StartsWithSegments("/health");
