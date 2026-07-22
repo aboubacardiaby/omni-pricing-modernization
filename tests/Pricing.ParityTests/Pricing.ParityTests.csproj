@@ -7,5 +7,6 @@
     <ProjectReference Include="..\..\src\Pricing.Application\Pricing.Application.csproj" />
     <ProjectReference Include="..\..\src\Pricing.Domain\Pricing.Domain.csproj" />
     <ProjectReference Include="..\..\src\Pricing.Compatibility\Pricing.Compatibility.csproj" />
+    <ProjectReference Include="..\..\tools\ParityRunner\ParityRunner.csproj" />
   </ItemGroup>
 </Project>

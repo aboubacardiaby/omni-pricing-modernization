@@ -234,105 +234,160 @@ flowchart TD
   - Acceptance: deterministic priority, trace, provenance, and no-arrangement behavior.
   - Evidence: A6U01 7180 dispatch into 0180/7075/0185 first-match cascades; deterministic evaluator, complete applied/skipped/not-evaluated/failure trace, explicit no-arrangement result for the later list-price fallback, and 7090 calculation-strategy contracts; 196 unit tests and 206 solution tests pass.
 
-- [ ] T033 [P] [CODEX] Implement account and customer-number sell rules.
+- [x] T033 [P] [CODEX] Implement account and customer-number sell rules.
+  - Owner: Codex
   - Depends on: T032
+  - Evidence: A6U01 0180/7075/0185 account-before-customer product, contract-override, category, SSC, vendor, and default slots with cost-source cascade eligibility, reserved interleaving for T034/T035 levels, typed repository failures, provenance, and cancellation; 207 unit tests and 217 solution tests pass.
 
-- [ ] T034 [P] [CODEX] Implement individual-contract and buying-group/parent sell rules.
+- [x] T034 [P] [CODEX] Implement individual-contract and buying-group/parent sell rules.
+  - Owner: Codex
   - Depends on: T032
+  - Evidence: A6U01 0180/0181, 7075/7076, and 0185/0186 subgroup membership gates, cascade-specific contract overrides, product/category/SSC/vendor/default order, nearest-parent-first traversal, group-contract parent product-before-contract physical order, provenance, typed failures, and cancellation; 218 unit tests and 228 solution tests pass. Live parity remains blocked under G3.
 
-- [ ] T035 [P] [CODEX] Implement corporate, product, category, vendor, and default sell rules.
+- [x] T035 [P] [CODEX] Implement corporate, product, category, vendor, and default sell rules.
+  - Owner: Codex
   - Depends on: T032
+  - Evidence: A6U01 0180 corporate product/category/vendor slots and 7240/7250/7255 same-level group-over-corporate reconciliation, corporate absence from group/acquisition cascades, and a validated composed T033–T035 hierarchy containing account/customer/group/parent product, category, vendor, contract, SSC, and default paths; 229 unit tests and 239 solution tests pass. List-price calculation remains T036 and live parity remains blocked under G3.
 
-- [ ] T036 [CODEX] Implement fixed, stated, cost-plus, cost-discount, gross-margin, suggested-sell, and list-price calculators.
+- [x] T036 [CODEX] Implement fixed, stated, cost-plus, cost-discount, gross-margin, suggested-sell, and list-price calculators.
+  - Owner: Codex
   - Depends on: T032, T010
   - Acceptance: formula, scale, zero, negative guard where applicable, and rounding tests.
+  - Evidence: A6U01 7090 method codes 1–8, business-type list selection, gross-margin clamp, cost-plus/list-less formulas, suggested-sell eligibility fallbacks, stated-price UOM conversion, HC fixed/COST+ last-word dispatch, typed source/conversion failures, cancellation, provenance, and eight-decimal compute-stage rounding; 247 unit tests and 257 solution tests pass. Live COBOL parity remains blocked under G3.
 
-- [ ] T037 [CODEX] Implement price-lock behavior and tests.
+- [x] T037 [CODEX] Implement price-lock behavior and tests.
+  - Owner: Codex
   - Depends on: T033–T036
+  - Evidence: A6U01 7765/0210/7205 CUG31 lookup, base-to-ordered-UOM conversion, percentage-method versus price-method reconciliation, frozen sell less locked sell adjustment, expiration provenance, and the 7210/7215 surcharge/vendor-adjustment bypass flags; typed conversion failure and cancellation included. 264 unit tests and 274 solution tests pass; live COBOL parity remains blocked under G3.
 
-- [ ] T038 [CODEX] Implement sell adjustments and compose base sell, adjustments, and provenance.
+- [x] T038 [CODEX] Implement sell adjustments and compose base sell, adjustments, and provenance.
+  - Owner: Codex
   - Depends on: T037, T009
+  - Evidence: A6U01 7195 composition of inventory-class, risk, delivery, finance, non-contract, prepay, JIT sell/cost, PANDAC, and SurgiTrak buckets; R/A JIT exclusion, monthly separate-billing gates, signed deduction handling, base/error preservation, itemized provenance, and eight-decimal staged totals. 275 unit tests and 285 solution tests pass; T039–T044 calculators remain separate and live COBOL parity remains blocked under G3.
 
 ## Phase 7 — Fees and Surcharges
 
-- [ ] T039 [P] [CODEX] Implement freight engine with account-first priority and single-source winner semantics.
+- [x] T039 [P] [CODEX] Implement freight engine with account-first priority and single-source winner semantics.
+  - Owner: Codex
   - Depends on: T009, T023, T031
+  - Evidence: A6U01 7200/0205/7226 applicability gates; account then CID precedence; single-winner buying-group/product/division/corporate waterfall; C/S/V basis calculations, account/CID V-to-S downgrade, product UOM scaling, monthly sell exclusion, exemption zeroing with audit type recoding, effective-date provenance, cancellation, and typed dependency failures. 288 unit tests and 298 solution tests pass; live COBOL parity remains blocked under G3.
 
-- [ ] T040 [P] [CODEX] Implement JIT engine for A/C/P/R behaviors and exemptions.
+- [x] T040 [P] [CODEX] Implement JIT engine for A/C/P/R behaviors and exemptions.
+  - Owner: Codex
   - Depends on: T009, T031, T038
+  - Evidence: A6U01 7195/7225 customer, contract-line, and A/C/P/R gates; private-label-O sell override; percentage/rate/per-item label and apply-label formulas; 2022 apply-label fast path; service/LUOM/extra-delivery/non-OM components; cost/sell routing and asymmetric A/R removal; staged rounding, provenance, and explicit T041 low-UOM redirect handoff. 306 unit tests and 316 solution tests pass; live COBOL parity remains blocked under G3.
 
-- [ ] T041 [P] [CODEX] Implement low-UOM and break-bulk engines including eligibility, vendor/contract exclusions, group hierarchy, alt UOM, and zero percentage.
+- [x] T041 [P] [CODEX] Implement low-UOM and break-bulk engines including eligibility, vendor/contract exclusions, group hierarchy, alt UOM, and zero percentage.
+  - Owner: Codex
   - Depends on: T009, T023
+  - Evidence: A6U01 0245/7872–7898 eligibility and stock gates, confirmed contract and group-only BGG25 vendor exclusion, account-first then priority/parent group selection, quantity-dependent VNG05/direct/base UOM designator resolution, exact-divisibility matching, legacy JIT-basis formula, 2022 PANDAC suppression/flat/percentage paths, private-label override, zero percentage, staged rounding, provenance, cancellation, and typed lookup errors. 318 unit tests and 328 solution tests pass; unconsumed BGG24 behavior was not invented and live COBOL parity remains blocked under G3.
 
-- [ ] T042 [P] [CODEX] Implement PANDAC and SurgiTrak behavior including implied sell arrangement where evidenced.
+- [x] T042 [P] [CODEX] Implement PANDAC and SurgiTrak behavior including implied sell arrangement where evidenced.
+  - Owner: Codex
   - Depends on: T009, T038
+  - Evidence: A6U01 0165/0170/7705/7706/7707 live PANDAC eligibility and new-specific/legacy-specific/default priority, CUTADR applicability fallback, new whole-percent scaling, legacy cost rate, flat/resolved-default boundaries, monthly billing and audit fields, typed failures, and explicit non-implied live fall-through; 7758 SurgiTrak Owens-product/fee-row gates, flat/cost/sell formulas, unknown no-op, rounding, monthly fold-in, and provenance. 332 unit tests and 342 solution tests pass; live COBOL parity remains blocked under G3.
 
-- [ ] T043 [P] [CODEX] Implement label, application, extra-delivery, and distribution fees.
+- [x] T043 [P] [CODEX] Implement label, application, extra-delivery, and distribution fees.
+  - Owner: Codex
   - Depends on: T009, T023
+  - Evidence: A6U01 7225 label/application/extra-delivery outputs are exposed as distinct explainable fee components while preserving the confirmed absence of an independent label/application billing-frequency branch; 7095 distribution GS/GN/MI/MN/MC bucket amounts decompose embedded margin and monthly MA/MM billing subtracts it from line sell. Zero/negative margins and provenance are covered. 347 unit tests and 357 solution tests pass; T044 retains category selection and broader markup/surcharge composition, and live COBOL parity remains blocked under G3.
 
-- [ ] T044 [CODEX] Implement category surcharge and sanctioned/non-sanctioned/individual/non-contract/customer markup composition.
+- [x] T044 [CODEX] Implement category surcharge and sanctioned/non-sanctioned/individual/non-contract/customer markup composition.
+  - Owner: Codex
   - Depends on: T009, T038
+  - Evidence: A6U01 0215/0250/7210 exact account/CID/division/corporate category/general-vendor/default priority plus buying-group fallback, price-lock bypass, soft lookup failure, truncated surcharge arithmetic, and monthly MA/MM handling; 7090/7095 custom/sanctioned/non-sanctioned/individual/non-contract and stock/usage classification, legacy error 602, .9999 margin clamp, gross-margin calculation, and T043 distribution-fee composition. 359 unit tests and 369 solution tests pass; live COBOL parity remains blocked under G3.
 
 ## Phase 8 — Dates, Rounding, and Final Result
 
-- [ ] T045 [CODEX] Implement ExpirationDateCollector with source provenance and closest-valid-date logic.
+- [x] T045 [CODEX] Implement ExpirationDateCollector with source provenance and closest-valid-date logic.
+  - Owner: Codex
   - Depends on: T010
   - Acceptance: null, duplicate, expired, same-day, leap-day, competing, and component tests.
+  - Evidence: A6U01 7695 accumulator and 7720 resolver implemented with a 50-valid-candidate limit, typed legacy error 145, inclusive same-day validity, earliest-date selection, duplicate winner provenance, null/open-ended and expired-source exclusion, and immutable component source results. All 10 focused tests and 369 unit/379 solution tests pass; live COBOL parity remains blocked under G3.
 
-- [ ] T046 [CODEX] Implement COBOL-compatible rounding policy and account configuration.
+- [x] T046 [CODEX] Implement COBOL-compatible rounding policy and account configuration.
+  - Owner: Codex
   - Depends on: T010, T013
   - Acceptance: proves stage-sensitive cases and all supported modes.
+  - Evidence: OMGPR.CPY account codes blank/N, R, and Y plus A6U01 7715 final-stage behavior implemented with independent unit/total rounding, unconditional unrounded-value retention, exact 0.0049 bias, silent unknown-code no-op, intermediate half-away-from-zero policy, and the surcharge truncation exception. All 18 focused tests and 387 unit/397 solution tests pass; the compiler-default tie assumption and live COBOL parity remain blocked under G3.
 
-- [ ] T047 [CODEX] Implement PricingOrchestrator and PricingResultFactory across context, cost, rebate, sell, fees, rounding, expiration, warnings, and errors.
+- [x] T047 [CODEX] Implement PricingOrchestrator and PricingResultFactory across context, cost, rebate, sell, fees, rounding, expiration, warnings, and errors.
+  - Owner: Codex
   - Depends on: T031, T038–T046
   - Acceptance: full regular-item scenario tests and explainable output.
+  - Evidence: A6U01 0025/0030/0040/0050 regular-item order implemented through explicit context, cost, rebate, sell, and fee stage ports; PricingResultFactory applies T046 final rounding, T045 closest expiration, partial-result error handling, warnings, selections, itemized components, and deduplicated provenance. Five focused scenarios and 392 unit/402 solution tests pass; concrete DI adapters remain T053 and live COBOL parity remains blocked under G3.
 
 ## Phase 9 — Kit Pricing
 
-- [ ] T048 [CLAUDE] Finalize confirmed kit decision table after missing A6O012U/A6O013U sources or interface evidence is obtained.
+- [x] T048 [CLAUDE] Finalize confirmed kit decision table after missing A6O012U/A6O013U sources or interface evidence is obtained.
+  - Owner: Codex (reassigned by user)
   - Depends on: T004
   - Acceptance: every inferred behavior resolved or explicitly blocked.
+  - Evidence: `docs/cobol-analysis/kit-decision-table.md` re-verifies supplied A6O011U/A6O012U/A6O013U interfaces and finalizes validation, request views, nested quantity, component pricing/rollup, expiration, alternate UOM, errors, and capacity. A6O015U/OMGPK discovery, ordering guarantee, rollup-switch internals, 301st-sub-pack runtime behavior, and shared date validation are explicitly BLOCKED; no inferred behavior remains.
 
-- [ ] T049 [CODEX] Implement IKitExplosionRepository, initially wrapping the legacy dependency when reimplementation evidence is incomplete.
+- [x] T049 [CODEX] Implement IKitExplosionRepository, initially wrapping the legacy dependency when reimplementation evidence is incomplete.
+  - Owner: Codex
   - Depends on: T048, T023
+  - Evidence: Application-owned immutable kit explosion request/result contract plus infrastructure `LegacyKitExplosionRepository` wrapping an injected A6O012U transport client; C/L/S and blank/N/Y switch mapping, returned row order/ordinal, opaque blocked A6O015U fields, fee dates, typed legacy/transport errors, cancellation, explicit 699-row response boundary, and DI registration are covered. Eight focused integration tests and 392 unit/410 solution tests pass; A6O015U remains a legacy dependency.
 
-- [ ] T050 [CODEX] Implement component pricing loop through regular PricingOrchestrator with recursion/cycle/depth protection.
+- [x] T050 [CODEX] Implement component pricing loop through regular PricingOrchestrator with recursion/cycle/depth protection.
+  - Owner: Codex
   - Depends on: T047, T049
+  - Evidence: A6O011U 2000 component-order/first-error loop implemented through `IPricingOrchestrator`; confirmed first-level explosion enables explicit nested sub-pack traversal, path provenance, quantity multiplication, cycle detection, configurable depth limit, invalid product/quantity guards, typed legacy explosion failure, and cancellation. Six focused tests and 398 unit/416 solution tests pass; kit rollup and final component-error propagation remain T051/T052.
 
-- [ ] T051 [CODEX] Implement kit rollup for quantities, costs, rebates, adjustments, freight, JIT, vendor adjustments, overhead, third-party fees, and sell.
+- [x] T051 [CODEX] Implement kit rollup for quantities, costs, rebates, adjustments, freight, JIT, vendor adjustments, overhead, third-party fees, and sell.
+  - Owner: Codex
   - Depends on: T050, T004
+  - Evidence: A6O011U 3000/3100 quantity extension and named rollup buckets implemented for selected/total cost, signed rebates, cost/vendor/sell adjustments, inbound freight, JIT, component sell, root OMGEXPL overhead and third-party cost/sell fees, sell-cost basis, and total sell; ordered itemized lines and provenance remain explainable. Four focused tests and 402 unit/420 solution tests pass. Blocked A6O015U blank-switch semantics are not inferred; T052 retains alternate-UOM, earliest-expiration, and final error propagation.
 
-- [ ] T052 [CODEX] Implement kit alternative-UOM conversion, earliest expiration, and component error propagation.
+- [x] T052 [CODEX] Implement kit alternative-UOM conversion, earliest expiration, and component error propagation.
+  - Owner: Codex
   - Depends on: T045, T046, T051
+  - Evidence: A6O011U 4200 merges component and root OH/third-party expirations through T045 with provenance; 4300 field-specific alternate-UOM multiplication uses T046 truncation after sell pricing and deliberately leaves third-party output, generic total cost-adjustment, and sell-adjustment buckets unscaled where COBOL does. Missing factor, component/traversal/rollup errors, warnings, and explainable final `PricingResult` are propagated. Five focused tests and 407 unit/425 solution tests pass; live kit parity remains pending G4.
 
 ### Gate G4 — Kit Parity
 
-- [ ] G4 [SHARED] Compare approved component and rollup cases; critical fields and decision paths must match.
+- [!] G4 [SHARED] Compare approved component and rollup cases; critical fields and decision paths must match.
+  - Owner: Codex
+  - Reviewer: Claude
+  - Decision: NOT APPROVED on 2026-07-21; see `docs/reviews/g4-kit-parity-review.md`.
+  - Blockers: no authoritative sanitized COBOL kit fixtures, no executable COBOL/C# kit comparisons, and no parity runner. Review also identified unresolved pack-level sell, component-quantity staging, and component-expiration differences.
 
 ## Phase 10 — API and Parity Operations
 
-- [ ] T053 [CODEX] Implement `POST /api/v1/prices/calculate` from the OpenAPI contract with regular/kit routing and all request modes.
+- [x] T053 [CODEX] Implement `POST /api/v1/prices/calculate` from the OpenAPI contract with regular/kit routing and all request modes.
+  - Owner: Codex
   - Depends on: T047, T052
+  - Evidence: `POST /api/v1/prices/calculate` maps the OpenAPI request/result shapes, string request-mode values, cancellation, components, selections, provenance, and warnings; application routing follows A6X01 `050-PROCESS-PRICE` by sending only product type O through the T049-T052 kit pipeline and regular/S products through T047. Three focused routing tests, seven endpoint tests, 410 unit tests, and 435 solution tests pass. The contract supplies no input total cost for legacy JIT-on-cost mode; the mode is preserved without inventing that missing value, and error response mapping remains T054.
 
-- [ ] T054 [CODEX] Implement validation, ProblemDetails, modern/legacy error mapping, authentication/authorization hooks, rate/input limits, and audit correlation.
+- [x] T054 [CODEX] Implement validation, ProblemDetails, modern/legacy error mapping, authentication/authorization hooks, rate/input limits, and audit correlation.
+  - Owner: Codex
   - Depends on: T006, T012, T053
+  - Evidence: T006 error taxonomy from Claude commit `488183b` drives correlated RFC 7807 mapping (validation 400, missing data 404, unsupported behavior 422, dependency failure 503, safe unexpected 500) while preserving modern and confirmed legacy codes. Strict OpenAPI-field JSON, COBOL-width/scale/date validation, a 64 KiB body ceiling, 128-character correlation limit, per-caller 100/minute fixed-window limiting, cancellation, success/failure audit events without customer identifiers, and a configuration-gated authenticated-user authorization policy are implemented. The policy is off by default because the current contract declares `security: []`; no credential scheme was invented. All 33 API integration tests and 445 solution tests pass.
 
 - [ ] T055 [CLAUDE] Produce sanitized COBOL characterization fixtures with expected decision paths and critical outputs.
   - Depends on: T006–T010
 
-- [ ] T056 [CODEX] Build ParityRunner to invoke COBOL adapter and C# service for identical inputs and persist comparison results.
+- [x] T056 [CODEX] Build ParityRunner to invoke COBOL adapter and C# service for identical inputs and persist comparison results.
+  - Owner: Codex
+  - T055 verified at Claude commit `24b098c`.
   - Depends on: T019, T047, T052, T055
+  - Evidence: `tools/ParityRunner` now includes an in-process `ICobolPricingAdapter` boundary, explicitly labeled T055 `FixtureBackedDocumentedExpectation` adapter with catalog-ID validation, and `InProcessParityRunner` that passes the identical immutable `PricingOperation` to the adapter and real `IPricingOrchestrator`. Schema-versioned atomic reports retain both complete results and leaf-level field pairs for monetary values, component order/quantity, selections, hierarchy, fees, expiration, errors, and provenance; the existing HTTP capture path remains available and T057 classification remains separate. Three new focused tests use a concrete `PricingOrchestrator` and cover mismatch capture, fixture provenance/validation, and persistence; 16 parity tests and 460 solution tests pass (0 failed). No live parity is claimed: T055's values are hand-derived prose expectations, its catalog is present at commit `24b098c` but absent from this checked-out tree, and no DB2/CICS/COBOL runtime or capture is available.
 
-- [ ] T057 [CODEX] Implement difference classification: exact, rounding, rule, missing/additional fee, date, contract, error, and missing-data differences.
+- [x] T057 [CODEX] Implement difference classification: exact, rounding, rule, missing/additional fee, date, contract, error, and missing-data differences.
+  - Owner: Codex
   - Depends on: T056
   - Acceptance: rule/contract mismatch is critical even if totals match.
+  - Evidence: `PricingDifferenceClassifier` performs semantic JSON comparison against COBOL-authoritative observations and emits exact, rounding, rule, missing-fee, additional-fee, date, contract, error, and missing-data categories with paths, both values, numeric deltas, configured tolerance, and severity. Contract, buying-group, top-level rule, provenance, component provenance, error, date, missing-data, and fee-presence differences are critical even when totals match; within-tolerance monetary differences require review and outside-tolerance differences are critical. `ParityRunner classify` atomically persists a schema-versioned report and exits 3 when critical differences exist. Eight focused classifier tests, 13 parity-project tests, and 457 solution tests pass; no live parity result is claimed without T056's external adapter/capture inputs.
 
 ## Phase 11 — Performance, Shadow, and Cutover
 
 - [ ] T058 [CLAUDE] Document COBOL performance baseline method and representative workload dimensions.
   - Depends on: T055
 
-- [ ] T059 [CODEX] Implement performance/load tests and report DB calls, latency percentiles, throughput, memory, error rate, and kit-size effects.
+- [~] T059 [CODEX] Implement performance/load tests and report DB calls, latency percentiles, throughput, memory, error rate, and kit-size effects.
+  - Owner: Codex
+  - T058 verified at Claude commit `df411db`.
   - Depends on: T053, T058
 
 - [ ] T060 [CODEX] Optimize verified hotspots using indexes/query changes/batching/request caching without changing results.

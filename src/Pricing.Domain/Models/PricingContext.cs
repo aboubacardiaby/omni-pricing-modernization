@@ -6,4 +6,5 @@ public sealed record PricingContext(
     ProductInformation Product,
     CustomerInformation Customer,
     ContractSelection? ContractSelection,
-    SellArrangementSelection? SellArrangementSelection);
+    SellArrangementSelection? SellArrangementSelection,
+    ICostSourceSelection? CostSelection = null);

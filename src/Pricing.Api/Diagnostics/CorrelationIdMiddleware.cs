@@ -1,5 +1,7 @@
 namespace Pricing.Api.Diagnostics;
 
+using global::Pricing.Api.Pricing;
+
 public sealed class CorrelationIdMiddleware(RequestDelegate next, ILogger<CorrelationIdMiddleware> logger)
 {
     public const string HeaderName = "X-Correlation-ID";
@@ -9,7 +11,22 @@ public sealed class CorrelationIdMiddleware(RequestDelegate next, ILogger<Correl
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var correlationId = GetCorrelationId(context);
+        string? supplied = context.Request.Headers[HeaderName].FirstOrDefault();
+        if (supplied?.Length > MaximumLength)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            context.Response.ContentType = "application/problem+json";
+            byte[] payload = PricingProblemWriter.Payload(
+                context,
+                StatusCodes.Status400BadRequest,
+                "The pricing request is invalid.",
+                $"{HeaderName} cannot exceed {MaximumLength} characters.",
+                "CORRELATION_ID_TOO_LONG");
+            await context.Response.Body.WriteAsync(payload, context.RequestAborted);
+            return;
+        }
+
+        var correlationId = GetCorrelationId(context, supplied);
         context.TraceIdentifier = correlationId;
         context.Response.OnStarting(() =>
         {
@@ -23,10 +40,9 @@ public sealed class CorrelationIdMiddleware(RequestDelegate next, ILogger<Correl
         }
     }
 
-    private static string GetCorrelationId(HttpContext context)
+    private static string GetCorrelationId(HttpContext context, string? supplied)
     {
-        var supplied = context.Request.Headers[HeaderName].FirstOrDefault();
-        return !string.IsNullOrWhiteSpace(supplied) && supplied.Length <= MaximumLength
+        return !string.IsNullOrWhiteSpace(supplied)
             ? supplied
             : context.TraceIdentifier;
     }

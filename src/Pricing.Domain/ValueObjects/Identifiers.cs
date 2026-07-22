@@ -46,6 +46,17 @@ public readonly record struct ProductId
     public override string ToString() => Value;
 }
 
+/// <summary>Concatenated vendor/product identifier used by the legacy kit explosion interface.</summary>
+/// <remarks>COBOL: OMGEXPL-PACK-PRODNO and component product numbers are PIC X(12).</remarks>
+public readonly record struct KitProductNumber
+{
+    public const int MaximumLength = 12;
+    [JsonConstructor]
+    public KitProductNumber(string value) => Value = StringValue.Require(value, MaximumLength, nameof(value));
+    public string Value { get; }
+    public override string ToString() => Value;
+}
+
 /// <summary>Contract identifier.</summary>
 /// <remarks>COBOL: OMGPR.CPY, OMGPR-I-CONTRACT, PIC X(20).</remarks>
 public readonly record struct ContractId

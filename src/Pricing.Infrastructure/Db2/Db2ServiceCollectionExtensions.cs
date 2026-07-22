@@ -17,6 +17,7 @@ public static class Db2ServiceCollectionExtensions
             .ValidateDataAnnotations()
             .ValidateOnStart();
         services.AddSingleton<IDb2ConnectionFactory, Db2ConnectionFactory>();
+        services.AddSingleton<IDb2CallCounter, Db2CallCounter>();
         services.AddSingleton<IDb2QueryExecutor, DapperDb2QueryExecutor>();
         services.AddHealthChecks()
             .AddCheck<Db2ConnectionHealthCheck>("db2", tags: ["ready"]);

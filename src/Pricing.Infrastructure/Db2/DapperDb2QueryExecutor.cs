@@ -12,12 +12,17 @@ public sealed class DapperDb2QueryExecutor : IDb2QueryExecutor
 
     private readonly IDb2ConnectionFactory connectionFactory;
     private readonly int commandTimeoutSeconds;
+    private readonly IDb2CallCounter? callCounter;
 
-    public DapperDb2QueryExecutor(IDb2ConnectionFactory connectionFactory, IOptions<Db2Options> options)
+    public DapperDb2QueryExecutor(
+        IDb2ConnectionFactory connectionFactory,
+        IOptions<Db2Options> options,
+        IDb2CallCounter? callCounter = null)
     {
         this.connectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
         commandTimeoutSeconds = options?.Value.CommandTimeoutSeconds
             ?? throw new ArgumentNullException(nameof(options));
+        this.callCounter = callCounter;
     }
 
     public async ValueTask<T?> QuerySingleOrDefaultAsync<T>(
@@ -26,6 +31,7 @@ public sealed class DapperDb2QueryExecutor : IDb2QueryExecutor
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(query);
+        callCounter?.Increment();
         using Activity? activity = StartActivity(query.Operation);
         try
         {
@@ -55,6 +61,7 @@ public sealed class DapperDb2QueryExecutor : IDb2QueryExecutor
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(query);
+        callCounter?.Increment();
         using Activity? activity = StartActivity(query.Operation);
         try
         {

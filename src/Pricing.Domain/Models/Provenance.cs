@@ -126,4 +126,9 @@ public enum HealthcareSellOverrideType
 public sealed record SellArrangementSelection(
     string ArrangementIdentifier,
     string ArrangementType,
-    RuleProvenance Provenance);
+    RuleProvenance Provenance,
+    long? BuyingGroupId = null,
+    string? BuyingGroupMember = null,
+    int? PreferredTierLevel = null,
+    DateOnly? TierStartDate = null,
+    int? ParentDepth = null);

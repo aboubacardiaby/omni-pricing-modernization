@@ -27,7 +27,16 @@ public sealed record SellCalculationBasis(
 public sealed record SellPriceCalculationInput(
     PricingContext Context,
     SellArrangementSelection? Arrangement,
-    SellCalculationBasis Basis);
+    SellCalculationBasis Basis,
+    string BusinessType = "",
+    Percentage? Percentage = null,
+    bool CostContractFound = false,
+    bool CostSuggestedSellAvailable = false,
+    Money? StatedPrice = null,
+    decimal StatedConversionUpFactor = 1m,
+    decimal StatedConversionDownFactor = 1m,
+    PricingError? PercentageResolutionError = null,
+    HealthcareSellOverrideTerms? HealthcareOverride = null);
 
 public sealed record SellPriceCalculationResult(
     Money SellPrice,
