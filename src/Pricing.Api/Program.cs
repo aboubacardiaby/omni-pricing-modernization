@@ -80,13 +80,22 @@ if (db2Configuration.Exists())
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IPricingCalculationService>(services =>
 {
-    var regularPricing = services.GetRequiredService<IPricingOrchestrator>();
+    IPricingOrchestrator? regularPricing = services.GetService<IPricingOrchestrator>();
+    IProductClassificationRepository? classificationRepository =
+        services.GetService<IProductClassificationRepository>();
+    IProductInformationRepository? informationRepository = services.GetService<IProductInformationRepository>();
+    IKitExplosionRepository? kitRepository = services.GetService<IKitExplosionRepository>();
+    if (regularPricing is null || classificationRepository is null || informationRepository is null || kitRepository is null)
+    {
+        return new UnavailablePricingCalculationService();
+    }
+
     return new PricingCalculationService(
-        new ProductClassificationService(services.GetRequiredService<IProductClassificationRepository>()),
-        new ProductInformationService(services.GetRequiredService<IProductInformationRepository>()),
+        new ProductClassificationService(classificationRepository),
+        new ProductInformationService(informationRepository),
         regularPricing,
         new KitComponentPricingService(
-            services.GetRequiredService<IKitExplosionRepository>(),
+            kitRepository,
             regularPricing));
 });
 builder.Services.AddScoped<ILegacyPriceOperationService, LegacyPriceOperationService>();

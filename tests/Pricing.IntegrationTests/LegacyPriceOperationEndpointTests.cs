@@ -16,6 +16,35 @@ using Xunit;
 public sealed class LegacyPriceOperationEndpointTests
 {
     [Fact]
+    public async Task UnconfiguredDatabaseReturnsDependencyProblemInsteadOfDiFailure()
+    {
+        await using var factory = new WebApplicationFactory<Program>();
+        using HttpClient client = factory.CreateClient();
+
+        using HttpResponseMessage response = await client.PostAsJsonAsync(
+            "/api/v1/prices/calculate",
+            new
+            {
+                division = "98",
+                account = "990079",
+                vendor = "2300",
+                product = "0J346H",
+                quantity = 1,
+                unitOfMeasure = "EA",
+                pricingDate = "2026-06-24",
+                requestType = "Full",
+            },
+            CancellationToken.None);
+        using JsonDocument problem = JsonDocument.Parse(
+            await response.Content.ReadAsStreamAsync(CancellationToken.None));
+
+        Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+        Assert.Equal(
+            "PRICING_DATA_ACCESS_NOT_CONFIGURED",
+            problem.RootElement.GetProperty("errorCode").GetString());
+    }
+
+    [Fact]
     public async Task ExecutesLegacyJsonContractAndMapsSupportedResponseFields()
     {
         var pricing = new RecordingPricingService(SuccessResult());
