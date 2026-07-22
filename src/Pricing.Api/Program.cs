@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Pricing.Api.Diagnostics;
+using Pricing.Api.Legacy;
 using Pricing.Api.Pricing;
 using Pricing.Application.Kits;
 using Pricing.Application.Orchestration;
@@ -88,6 +89,7 @@ builder.Services.AddScoped<IPricingCalculationService>(services =>
             services.GetRequiredService<IKitExplosionRepository>(),
             regularPricing));
 });
+builder.Services.AddScoped<ILegacyPriceOperationService, LegacyPriceOperationService>();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -96,6 +98,7 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Description = "Explainable pricing service foundation. COBOL remains authoritative."
     });
+    options.OperationFilter<LegacyPriceOperationSwagger>();
 });
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService("Pricing.Api"))
@@ -145,6 +148,7 @@ app.MapHealthChecks("/health/ready", new HealthCheckOptions
     Predicate = registration => registration.Tags.Contains("ready")
 });
 app.MapPricingEndpoint(builder.Configuration.GetValue<bool>("Security:RequireAuthentication"));
+app.MapLegacyPriceOperationEndpoint(builder.Configuration.GetValue<bool>("Security:RequireAuthentication"));
 
 app.Run();
 

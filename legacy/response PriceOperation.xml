@@ -1,0 +1,3385 @@
+<PriceOperation>
+  <MethodParameters>
+    <PriceOperationResponseOUT_PRICE>
+      <OUT_ERROR_FLAG isNull="false" />
+      <OUT_ERROR_DESC isNull="false" />
+      <OUT_ROW attr0="PriceOperationResponseOUT_PRICEOUT_ROWArray" isNull="false">
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray0>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR>23000J346H</OUT_PART_NBR>
+          <OUT_CATALOG_NBR>J346H</OUT_CATALOG_NBR>
+          <OUT_PART_DESCRIPTION>SUTURE CTD VICRYL 0 VIL BR CT-1</OUT_PART_DESCRIPTION>
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR>C</OUT_ITEM_INDICATOR>
+          <OUT_NON_STOCK_FLAG>N</OUT_NON_STOCK_FLAG>
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME>JOHNSON &amp; JOHNSON / ETHICON INC / S</OUT_VENDOR_NAME>
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR>NOT CONTRACTED</OUT_VENDOR_CONTRACT_NBR>
+            <OUT_OMNI2_PRICING>Y</OUT_OMNI2_PRICING>
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG>N</OUT_SANCTIONED_FLAG>
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM>BX</OUT_BR_DFLT_UOM>
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE>936+</OUT_QTY_AVAILABLE>
+            <OUT_QTY_ON_ORDER>108+</OUT_QTY_ON_ORDER>
+            <OUT_QTY_RESERVE>0</OUT_QTY_RESERVE>
+            <OUT_QTY_CUST_RESERVE>0</OUT_QTY_CUST_RESERVE>
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM>EA</OUT_BU_UOM>
+            <OUT_BU_UOM_DESC>1</OUT_BU_UOM_DESC>
+            <OUT_BU_PRICE>6.5140</OUT_BU_PRICE>
+            <OUT_BU_PRICE_UNRND>6.51404000</OUT_BU_PRICE_UNRND>
+            <OUT_BU_JIT_BREAK_FEE>0.0000</OUT_BU_JIT_BREAK_FEE>
+            <OUT_BU_JIT_LABEL_FEE>0.0000</OUT_BU_JIT_LABEL_FEE>
+            <OUT_BU_JIT_SERVICE_FEE>0.0000</OUT_BU_JIT_SERVICE_FEE>
+            <OUT_BU_JIT_APPLY_FEE>0.0000</OUT_BU_JIT_APPLY_FEE>
+            <OUT_BU_FILE_COST>5.0108</OUT_BU_FILE_COST>
+            <OUT_BU_ACQ_COST>5.0108</OUT_BU_ACQ_COST>
+            <OUT_BU_TOTAL_COST>5.0108</OUT_BU_TOTAL_COST>
+            <OUT_BU_VENDOR_UOM>EA</OUT_BU_VENDOR_UOM>
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>5</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM>Y</OUT_ALT_DFLT_UOM>
+              <OUT_ALT_UOM>BX</OUT_ALT_UOM>
+              <OUT_ALT_FACTOR>36.0000</OUT_ALT_FACTOR>
+              <OUT_ALT_PRICE>234.5054</OUT_ALT_PRICE>
+              <OUT_ALT_PRICE_UNRND>234.50544000</OUT_ALT_PRICE_UNRND>
+              <OUT_ALT_JIT_BREAKFEE>0.0000</OUT_ALT_JIT_BREAKFEE>
+              <OUT_ALT_JIT_LABELFEE>0.0000</OUT_ALT_JIT_LABELFEE>
+              <OUT_ALT_JIT_SERVICEFEE>0.0000</OUT_ALT_JIT_SERVICEFEE>
+              <OUT_ALT_JIT_APPLYFEE>0.0000</OUT_ALT_JIT_APPLYFEE>
+              <OUT_ALT_FILE_COST>180.3888</OUT_ALT_FILE_COST>
+              <OUT_ALT_ACQ_COST>180.3888</OUT_ALT_ACQ_COST>
+              <OUT_ALT_TOTAL_COST>180.3888</OUT_ALT_TOTAL_COST>
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM>CA</OUT_ALT_UOM>
+              <OUT_ALT_FACTOR>36.0000</OUT_ALT_FACTOR>
+              <OUT_ALT_PRICE>234.5054</OUT_ALT_PRICE>
+              <OUT_ALT_PRICE_UNRND>234.50544000</OUT_ALT_PRICE_UNRND>
+              <OUT_ALT_JIT_BREAKFEE>0.0000</OUT_ALT_JIT_BREAKFEE>
+              <OUT_ALT_JIT_LABELFEE>0.0000</OUT_ALT_JIT_LABELFEE>
+              <OUT_ALT_JIT_SERVICEFEE>0.0000</OUT_ALT_JIT_SERVICEFEE>
+              <OUT_ALT_JIT_APPLYFEE>0.0000</OUT_ALT_JIT_APPLYFEE>
+              <OUT_ALT_FILE_COST>180.3888</OUT_ALT_FILE_COST>
+              <OUT_ALT_ACQ_COST>180.3888</OUT_ALT_ACQ_COST>
+              <OUT_ALT_TOTAL_COST>180.3888</OUT_ALT_TOTAL_COST>
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM>CS</OUT_ALT_UOM>
+              <OUT_ALT_FACTOR>36.0000</OUT_ALT_FACTOR>
+              <OUT_ALT_PRICE>234.5054</OUT_ALT_PRICE>
+              <OUT_ALT_PRICE_UNRND>234.50544000</OUT_ALT_PRICE_UNRND>
+              <OUT_ALT_JIT_BREAKFEE>0.0000</OUT_ALT_JIT_BREAKFEE>
+              <OUT_ALT_JIT_LABELFEE>0.0000</OUT_ALT_JIT_LABELFEE>
+              <OUT_ALT_JIT_SERVICEFEE>0.0000</OUT_ALT_JIT_SERVICEFEE>
+              <OUT_ALT_JIT_APPLYFEE>0.0000</OUT_ALT_JIT_APPLYFEE>
+              <OUT_ALT_FILE_COST>180.3888</OUT_ALT_FILE_COST>
+              <OUT_ALT_ACQ_COST>180.3888</OUT_ALT_ACQ_COST>
+              <OUT_ALT_TOTAL_COST>180.3888</OUT_ALT_TOTAL_COST>
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM>DZ</OUT_ALT_UOM>
+              <OUT_ALT_FACTOR>12.0000</OUT_ALT_FACTOR>
+              <OUT_ALT_PRICE>78.1685</OUT_ALT_PRICE>
+              <OUT_ALT_PRICE_UNRND>78.16848000</OUT_ALT_PRICE_UNRND>
+              <OUT_ALT_JIT_BREAKFEE>0.0000</OUT_ALT_JIT_BREAKFEE>
+              <OUT_ALT_JIT_LABELFEE>0.0000</OUT_ALT_JIT_LABELFEE>
+              <OUT_ALT_JIT_SERVICEFEE>0.0000</OUT_ALT_JIT_SERVICEFEE>
+              <OUT_ALT_JIT_APPLYFEE>0.0000</OUT_ALT_JIT_APPLYFEE>
+              <OUT_ALT_FILE_COST>60.1296</OUT_ALT_FILE_COST>
+              <OUT_ALT_ACQ_COST>60.1296</OUT_ALT_ACQ_COST>
+              <OUT_ALT_TOTAL_COST>60.1296</OUT_ALT_TOTAL_COST>
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM>PK</OUT_ALT_UOM>
+              <OUT_ALT_FACTOR>1.0000</OUT_ALT_FACTOR>
+              <OUT_ALT_PRICE>6.5140</OUT_ALT_PRICE>
+              <OUT_ALT_PRICE_UNRND>6.51404000</OUT_ALT_PRICE_UNRND>
+              <OUT_ALT_JIT_BREAKFEE>0.0000</OUT_ALT_JIT_BREAKFEE>
+              <OUT_ALT_JIT_LABELFEE>0.0000</OUT_ALT_JIT_LABELFEE>
+              <OUT_ALT_JIT_SERVICEFEE>0.0000</OUT_ALT_JIT_SERVICEFEE>
+              <OUT_ALT_JIT_APPLYFEE>0.0000</OUT_ALT_JIT_APPLYFEE>
+              <OUT_ALT_FILE_COST>5.0108</OUT_ALT_FILE_COST>
+              <OUT_ALT_ACQ_COST>5.0108</OUT_ALT_ACQ_COST>
+              <OUT_ALT_TOTAL_COST>5.0108</OUT_ALT_TOTAL_COST>
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR>000000000000</OUT_ALT_FACTOR>
+              <OUT_ALT_PRICE>0.0000</OUT_ALT_PRICE>
+              <OUT_ALT_PRICE_UNRND>0.00000000</OUT_ALT_PRICE_UNRND>
+              <OUT_ALT_JIT_BREAKFEE>000000000000</OUT_ALT_JIT_BREAKFEE>
+              <OUT_ALT_JIT_LABELFEE>000000000000</OUT_ALT_JIT_LABELFEE>
+              <OUT_ALT_JIT_SERVICEFEE>000000000000</OUT_ALT_JIT_SERVICEFEE>
+              <OUT_ALT_JIT_APPLYFEE>000000000000</OUT_ALT_JIT_APPLYFEE>
+              <OUT_ALT_FILE_COST>000000000000</OUT_ALT_FILE_COST>
+              <OUT_ALT_ACQ_COST>0.0000</OUT_ALT_ACQ_COST>
+              <OUT_ALT_TOTAL_COST>0.0000</OUT_ALT_TOTAL_COST>
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray0>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray1>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray1>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray2>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray2>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray3>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray3>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray4>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray4>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray5>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray5>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray6>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray6>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray7>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray7>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray8>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray8>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray9>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray9>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray10>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray10>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray11>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray11>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray12>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray12>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray13>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray13>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray14>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray14>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray15>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray15>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray16>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray16>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray17>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray17>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray18>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray18>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray19>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray19>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray20>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray20>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray21>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray21>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray22>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray22>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray23>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray23>
+        <PriceOperationResponseOUT_PRICEOUT_ROWArray24>
+          <OUT_ERROR_SW isNull="false" />
+          <OUT_ERROR_NUMBER isNull="false" />
+          <OUT_ERROR_MSG isNull="false" />
+          <OUT_PART_NBR isNull="false" />
+          <OUT_CATALOG_NBR isNull="false" />
+          <OUT_PART_DESCRIPTION isNull="false" />
+          <OUT_PART_EXTRA_DESC isNull="false" />
+          <OUT_ITEM_INDICATOR isNull="false" />
+          <OUT_NON_STOCK_FLAG isNull="false" />
+          <OUT_CUST_PART isNull="false" />
+          <OUT_CUST_PART2 isNull="false" />
+          <OUT_CUST_SUFFIX isNull="false" />
+          <OUT_VENDOR_NAME isNull="false" />
+          <OUT_PRICER>
+            <OUT_VENDOR_CONTRACT_NBR isNull="false" />
+            <OUT_OMNI2_PRICING isNull="false" />
+            <OUT_BUY_GROUP_SHORT isNull="false" />
+            <OUT_I_GRP_CONTRACT_NBR isNull="false" />
+            <OUT_CONTRACT_TYPE isNull="false" />
+            <OUT_C_SELL_TYPE isNull="false" />
+            <OUT_SANCTIONED_FLAG isNull="false" />
+            <OUT_EFFECTIVE_DATE isNull="false" />
+            <OUT_EXPIRATION_DATE isNull="false" />
+          </OUT_PRICER>
+          <OUT_INB>
+            <OUT_BR_DFLT_UOM isNull="false" />
+            <OUT_BR_DFLT_EQUAL_BU isNull="false" />
+            <OUT_QTY_AVAILABLE isNull="false" />
+            <OUT_QTY_ON_ORDER isNull="false" />
+            <OUT_QTY_RESERVE isNull="false" />
+            <OUT_QTY_CUST_RESERVE isNull="false" />
+          </OUT_INB>
+          <OUT_BASE>
+            <OUT_BU_UOM isNull="false" />
+            <OUT_BU_UOM_DESC isNull="false" />
+            <OUT_BU_PRICE isNull="false" />
+            <OUT_BU_PRICE_UNRND isNull="false" />
+            <OUT_BU_JIT_BREAK_FEE isNull="false" />
+            <OUT_BU_JIT_LABEL_FEE isNull="false" />
+            <OUT_BU_JIT_SERVICE_FEE isNull="false" />
+            <OUT_BU_JIT_APPLY_FEE isNull="false" />
+            <OUT_BU_FILE_COST isNull="false" />
+            <OUT_BU_ACQ_COST isNull="false" />
+            <OUT_BU_TOTAL_COST isNull="false" />
+            <OUT_BU_VENDOR_UOM isNull="false" />
+          </OUT_BASE>
+          <OUT_ALT_NBR_OF_UOMS>0</OUT_ALT_NBR_OF_UOMS>
+          <OUT_ALT attr0="PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray" isNull="false">
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray0>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray1>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray2>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray3>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray4>
+            <PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+              <OUT_ALT_DFLT_UOM isNull="false" />
+              <OUT_ALT_UOM isNull="false" />
+              <OUT_ALT_FACTOR isNull="false" />
+              <OUT_ALT_PRICE isNull="false" />
+              <OUT_ALT_PRICE_UNRND isNull="false" />
+              <OUT_ALT_JIT_BREAKFEE isNull="false" />
+              <OUT_ALT_JIT_LABELFEE isNull="false" />
+              <OUT_ALT_JIT_SERVICEFEE isNull="false" />
+              <OUT_ALT_JIT_APPLYFEE isNull="false" />
+              <OUT_ALT_FILE_COST isNull="false" />
+              <OUT_ALT_ACQ_COST isNull="false" />
+              <OUT_ALT_TOTAL_COST isNull="false" />
+            </PriceOperationResponseOUT_PRICEOUT_ROWOUT_ALTArray5>
+          </OUT_ALT>
+        </PriceOperationResponseOUT_PRICEOUT_ROWArray24>
+      </OUT_ROW>
+    </PriceOperationResponseOUT_PRICE>
+  </MethodParameters>
+</PriceOperation>

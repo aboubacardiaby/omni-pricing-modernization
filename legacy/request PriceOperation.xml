@@ -1,0 +1,16 @@
+<PriceOperation>
+  <MethodParameters>
+    <IN_PRICE>
+      <IN_ACTION>A</IN_ACTION>
+      <IN_USERID>NC</IN_USERID>
+      <IN_CO>OM</IN_CO>
+      <IN_CUST_ID>98990079</IN_CUST_ID>
+      <IN_SHIPTO isNull="false" />
+      <IN_PRICER_MM_DD_CCYY>06-24-2026</IN_PRICER_MM_DD_CCYY>
+      <IN_NBR_REQUESTS>1</IN_NBR_REQUESTS>
+      <IN_PRODUCT_NO attr0="StringArray" isNull="false">
+        <StringArray0>23000J346H</StringArray0>
+      </IN_PRODUCT_NO>
+    </IN_PRICE>
+  </MethodParameters>
+</PriceOperation>

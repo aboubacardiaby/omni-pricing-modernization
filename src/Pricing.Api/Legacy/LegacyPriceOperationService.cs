@@ -1,0 +1,163 @@
+namespace Pricing.Api.Legacy;
+
+using System.Collections.Immutable;
+using System.Globalization;
+using global::Pricing.Application.Orchestration;
+using global::Pricing.Domain.Models;
+using global::Pricing.Domain.ValueObjects;
+
+public interface ILegacyPriceOperationService
+{
+    ValueTask<LegacyPriceOperationResponse> ExecuteAsync(
+        LegacyPriceOperationInput input,
+        CancellationToken cancellationToken);
+}
+
+public sealed class LegacyPriceOperationService(IPricingCalculationService pricing)
+    : ILegacyPriceOperationService
+{
+    public async ValueTask<LegacyPriceOperationResponse> ExecuteAsync(
+        LegacyPriceOperationInput input,
+        CancellationToken cancellationToken)
+    {
+        (DivisionId division, AccountNumber account, DateOnly pricingDate) = ParseHeader(input);
+        var rows = ImmutableArray.CreateBuilder<LegacyPriceRow>(input.ProductNumbers.Count);
+        foreach (string distributorProductNumber in input.ProductNumbers)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            (VendorId vendor, ProductId product) = ParseProduct(distributorProductNumber);
+            var request = new PricingRequest(
+                division,
+                account,
+                vendor,
+                product,
+                new Quantity(1m),
+                new UnitOfMeasure("EA"),
+                input.ShipTo,
+                null,
+                pricingDate,
+                PricingRequestType.Full);
+            PricingResult result = await pricing.CalculateAsync(request, cancellationToken).ConfigureAwait(false);
+            rows.Add(ToRow(distributorProductNumber, result));
+        }
+
+        bool hasErrors = rows.Any(row => row.ErrorSwitch == "Y");
+        return new LegacyPriceOperationResponse(new LegacyPriceOperationOutput(
+            hasErrors ? "Y" : null,
+            hasErrors ? "One or more products could not be priced." : null,
+            rows.ToImmutable()));
+    }
+
+    private static (DivisionId Division, AccountNumber Account, DateOnly PricingDate) ParseHeader(
+        LegacyPriceOperationInput input)
+    {
+        ArgumentNullException.ThrowIfNull(input);
+        if (!string.Equals(input.Action, "A", StringComparison.Ordinal))
+        {
+            throw new ArgumentException("IN_ACTION must be 'A'.", nameof(input));
+        }
+
+        if (!string.Equals(input.Company, "OM", StringComparison.Ordinal))
+        {
+            throw new ArgumentException("IN_CO must be 'OM'.", nameof(input));
+        }
+
+        if (string.IsNullOrWhiteSpace(input.UserId))
+        {
+            throw new ArgumentException("IN_USERID is required.", nameof(input));
+        }
+
+        if (input.CustomerId.Length != 8)
+        {
+            throw new ArgumentException("IN_CUST_ID must contain a two-character division and six-character account.", nameof(input));
+        }
+
+        if (input.ProductNumbers is null || input.ProductNumbers.Count is < 1 or > 25)
+        {
+            throw new ArgumentException("IN_PRODUCT_NO must contain between one and 25 products.", nameof(input));
+        }
+
+        if (input.NumberOfRequests != input.ProductNumbers.Count)
+        {
+            throw new ArgumentException("IN_NBR_REQUESTS must equal the number of IN_PRODUCT_NO values.", nameof(input));
+        }
+
+        if (!DateOnly.TryParseExact(
+                input.PricingDate,
+                "MM-dd-yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out DateOnly pricingDate))
+        {
+            throw new ArgumentException("IN_PRICER_MM_DD_CCYY must use MM-dd-yyyy.", nameof(input));
+        }
+
+        return (
+            new DivisionId(input.CustomerId[..2]),
+            new AccountNumber(input.CustomerId[2..]),
+            pricingDate);
+    }
+
+    private static (VendorId Vendor, ProductId Product) ParseProduct(string distributorProductNumber)
+    {
+        if (string.IsNullOrWhiteSpace(distributorProductNumber) || distributorProductNumber.Length is < 5 or > 12)
+        {
+            throw new ArgumentException("Each IN_PRODUCT_NO must contain a four-character vendor and one-to-eight-character vendor product.");
+        }
+
+        return (new VendorId(distributorProductNumber[..4]), new ProductId(distributorProductNumber[4..]));
+    }
+
+    private static LegacyPriceRow ToRow(string distributorProductNumber, PricingResult result)
+    {
+        PricingError? error = result.Errors.IsEmpty ? null : result.Errors[0];
+        ContractSelection? contract = result.ContractSelection;
+        string? expiration = FormatDate(result.ExpirationDate);
+        return new LegacyPriceRow(
+            error is null ? null : "Y",
+            error?.LegacyErrorCode,
+            error?.Message,
+            distributorProductNumber,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            new LegacyPricerOutput(
+                contract?.Contract.Value,
+                null,
+                null,
+                null,
+                contract?.ContractType,
+                result.SellArrangementSelection?.ArrangementType,
+                null,
+                FormatDate(contract?.Provenance.EffectiveDates?.EffectiveDate),
+                expiration),
+            new LegacyInventoryOutput(null, null, null, null, null, null),
+            new LegacyBaseOutput(
+                contract?.UnitOfMeasure.Value ?? "EA",
+                null,
+                FormatAmount(result.SellPrice, 4),
+                FormatAmount(result.SellPrice, 8),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                FormatAmount(result.Cost, 4),
+                contract?.UnitOfMeasure.Value),
+            0,
+            []);
+    }
+
+    private static string? FormatAmount(Money? amount, int scale) => amount is null
+        ? null
+        : amount.Value.Value.ToString($"F{scale}", CultureInfo.InvariantCulture);
+
+    private static string? FormatDate(DateOnly? date) => date?.ToString("MM-dd-yyyy", CultureInfo.InvariantCulture);
+}

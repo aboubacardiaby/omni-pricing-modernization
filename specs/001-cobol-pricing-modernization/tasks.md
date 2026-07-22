@@ -393,11 +393,18 @@ flowchart TD
   - Production-like measurements remain explicitly not measured until a configured DB2 endpoint, representative data, and the T058 COBOL numeric baseline are available; missing telemetry is reported as null, never fabricated as zero.
   - Depends on: T053, T058
 
-- [ ] T060 [CODEX] Optimize verified hotspots using indexes/query changes/batching/request caching without changing results.
+- [!] T060 [CODEX] Optimize verified hotspots using indexes/query changes/batching/request caching without changing results.
+  - Owner: Codex
+  - Blocked on 2026-07-22: T059's report contains no production-like DB-call, latency, throughput, memory, error-rate, or kit-scaling measurements, and T058 explicitly contains no numeric COBOL baseline. There is therefore no verified hotspot or before/after baseline against which an optimization can be selected or proven.
+  - Implementation blocker: the pricing repository contracts currently have no concrete DB2 query adapters in `Pricing.Infrastructure`; only the generic Dapper executor and legacy kit transport exist, so there is no pricing SQL/index/batching path to optimize. Adding request caching without measured benefit and live parity evidence would violate the plan's "avoid caching until correctness is established" control.
+  - Unblock when: representative T058 workloads are run against a configured C# DB2 environment and COBOL baseline; the report identifies a concrete hotspot; and the corresponding concrete repository/query path exists. Any later cache key must include every pricing determinant and pricing date, and the unchanged parity suite must pass before completion.
   - Depends on: T057, T059
   - Acceptance: parity suite unchanged; cache keys include every pricing determinant and pricing date.
 
-- [ ] T061 [CODEX] Implement shadow execution, sampling, metrics, safe difference logs, dashboards/alerts definitions, and COBOL-authoritative response selection.
+- [!] T061 [CODEX] Implement shadow execution, sampling, metrics, safe difference logs, dashboards/alerts definitions, and COBOL-authoritative response selection.
+  - Owner: Codex
+  - Blocked on 2026-07-22: dependency T060 is `[!]` blocked because no production-like performance baseline, verified hotspot, or concrete pricing DB2 repository/query path exists. Per `AGENTS.md`, T061 cannot be claimed or implemented while that dependency is incomplete.
+  - Unblock when: T060's recorded measurement/repository prerequisites are satisfied, its evidence-backed optimization is completed, and its unchanged-parity acceptance criterion passes.
   - Depends on: T057, T060
 
 - [ ] T062 [CODEX] Implement scoped cutover flags by division/customer/product/request type/traffic percentage and immediate COBOL rollback.
