@@ -87,7 +87,8 @@ public sealed class ProductInformationService
                 data.ProductCategory,
                 divisionId is null ? null : data.InventoryClass,
                 data.ProductCategoryEffectiveDate,
-                data.ProductCategoryExpirationDate);
+                data.ProductCategoryExpirationDate,
+                data.InventoryPriceLevel);
             return ProductInformationResult.Success(information, warnings);
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)

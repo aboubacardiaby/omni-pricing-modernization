@@ -13,7 +13,8 @@ public sealed record ProductInformation(
     int? ProductCategory,
     string? InventoryClass,
     DateOnly? ProductCategoryEffectiveDate = null,
-    DateOnly? ProductCategoryExpirationDate = null);
+    DateOnly? ProductCategoryExpirationDate = null,
+    string? InventoryPriceLevel = null);
 
 public enum ProductType
 {

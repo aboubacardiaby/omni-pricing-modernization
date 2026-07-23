@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using Pricing.Infrastructure.SqlServer;
+using Pricing.Application.ProductClassification;
+using Pricing.Application.ProductInformation;
+using Pricing.Application.CostSelection;
+using Pricing.Application.CustomerPricingContext;
 using Xunit;
 
 public sealed class SqlServerInfrastructureTests
@@ -40,6 +44,21 @@ public sealed class SqlServerInfrastructureTests
 
         Assert.IsType<SqlServerConnectionFactory>(provider.GetRequiredService<ISqlServerConnectionFactory>());
         Assert.IsType<DapperSqlServerQueryExecutor>(provider.GetRequiredService<ISqlServerQueryExecutor>());
+        using IServiceScope scope = provider.CreateScope();
+        IProductClassificationRepository classification =
+            scope.ServiceProvider.GetRequiredService<IProductClassificationRepository>();
+        IProductInformationRepository information =
+            scope.ServiceProvider.GetRequiredService<IProductInformationRepository>();
+        Assert.IsType<SqlServerProductRepository>(classification);
+        Assert.Same(classification, information);
+        Assert.IsType<SqlServerAcquisitionCostRepository>(
+            scope.ServiceProvider.GetRequiredService<IAcquisitionCostRepository>());
+        Assert.IsType<SqlServerCustomerPricingContextRepository>(
+            scope.ServiceProvider.GetRequiredService<ICustomerPricingContextRepository>());
+        Assert.IsType<SqlServerIndividualCostContractRepository>(
+            scope.ServiceProvider.GetRequiredService<IIndividualCostContractRepository>());
+        Assert.IsType<SqlServerBuyingGroupCostContractRepository>(
+            scope.ServiceProvider.GetRequiredService<IBuyingGroupCostContractRepository>());
         Assert.Contains(
             provider.GetRequiredService<IOptions<HealthCheckServiceOptions>>().Value.Registrations,
             registration => registration.Name == "sqlserver");

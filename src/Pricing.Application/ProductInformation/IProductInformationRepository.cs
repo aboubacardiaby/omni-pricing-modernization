@@ -26,7 +26,8 @@ public sealed record ProductInformationData(
     string? InventoryClass,
     decimal? AlternateConversionFactor,
     bool ProductCategoryFound = true,
-    bool AlternateUnitOfMeasureFound = true);
+    bool AlternateUnitOfMeasureFound = true,
+    string? InventoryPriceLevel = null);
 
 public sealed class ProductInformationRepositoryException : Exception
 {
