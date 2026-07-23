@@ -19,75 +19,67 @@ public sealed class LegacyPriceOperationSwagger : IOperationFilter
 
     private static OpenApiObject RequestExample() => new()
     {
-        ["IN_PRICE"] = new OpenApiObject
-        {
-            ["IN_ACTION"] = new OpenApiString("A"),
-            ["IN_USERID"] = new OpenApiString("NC"),
-            ["IN_CO"] = new OpenApiString("OM"),
-            ["IN_CUST_ID"] = new OpenApiString("98990079"),
-            ["IN_SHIPTO"] = new OpenApiString(string.Empty),
-            ["IN_PRICER_MM_DD_CCYY"] = new OpenApiString("06-24-2026"),
-            ["IN_NBR_REQUESTS"] = new OpenApiInteger(1),
-            ["IN_PRODUCT_NO"] = new OpenApiArray { new OpenApiString("23000J346H") },
-        },
+        ["action"] = new OpenApiString("A"),
+        ["userId"] = new OpenApiString("NC"),
+        ["company"] = new OpenApiString("OM"),
+        ["customerId"] = new OpenApiString("98990079"),
+        ["shipTo"] = new OpenApiString(string.Empty),
+        ["pricerDate"] = new OpenApiString("06-24-2026"),
+        ["numberOfRequests"] = new OpenApiInteger(1),
+        ["productNumbers"] = new OpenApiArray { new OpenApiString("23000J346H") },
     };
 
     private static OpenApiObject ResponseExample() => new()
     {
-        ["OUT_PRICE"] = new OpenApiObject
+        ["errorFlag"] = new OpenApiString(string.Empty),
+        ["errorDescription"] = new OpenApiString(string.Empty),
+        ["rows"] = new OpenApiArray
         {
-            ["OUT_ERROR_FLAG"] = new OpenApiString(string.Empty),
-            ["OUT_ERROR_DESC"] = new OpenApiString(string.Empty),
-            ["OUT_ROW"] = new OpenApiArray
+            new OpenApiObject
             {
-                new OpenApiObject
+                ["errorSwitch"] = new OpenApiString(string.Empty),
+                ["errorNumber"] = new OpenApiString(string.Empty),
+                ["errorMessage"] = new OpenApiString(string.Empty),
+                ["partNumber"] = new OpenApiString("23000J346H"),
+                ["catalogNumber"] = new OpenApiString("J346H"),
+                ["partDescription"] = new OpenApiString("SUTURE CTD VICRYL 0 VIL BR CT-1"),
+                ["itemIndicator"] = new OpenApiString("C"),
+                ["nonStockFlag"] = new OpenApiString("N"),
+                ["vendorName"] = new OpenApiString("JOHNSON & JOHNSON / ETHICON INC / S"),
+                ["pricer"] = new OpenApiObject
                 {
-                    ["OUT_ERROR_SW"] = new OpenApiString(string.Empty),
-                    ["OUT_ERROR_NUMBER"] = new OpenApiString(string.Empty),
-                    ["OUT_ERROR_MSG"] = new OpenApiString(string.Empty),
-                    ["OUT_PART_NBR"] = new OpenApiString("23000J346H"),
-                    ["OUT_CATALOG_NBR"] = new OpenApiString("J346H"),
-                    ["OUT_PART_DESCRIPTION"] = new OpenApiString("SUTURE CTD VICRYL 0 VIL BR CT-1"),
-                    ["OUT_ITEM_INDICATOR"] = new OpenApiString("C"),
-                    ["OUT_NON_STOCK_FLAG"] = new OpenApiString("N"),
-                    ["OUT_VENDOR_NAME"] = new OpenApiString("JOHNSON & JOHNSON / ETHICON INC / S"),
-                    ["OUT_PRICER"] = new OpenApiObject
+                    ["vendorContractNumber"] = new OpenApiString("NOT CONTRACTED"),
+                    ["omni2Pricing"] = new OpenApiString("Y"),
+                    ["sanctionedFlag"] = new OpenApiString("N"),
+                },
+                ["inventory"] = new OpenApiObject
+                {
+                    ["defaultUom"] = new OpenApiString("BX"),
+                    ["quantityAvailable"] = new OpenApiString("936+"),
+                    ["quantityOnOrder"] = new OpenApiString("108+"),
+                },
+                ["base"] = new OpenApiObject
+                {
+                    ["uom"] = new OpenApiString("EA"),
+                    ["uomDescription"] = new OpenApiString("1"),
+                    ["price"] = new OpenApiString("6.5140"),
+                    ["fileCost"] = new OpenApiString("5.0108"),
+                    ["acquisitionCost"] = new OpenApiString("5.0108"),
+                    ["totalCost"] = new OpenApiString("5.0108"),
+                    ["vendorUom"] = new OpenApiString("EA"),
+                },
+                ["numberOfAlternateUoms"] = new OpenApiInteger(5),
+                ["alternates"] = new OpenApiArray
+                {
+                    new OpenApiObject
                     {
-                        ["OUT_VENDOR_CONTRACT_NBR"] = new OpenApiString("NOT CONTRACTED"),
-                        ["OUT_OMNI2_PRICING"] = new OpenApiString("Y"),
-                        ["OUT_SANCTIONED_FLAG"] = new OpenApiString("N"),
-                    },
-                    ["OUT_INB"] = new OpenApiObject
-                    {
-                        ["OUT_BR_DFLT_UOM"] = new OpenApiString("BX"),
-                        ["OUT_QTY_AVAILABLE"] = new OpenApiString("936+"),
-                        ["OUT_QTY_ON_ORDER"] = new OpenApiString("108+"),
-                    },
-                    ["OUT_BASE"] = new OpenApiObject
-                    {
-                        ["OUT_BU_UOM"] = new OpenApiString("EA"),
-                        ["OUT_BU_UOM_DESC"] = new OpenApiString("1"),
-                        ["OUT_BU_PRICE"] = new OpenApiString("6.5140"),
-                        ["OUT_BU_PRICE_UNRND"] = new OpenApiString("6.51404000"),
-                        ["OUT_BU_FILE_COST"] = new OpenApiString("5.0108"),
-                        ["OUT_BU_ACQ_COST"] = new OpenApiString("5.0108"),
-                        ["OUT_BU_TOTAL_COST"] = new OpenApiString("5.0108"),
-                        ["OUT_BU_VENDOR_UOM"] = new OpenApiString("EA"),
-                    },
-                    ["OUT_ALT_NBR_OF_UOMS"] = new OpenApiInteger(5),
-                    ["OUT_ALT"] = new OpenApiArray
-                    {
-                        new OpenApiObject
-                        {
-                            ["OUT_ALT_DFLT_UOM"] = new OpenApiString("Y"),
-                            ["OUT_ALT_UOM"] = new OpenApiString("BX"),
-                            ["OUT_ALT_FACTOR"] = new OpenApiString("36.0000"),
-                            ["OUT_ALT_PRICE"] = new OpenApiString("234.5054"),
-                            ["OUT_ALT_PRICE_UNRND"] = new OpenApiString("234.50544000"),
-                            ["OUT_ALT_FILE_COST"] = new OpenApiString("180.3888"),
-                            ["OUT_ALT_ACQ_COST"] = new OpenApiString("180.3888"),
-                            ["OUT_ALT_TOTAL_COST"] = new OpenApiString("180.3888"),
-                        },
+                        ["defaultUom"] = new OpenApiString("Y"),
+                        ["uom"] = new OpenApiString("BX"),
+                        ["factor"] = new OpenApiString("36.0000"),
+                        ["price"] = new OpenApiString("234.5054"),
+                        ["fileCost"] = new OpenApiString("180.3888"),
+                        ["acquisitionCost"] = new OpenApiString("180.3888"),
+                        ["totalCost"] = new OpenApiString("180.3888"),
                     },
                 },
             },

@@ -59,13 +59,12 @@ public sealed class LegacyPriceOperationEndpointTests
             await response.Content.ReadAsStreamAsync(CancellationToken.None));
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        JsonElement output = document.RootElement.GetProperty("OUT_PRICE");
-        JsonElement row = output.GetProperty("OUT_ROW")[0];
-        Assert.Equal("23000J346H", row.GetProperty("OUT_PART_NBR").GetString());
-        Assert.Equal("6.5140", row.GetProperty("OUT_BASE").GetProperty("OUT_BU_PRICE").GetString());
-        Assert.Equal("6.51400000", row.GetProperty("OUT_BASE").GetProperty("OUT_BU_PRICE_UNRND").GetString());
-        Assert.Equal("5.0108", row.GetProperty("OUT_BASE").GetProperty("OUT_BU_TOTAL_COST").GetString());
-        Assert.Equal(0, row.GetProperty("OUT_ALT_NBR_OF_UOMS").GetInt32());
+        JsonElement output = document.RootElement;
+        JsonElement row = output.GetProperty("rows")[0];
+        Assert.Equal("23000J346H", row.GetProperty("partNumber").GetString());
+        Assert.Equal("6.5140", row.GetProperty("base").GetProperty("price").GetString());
+        Assert.Equal("5.0108", row.GetProperty("base").GetProperty("totalCost").GetString());
+        Assert.Equal(0, row.GetProperty("numberOfAlternateUoms").GetInt32());
 
         PricingRequest mapped = Assert.IsType<PricingRequest>(pricing.Request);
         Assert.Equal("98", mapped.Division.Value);
@@ -83,17 +82,14 @@ public sealed class LegacyPriceOperationEndpointTests
         using HttpClient client = factory.CreateClient();
         object request = new
         {
-            IN_PRICE = new
-            {
-                IN_ACTION = "A",
-                IN_USERID = "NC",
-                IN_CO = "OM",
-                IN_CUST_ID = "98990079",
-                IN_SHIPTO = "",
-                IN_PRICER_MM_DD_CCYY = "06-24-2026",
-                IN_NBR_REQUESTS = 2,
-                IN_PRODUCT_NO = new[] { "23000J346H" },
-            },
+            action = "A",
+            userId = "NC",
+            company = "OM",
+            customerId = "98990079",
+            shipTo = "",
+            pricerDate = "06-24-2026",
+            numberOfRequests = 2,
+            productNumbers = new[] { "23000J346H" },
         };
 
         using HttpResponseMessage response = await client.PostAsJsonAsync(
@@ -123,24 +119,22 @@ public sealed class LegacyPriceOperationEndpointTests
             .GetProperty("post");
         Assert.Equal("legacyPriceOperation", operation.GetProperty("operationId").GetString());
         string swaggerJson = swagger.RootElement.GetRawText();
-        Assert.Contains("IN_PRICE", swaggerJson, StringComparison.Ordinal);
-        Assert.Contains("OUT_PRICE", swaggerJson, StringComparison.Ordinal);
-        Assert.Contains("OUT_BU_PRICE_UNRND", swaggerJson, StringComparison.Ordinal);
+        Assert.Contains("pricerDate", swaggerJson, StringComparison.Ordinal);
+        Assert.DoesNotContain("IN_PRICE", swaggerJson, StringComparison.Ordinal);
+        Assert.Contains("numberOfAlternateUoms", swaggerJson, StringComparison.Ordinal);
+        Assert.DoesNotContain("OUT_PRICE", swaggerJson, StringComparison.Ordinal);
     }
 
     private static object Request() => new
     {
-        IN_PRICE = new
-        {
-            IN_ACTION = "A",
-            IN_USERID = "NC",
-            IN_CO = "OM",
-            IN_CUST_ID = "98990079",
-            IN_SHIPTO = "",
-            IN_PRICER_MM_DD_CCYY = "06-24-2026",
-            IN_NBR_REQUESTS = 1,
-            IN_PRODUCT_NO = new[] { "23000J346H" },
-        },
+        action = "A",
+        userId = "NC",
+        company = "OM",
+        customerId = "98990079",
+        shipTo = "",
+        pricerDate = "06-24-2026",
+        numberOfRequests = 1,
+        productNumbers = new[] { "23000J346H" },
     };
 
     private static PricingResult SuccessResult()

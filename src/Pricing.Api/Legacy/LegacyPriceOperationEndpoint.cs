@@ -1,6 +1,7 @@
 namespace Pricing.Api.Legacy;
 
 using global::Pricing.Api.Pricing;
+using PricerApi.Models;
 using System.Text.Json;
 
 public static class LegacyPriceOperationEndpoint
@@ -17,8 +18,8 @@ public static class LegacyPriceOperationEndpoint
             .WithSummary("Execute the legacy Price operation using JSON")
             .WithDescription("JSON compatibility facade for the Micro Focus Price.wsdl contract. COBOL remains authoritative.")
             .WithTags("Legacy compatibility")
-            .Accepts<LegacyPriceOperationRequest>("application/json")
-            .Produces<LegacyPriceOperationResponse>(StatusCodes.Status200OK)
+            .Accepts<PriceRequest>("application/json")
+            .Produces<PriceResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status429TooManyRequests)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
@@ -32,15 +33,15 @@ public static class LegacyPriceOperationEndpoint
     }
 
     private static async Task<IResult> ExecuteAsync(
-        LegacyPriceOperationRequest request,
+        PriceRequest request,
         ILegacyPriceOperationService operation,
         HttpContext context,
         CancellationToken cancellationToken)
     {
         try
         {
-            LegacyPriceOperationResponse response = await operation
-                .ExecuteAsync(request.InPrice, cancellationToken)
+            PriceResponse response = await operation
+                .ExecuteAsync(request, cancellationToken)
                 .ConfigureAwait(false);
             return Results.Bytes(
                 JsonSerializer.SerializeToUtf8Bytes(response, ResponseJsonOptions),
