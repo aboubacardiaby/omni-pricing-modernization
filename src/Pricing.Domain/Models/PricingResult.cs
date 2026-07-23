@@ -14,6 +14,7 @@ public sealed record PricingResult(
     ImmutableArray<PriceComponent> Components,
     ImmutableArray<RuleProvenance> Provenance,
     ImmutableArray<PricingWarning> Warnings,
-    ImmutableArray<PricingError> Errors);
+    ImmutableArray<PricingError> Errors,
+    LegacyPricingDetails? LegacyDetails = null);
 
 public sealed record PricingWarning(string Code, string Message);

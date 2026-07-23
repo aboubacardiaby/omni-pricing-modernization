@@ -1,22 +1,22 @@
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.OpenApi.Models;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
-using Pricing.Api.Diagnostics;
-using Pricing.Api.Legacy;
-using Pricing.Api.Pricing;
-using Pricing.Application.Kits;
-using Pricing.Application.Orchestration;
-using Pricing.Application.ProductClassification;
-using Pricing.Application.ProductInformation;
-using Pricing.Infrastructure.Db2;
-using Pricing.Infrastructure.SqlServer;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using Pricing.Api.Legacy;
+using OpenTelemetry.Trace;
+using Pricing.Api.Pricing;
+using OpenTelemetry.Resources;
+using Pricing.Api.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using Pricing.Application.Kits;
+using Pricing.Infrastructure.Db2;
 using System.Threading.RateLimiting;
+using System.Text.Json.Serialization;
+using Pricing.Infrastructure.SqlServer;
+using Pricing.Application.Orchestration;
+using Microsoft.AspNetCore.Authorization;
+using Pricing.Application.ProductInformation;
+using Pricing.Application.ProductClassification;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 var problemJsonOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
@@ -78,31 +78,21 @@ if (db2Configuration.Exists())
 {
     builder.Services.AddDb2DataAccess(db2Configuration);
 }
-if (!string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString(SqlServerOptions.ConnectionStringName)))
+if (!builder.Environment.IsEnvironment("Testing") &&
+    !string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString(SqlServerOptions.ConnectionStringName)))
 {
     builder.Services.AddSqlServerDataAccess(builder.Configuration);
 }
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddScoped<IPricingCalculationService>(services =>
+if (!builder.Environment.IsEnvironment("Testing") &&
+    !string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString(SqlServerOptions.ConnectionStringName)))
 {
-    IPricingOrchestrator? regularPricing = services.GetService<IPricingOrchestrator>();
-    IProductClassificationRepository? classificationRepository =
-        services.GetService<IProductClassificationRepository>();
-    IProductInformationRepository? informationRepository = services.GetService<IProductInformationRepository>();
-    IKitExplosionRepository? kitRepository = services.GetService<IKitExplosionRepository>();
-    if (regularPricing is null || classificationRepository is null || informationRepository is null || kitRepository is null)
-    {
-        return new UnavailablePricingCalculationService();
-    }
-
-    return new PricingCalculationService(
-        new ProductClassificationService(classificationRepository),
-        new ProductInformationService(informationRepository),
-        regularPricing,
-        new KitComponentPricingService(
-            kitRepository,
-            regularPricing));
-});
+    builder.Services.AddScoped<IPricingCalculationService, SqlServerPricingCalculationService>();
+}
+else
+{
+    builder.Services.AddScoped<IPricingCalculationService, UnavailablePricingCalculationService>();
+}
 builder.Services.AddScoped<ILegacyPriceOperationService, LegacyPriceOperationService>();
 builder.Services.AddSwaggerGen(options =>
 {

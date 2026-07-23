@@ -1,11 +1,10 @@
-namespace Pricing.Api.Legacy;
-
-using System.Collections.Immutable;
 using System.Globalization;
-using global::Pricing.Application.Orchestration;
+using System.Collections.Immutable;
 using global::Pricing.Domain.Models;
 using global::Pricing.Domain.ValueObjects;
+using global::Pricing.Application.Orchestration;
 
+namespace Pricing.Api.Legacy;
 public interface ILegacyPriceOperationService
 {
     ValueTask<LegacyPriceOperationResponse> ExecuteAsync(
@@ -112,49 +111,76 @@ public sealed class LegacyPriceOperationService(IPricingCalculationService prici
     {
         PricingError? error = result.Errors.IsEmpty ? null : result.Errors[0];
         ContractSelection? contract = result.ContractSelection;
+        LegacyPricingDetails? details = result.LegacyDetails;
         string? expiration = FormatDate(result.ExpirationDate);
+        IReadOnlyList<LegacyAlternativeUomOutput> alternatives = details?.AlternateUoms.Select(alternate =>
+            new LegacyAlternativeUomOutput(
+                alternate.IsBranchDefault ? "Y" : null,
+                alternate.UnitOfMeasure,
+                alternate.Factor.ToString("F4", CultureInfo.InvariantCulture),
+                FormatAmount(alternate.Price, 4),
+                FormatAmount(alternate.Price, 8),
+                "0.0000",
+                "0.0000",
+                "0.0000",
+                "0.0000",
+                FormatAmount(alternate.Cost, 4),
+                FormatAmount(alternate.Cost, 4),
+                FormatAmount(alternate.Cost, 4))).ToImmutableArray() ?? [];
+
         return new LegacyPriceRow(
             error is null ? null : "Y",
             error?.LegacyErrorCode,
             error?.Message,
             distributorProductNumber,
+            details?.CatalogNumber,
+            details?.Description,
+            details?.ExtraDescription,
+            details?.ItemIndicator,
+            details?.NonStockFlag,
             null,
             null,
             null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            details?.VendorName,
             new LegacyPricerOutput(
-                contract?.Contract.Value,
-                null,
+                contract?.Contract.Value ?? details?.VendorContractNumber,
+                details?.Omni2Pricing,
                 null,
                 null,
                 contract?.ContractType,
                 result.SellArrangementSelection?.ArrangementType,
-                null,
+                details?.SanctionedFlag,
                 FormatDate(contract?.Provenance.EffectiveDates?.EffectiveDate),
                 expiration),
-            new LegacyInventoryOutput(null, null, null, null, null, null),
+            new LegacyInventoryOutput(
+                details?.BranchDefaultUom,
+                details?.BranchDefaultEqualsBase,
+                FormatQuantity(details?.QuantityAvailable, showPositiveSign: true),
+                FormatQuantity(details?.QuantityOnOrder, showPositiveSign: true),
+                FormatQuantity(details?.QuantityReserved),
+                FormatQuantity(details?.CustomerQuantityReserved)),
             new LegacyBaseOutput(
-                contract?.UnitOfMeasure.Value,
-                null,
+                contract?.UnitOfMeasure.Value ?? details?.BaseUom,
+                details?.BaseUomDescription,
                 FormatAmount(result.SellPrice, 4),
                 FormatAmount(result.SellPrice, 8),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
+                "0.0000",
+                "0.0000",
+                "0.0000",
+                "0.0000",
+                FormatAmount(details?.FileCost, 4),
+                FormatAmount(details?.AcquisitionCost, 4),
                 FormatAmount(result.Cost, 4),
-                contract?.UnitOfMeasure.Value),
-            0,
-            []);
+                contract?.UnitOfMeasure.Value ?? details?.VendorUom),
+            alternatives.Count,
+            alternatives);
     }
 
+    private static string? FormatQuantity(int? quantity, bool showPositiveSign = false) => quantity is null
+        ? null
+        : showPositiveSign && quantity >= 0
+            ? $"{quantity}+"
+            : quantity.Value.ToString(CultureInfo.InvariantCulture);
     private static string? FormatAmount(Money? amount, int scale) => amount is null
         ? null
         : amount.Value.Value.ToString($"F{scale}", CultureInfo.InvariantCulture);

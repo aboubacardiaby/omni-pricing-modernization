@@ -18,7 +18,7 @@ public sealed class LegacyPriceOperationEndpointTests
     [Fact]
     public async Task UnconfiguredDatabaseReturnsDependencyProblemInsteadOfDiFailure()
     {
-        await using var factory = new WebApplicationFactory<Program>();
+        await using var factory = new UnconfiguredApiFactory();
         using HttpClient client = factory.CreateClient();
 
         using HttpResponseMessage response = await client.PostAsJsonAsync(
@@ -178,6 +178,11 @@ public sealed class LegacyPriceOperationEndpointTests
         });
     }
 
+    private sealed class UnconfiguredApiFactory : WebApplicationFactory<Program>
+    {
+        protected override void ConfigureWebHost(IWebHostBuilder builder) =>
+            builder.UseEnvironment("Testing");
+    }
     private sealed class RecordingPricingService(PricingResult result) : IPricingCalculationService
     {
         public PricingRequest? Request { get; private set; }

@@ -3,15 +3,16 @@ namespace Pricing.IntegrationTests;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
-public sealed class ApiFoundationTests : IClassFixture<WebApplicationFactory<Program>>
+public sealed class ApiFoundationTests : IClassFixture<ApiFoundationTests.UnconfiguredApiFactory>
 {
     private readonly HttpClient client;
 
-    public ApiFoundationTests(WebApplicationFactory<Program> factory)
+    public ApiFoundationTests(UnconfiguredApiFactory factory)
     {
         client = factory.CreateClient(new WebApplicationFactoryClientOptions
         {
@@ -59,4 +60,9 @@ public sealed class ApiFoundationTests : IClassFixture<WebApplicationFactory<Pro
         Assert.True(problem.Extensions.TryGetValue("correlationId", out var problemCorrelationId));
         Assert.Equal(correlationId, problemCorrelationId?.ToString());
     }
-}
+
+    public sealed class UnconfiguredApiFactory : WebApplicationFactory<Program>
+    {
+        protected override void ConfigureWebHost(IWebHostBuilder builder) =>
+            builder.UseEnvironment("Testing");
+    }}
