@@ -52,6 +52,6 @@ disabled by default and should not be enabled on an internet-facing deployment. 
 the report retains null measurements and lists them under `missingMeasurements`; it never
 fabricates zero DB calls or memory usage.
 
-Actual thresholds and comparison with COBOL remain blocked until T058's CICS/DB2 baseline is
+Actual thresholds and comparison with COBOL remain blocked until T058's legacy COBOL baseline is
 captured. A run against mocks or a developer machine validates the harness, not production
 capacity.

@@ -5,7 +5,7 @@ using System.Diagnostics;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
-using Pricing.Infrastructure.Db2;
+using Pricing.Infrastructure.Diagnostics;
 
 public sealed class DapperSqlServerQueryExecutor : ISqlServerQueryExecutor
 {
@@ -18,12 +18,12 @@ public sealed class DapperSqlServerQueryExecutor : ISqlServerQueryExecutor
 
     private readonly ISqlServerConnectionFactory connectionFactory;
     private readonly int commandTimeoutSeconds;
-    private readonly IDb2CallCounter? callCounter;
+    private readonly IDatabaseCallCounter? callCounter;
 
     public DapperSqlServerQueryExecutor(
         ISqlServerConnectionFactory connectionFactory,
         IOptions<SqlServerOptions> options,
-        IDb2CallCounter? callCounter = null)
+        IDatabaseCallCounter? callCounter = null)
     {
         this.connectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory));
         commandTimeoutSeconds = options?.Value.CommandTimeoutSeconds

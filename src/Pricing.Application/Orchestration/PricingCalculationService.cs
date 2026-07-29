@@ -23,7 +23,7 @@ public sealed class PricingCalculationService(
     ProductClassificationService classificationService,
     ProductInformationService productInformationService,
     IPricingOrchestrator regularPricing,
-    KitComponentPricingService kitComponentPricing)
+    KitComponentPricingService? kitComponentPricing = null)
     : IPricingCalculationService
 {
     private static readonly AccountRoundingConfiguration DefaultRounding =
@@ -49,6 +49,14 @@ public sealed class PricingCalculationService(
             return await regularPricing
                 .PriceAsync(new PricingOperation(request, DefaultRounding), cancellationToken)
                 .ConfigureAwait(false);
+        }
+
+        if (kitComponentPricing is null)
+        {
+            return Failure(ProductType.Kit, new UnsupportedBehaviorPricingError(
+                "KIT_EXPLOSION_NOT_CONFIGURED",
+                "Kit pricing requires the legacy A6O012U explosion transport.",
+                Blocker: "ILegacyKitExplosionClient"));
         }
 
         ProductInformationResult information = await productInformationService.GetAsync(

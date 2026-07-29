@@ -46,7 +46,7 @@ public sealed class ExpirationDateCollector
         {
             ArgumentNullException.ThrowIfNull(source);
 
-            // Nullable DB2 expiration fields never reach COBOL paragraph 7695. Rows expiring
+            // Nullable database expiration fields never reach COBOL paragraph 7695. Rows expiring
             // before the inclusive pricing date are likewise not valid contributors.
             if (source.ExpirationDate is not { } expiration || expiration < pricingDate)
             {

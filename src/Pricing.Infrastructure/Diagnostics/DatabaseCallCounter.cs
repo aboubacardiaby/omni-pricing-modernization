@@ -1,13 +1,13 @@
-namespace Pricing.Infrastructure.Db2;
+namespace Pricing.Infrastructure.Diagnostics;
 
-public interface IDb2CallCounter
+public interface IDatabaseCallCounter
 {
     int Count { get; }
     IDisposable BeginRequest();
     void Increment();
 }
 
-public sealed class Db2CallCounter : IDb2CallCounter
+public sealed class DatabaseCallCounter : IDatabaseCallCounter
 {
     private readonly AsyncLocal<CounterState?> current = new();
 

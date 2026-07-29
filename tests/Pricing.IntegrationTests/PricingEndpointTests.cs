@@ -28,8 +28,7 @@ public sealed class PricingEndpointTests
             {
                 division = "",
                 account = "123456",
-                vendor = "1234",
-                product = "ABC123",
+                products = new[] { new { vendor = "1234", product = "ABC123" } },
                 quantity = 2,
                 unitOfMeasure = "EA",
                 pricingDate = "2026-07-21",
@@ -50,17 +49,17 @@ public sealed class PricingEndpointTests
     }
 
     [Theory]
-    [InlineData("missing", HttpStatusCode.NotFound)]
-    [InlineData("unsupported", HttpStatusCode.UnprocessableEntity)]
-    [InlineData("dependency", HttpStatusCode.ServiceUnavailable)]
-    [InlineData("validation", HttpStatusCode.BadRequest)]
-    public async Task MapsTypedPricingErrorsToProblemDetails(string errorType, HttpStatusCode expectedStatus)
+    [InlineData("missing")]
+    [InlineData("unsupported")]
+    [InlineData("dependency")]
+    [InlineData("validation")]
+    public async Task MapsTypedPricingErrorsToProductRows(string errorType)
     {
         PricingError error = errorType switch
         {
             "missing" => new MissingDataPricingError("PRODUCT_NOT_FOUND", "Not found", "61603"),
             "unsupported" => new UnsupportedBehaviorPricingError("BLOCKED_BEHAVIOR", "Blocked"),
-            "dependency" => new DependencyPricingError("DB2_UNAVAILABLE", "Unavailable", "70", true),
+            "dependency" => new DependencyPricingError("DATABASE_UNAVAILABLE", "Unavailable", "70", true),
             _ => new ValidationPricingError("INVALID_INPUT", "Invalid", "102"),
         };
         var service = new StubPricingCalculationService(Result(ProductType.Regular) with { Errors = [error] });
@@ -71,19 +70,12 @@ public sealed class PricingEndpointTests
             "/api/v1/prices/calculate",
             Request("Full"),
             CancellationToken.None);
-        using JsonDocument problem = JsonDocument.Parse(await response.Content.ReadAsStreamAsync(CancellationToken.None));
+        using JsonDocument document = JsonDocument.Parse(await response.Content.ReadAsStreamAsync(CancellationToken.None));
+        JsonElement productError = document.RootElement.GetProperty("results")[0].GetProperty("error");
 
-        Assert.Equal(expectedStatus, response.StatusCode);
-        Assert.Equal(error.Code, problem.RootElement.GetProperty("errorCode").GetString());
-        if (error.LegacyErrorCode is { } legacyErrorCode)
-        {
-            Assert.Equal(legacyErrorCode, problem.RootElement.GetProperty("legacyErrorCode").GetString());
-        }
-        else
-        {
-            Assert.False(problem.RootElement.TryGetProperty("legacyErrorCode", out _));
-        }
-        Assert.True(problem.RootElement.TryGetProperty("correlationId", out _));
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal(error.Code, productError.GetProperty("code").GetString());
+        Assert.Equal(error.LegacyErrorCode, productError.GetProperty("legacyErrorCode").GetString());
     }
 
     [Fact]
@@ -129,7 +121,7 @@ public sealed class PricingEndpointTests
         await using var factory = new PricingApiFactory(service);
         using HttpClient client = factory.CreateClient();
         const string json = """
-            {"division":"01","account":"123456","vendor":"1234","product":"ABC123","quantity":2,"unitOfMeasure":"EA","pricingDate":"2026-07-21","requestType":"Full","unexpected":true}
+            {"division":"01","account":"123456","products":[{"vendor":"1234","product":"ABC123"}],"quantity":2,"unitOfMeasure":"EA","pricingDate":"2026-07-21","requestType":"Full","unexpected":true}
             """;
 
         using HttpResponseMessage response = await client.PostAsync(
@@ -182,11 +174,11 @@ public sealed class PricingEndpointTests
             Request("Full"),
             CancellationToken.None);
         string body = await response.Content.ReadAsStringAsync(CancellationToken.None);
-        using JsonDocument problem = JsonDocument.Parse(body);
+        using JsonDocument document = JsonDocument.Parse(body);
+        JsonElement productError = document.RootElement.GetProperty("results")[0].GetProperty("error");
 
-        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
-        Assert.Equal("UNEXPECTED_ERROR", problem.RootElement.GetProperty("errorCode").GetString());
-        Assert.True(problem.RootElement.TryGetProperty("correlationId", out _));
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("UNEXPECTED_ERROR", productError.GetProperty("code").GetString());
         Assert.DoesNotContain("sensitive internal detail", body, StringComparison.Ordinal);
     }
 
@@ -224,7 +216,8 @@ public sealed class PricingEndpointTests
             "/api/v1/prices/calculate",
             Request("Full"),
             CancellationToken.None);
-        ApiResult? result = await response.Content.ReadFromJsonAsync<ApiResult>(CancellationToken.None);
+        ApiBatchResult? batch = await response.Content.ReadFromJsonAsync<ApiBatchResult>(CancellationToken.None);
+        ApiResult? result = batch?.Results.Single();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.NotNull(result);
@@ -239,12 +232,57 @@ public sealed class PricingEndpointTests
         Assert.Single(result.Warnings);
     }
 
+    [Fact]
+    public async Task PricesMultipleProductsInOrderAndKeepsProductErrorsInRows()
+    {
+        PricingResult failed = Result(ProductType.Regular) with
+        {
+            Errors = [new MissingDataPricingError("PRODUCT_NOT_FOUND", "Not found", "61603")],
+        };
+        var service = new SequencePricingCalculationService(Result(ProductType.Regular), failed);
+        await using var factory = new PricingApiFactory(service);
+        using HttpClient client = factory.CreateClient();
+        object request = new
+        {
+            division = "01",
+            account = "123456",
+            products = new[]
+            {
+                new { vendor = "1234", product = "ABC123" },
+                new { vendor = "5678", product = "XYZ789" },
+            },
+            quantity = 2,
+            unitOfMeasure = "EA",
+            pricingDate = "2026-07-21",
+            requestType = "Full",
+        };
+
+        using HttpResponseMessage response = await client.PostAsJsonAsync(
+            "/api/v1/prices/calculate",
+            request,
+            CancellationToken.None);
+        using JsonDocument document = JsonDocument.Parse(
+            await response.Content.ReadAsStreamAsync(CancellationToken.None));
+        JsonElement results = document.RootElement.GetProperty("results");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal(2, results.GetArrayLength());
+        Assert.Equal("1234", results[0].GetProperty("vendor").GetString());
+        Assert.Equal("ABC123", results[0].GetProperty("product").GetString());
+        Assert.Equal(JsonValueKind.Null, results[0].GetProperty("error").ValueKind);
+        Assert.Equal("5678", results[1].GetProperty("vendor").GetString());
+        Assert.Equal("XYZ789", results[1].GetProperty("product").GetString());
+        Assert.Equal("PRODUCT_NOT_FOUND", results[1].GetProperty("error").GetProperty("code").GetString());
+        Assert.Collection(
+            service.Requests,
+            item => Assert.Equal("ABC123", item.Product.Value),
+            item => Assert.Equal("XYZ789", item.Product.Value));
+    }
     private static object Request(string requestType) => new
     {
         division = "01",
         account = "123456",
-        vendor = "1234",
-        product = "ABC123",
+        products = new[] { new { vendor = "1234", product = "ABC123" } },
         quantity = 2,
         unitOfMeasure = "EA",
         shipTo = "01",
@@ -287,6 +325,19 @@ public sealed class PricingEndpointTests
         });
     }
 
+    private sealed class SequencePricingCalculationService(params PricingResult[] results) : IPricingCalculationService
+    {
+        private int index;
+
+        public List<PricingRequest> Requests { get; } = [];
+
+        public ValueTask<PricingResult> CalculateAsync(PricingRequest request, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Requests.Add(request);
+            return ValueTask.FromResult(results[index++]);
+        }
+    }
     private sealed class StubPricingCalculationService(
         PricingResult result,
         Exception? exception = null) : IPricingCalculationService
@@ -305,6 +356,8 @@ public sealed class PricingEndpointTests
             return ValueTask.FromResult(result);
         }
     }
+
+    private sealed record ApiBatchResult(ApiResult[] Results);
 
     private sealed record ApiResult(
         string ProductType,

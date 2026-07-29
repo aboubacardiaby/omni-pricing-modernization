@@ -1,27 +1,24 @@
 namespace Pricing.Api.Pricing;
 
+using System.Text.Json;
 using global::Pricing.Application.Orchestration;
 using global::Pricing.Domain.Models;
 using global::Pricing.Domain.ValueObjects;
-using System.Text.Json;
 
 public static class PricingEndpoint
 {
     private static readonly JsonSerializerOptions ResponseJsonOptions = new(JsonSerializerDefaults.Web);
     private static readonly Action<ILogger, string, PricingRequestType, ProductType, Exception?> AuditSuccess =
         LoggerMessage.Define<string, PricingRequestType, ProductType>(
-            LogLevel.Information,
-            new EventId(53001, "PricingCalculationCompleted"),
+            LogLevel.Information, new EventId(53001, "PricingCalculationCompleted"),
             "Pricing calculation completed with outcome {Outcome}, request type {RequestType}, and product type {ProductType}");
     private static readonly Action<ILogger, string, PricingRequestType, Exception?> AuditFailure =
         LoggerMessage.Define<string, PricingRequestType>(
-            LogLevel.Warning,
-            new EventId(53002, "PricingCalculationRejected"),
+            LogLevel.Warning, new EventId(53002, "PricingCalculationRejected"),
             "Pricing calculation rejected with error {ErrorCode} and request type {RequestType}");
     private static readonly Action<ILogger, PricingRequestType, Exception?> AuditUnexpectedFailure =
         LoggerMessage.Define<PricingRequestType>(
-            LogLevel.Error,
-            new EventId(53003, "PricingCalculationFailed"),
+            LogLevel.Error, new EventId(53003, "PricingCalculationFailed"),
             "Pricing calculation failed unexpectedly for request type {RequestType}");
 
     public static IEndpointRouteBuilder MapPricingEndpoint(
@@ -29,15 +26,12 @@ public static class PricingEndpoint
         bool requireAuthentication = false)
     {
         RouteHandlerBuilder endpoint = endpoints.MapPost("/api/v1/prices/calculate", CalculateAsync)
-            .WithName("calculatePrice")
+            .WithName("calculatePrices")
             .WithTags("Pricing")
-            .Produces<CalculatePriceResponse>(StatusCodes.Status200OK)
+            .Produces<CalculatePricesResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
-            .ProducesProblem(StatusCodes.Status404NotFound)
-            .ProducesProblem(StatusCodes.Status422UnprocessableEntity)
             .ProducesProblem(StatusCodes.Status429TooManyRequests)
             .ProducesProblem(StatusCodes.Status500InternalServerError)
-            .ProducesProblem(StatusCodes.Status503ServiceUnavailable)
             .RequireRateLimiting("pricing");
         if (requireAuthentication)
         {
@@ -48,64 +42,73 @@ public static class PricingEndpoint
     }
 
     private static async Task<IResult> CalculateAsync(
-        CalculatePriceRequest request,
+        CalculatePricesRequest request,
         IPricingCalculationService pricing,
         HttpContext context,
         CancellationToken cancellationToken)
     {
-        ValidationPricingError? validationError = PricingRequestValidator.Validate(request);
-        if (validationError is not null)
+        ValidationPricingError? requestError = PricingRequestValidator.Validate(request);
+        if (requestError is not null)
         {
-            WriteFailureAudit(context, validationError.Code, request.RequestType);
-            return PricingProblemWriter.Result(context, validationError);
+            WriteFailureAudit(context, requestError.Code, request.RequestType);
+            return PricingProblemWriter.Result(context, requestError);
         }
 
-        PricingRequest domainRequest = ToDomain(request);
-        PricingResult result;
-        try
+        var responses = new List<CalculateProductResponse>(request.Products.Count);
+        foreach (CalculateProductRequest product in request.Products)
         {
-            result = await pricing.CalculateAsync(domainRequest, cancellationToken).ConfigureAwait(false);
-        }
-        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
-        {
-            throw;
-        }
-        catch (Exception)
-        {
-            AuditUnexpectedFailure(
+            cancellationToken.ThrowIfCancellationRequested();
+            ValidationPricingError? productError = PricingRequestValidator.Validate(product);
+            if (productError is not null)
+            {
+                WriteFailureAudit(context, productError.Code, request.RequestType);
+                responses.Add(ToErrorResponse(product, productError));
+                continue;
+            }
+
+            PricingResult result;
+            try
+            {
+                result = await pricing.CalculateAsync(ToDomain(request, product), cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                AuditUnexpectedFailure(
+                    context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("PricingAudit"),
+                    request.RequestType,
+                    null);
+                responses.Add(ToErrorResponse(product, new DependencyPricingError(
+                    "UNEXPECTED_ERROR", "Pricing failed unexpectedly.", IsTransient: false)));
+                continue;
+            }
+
+            if (!result.Errors.IsEmpty)
+            {
+                WriteFailureAudit(context, result.Errors[0].Code, request.RequestType);
+                responses.Add(ToErrorResponse(product, result.Errors[0]));
+                continue;
+            }
+
+            AuditSuccess(
                 context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("PricingAudit"),
-                request.RequestType,
-                null);
-            return PricingProblemWriter.Result(
-                context,
-                StatusCodes.Status500InternalServerError,
-                "Pricing failed unexpectedly.",
-                null,
-                "UNEXPECTED_ERROR");
-        }
-        if (!result.Errors.IsEmpty)
-        {
-            WriteFailureAudit(context, result.Errors[0].Code, request.RequestType);
-            return PricingProblemWriter.Result(context, result.Errors[0]);
+                "Success", request.RequestType, result.ProductType, null);
+            responses.Add(ToResponse(product, result));
         }
 
-        AuditSuccess(
-            context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("PricingAudit"),
-            "Success",
-            request.RequestType,
-            result.ProductType,
-            null);
         byte[] payload = JsonSerializer.SerializeToUtf8Bytes(
-            ToResponse(result),
-            ResponseJsonOptions);
+            new CalculatePricesResponse(responses), ResponseJsonOptions);
         return Results.Bytes(payload, "application/json");
     }
 
-    private static PricingRequest ToDomain(CalculatePriceRequest request) => new(
+    private static PricingRequest ToDomain(CalculatePricesRequest request, CalculateProductRequest product) => new(
         new DivisionId(request.Division),
         new AccountNumber(request.Account),
-        new VendorId(request.Vendor),
-        new ProductId(request.Product),
+        new VendorId(product.Vendor),
+        new ProductId(product.Product),
         new Quantity(request.Quantity),
         new UnitOfMeasure(request.UnitOfMeasure),
         request.ShipTo,
@@ -113,7 +116,10 @@ public static class PricingEndpoint
         request.PricingDate,
         request.RequestType);
 
-    private static CalculatePriceResponse ToResponse(PricingResult result) => new(
+    private static CalculateProductResponse ToResponse(CalculateProductRequest product, PricingResult result) => new(
+        product.Vendor,
+        product.Product,
+        null,
         result.ProductType == ProductType.Kit ? "Kit" : "Regular",
         result.Cost?.Value,
         result.SellPrice?.Value,
@@ -122,11 +128,15 @@ public static class PricingEndpoint
         result.ContractSelection?.BuyingGroupId?.ToString(System.Globalization.CultureInfo.InvariantCulture),
         result.SellArrangementSelection?.ArrangementType,
         result.Components.Select(component => new PriceComponentResponse(
-            component.Name,
-            component.Amount.Value,
-            ToResponse(component.Provenance))).ToArray(),
+            component.Name, component.Amount.Value, ToResponse(component.Provenance))).ToArray(),
         result.Provenance.Select(ToResponse).ToArray(),
         result.Warnings.Select(warning => new PricingWarningResponse(warning.Code, warning.Message)).ToArray());
+
+    private static CalculateProductResponse ToErrorResponse(CalculateProductRequest? product, PricingError error) => new(
+        product?.Vendor ?? string.Empty,
+        product?.Product ?? string.Empty,
+        new PricingErrorResponse(error.Code, error.Message, error.LegacyErrorCode),
+        null, null, null, null, null, null, null, [], [], []);
 
     private static RuleProvenanceResponse ToResponse(RuleProvenance provenance) => new(
         provenance.RuleName,

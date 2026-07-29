@@ -69,7 +69,7 @@ public sealed class CostRuleEvaluatorTests
     [Fact]
     public async Task FailureStopsEvaluationAndMarksRemainingRules()
     {
-        var error = new DependencyPricingError("COST_LOOKUP_FAILED", "DB2 failure", "37", true, "90");
+        var error = new DependencyPricingError("COST_LOOKUP_FAILED", "Database failure", "37", true, "90");
         var first = new StubRule("individual", 10, CostRuleDecision.Failed(error));
         var second = new StubRule("group", 20, CostRuleDecision.Applied(Selection("group")));
 

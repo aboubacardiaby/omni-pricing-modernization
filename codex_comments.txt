@@ -1,0 +1,354 @@
+stop the process
+
+
+
+
+
+
+10:25 AM
+
+
+
+
+
+
+Worked for 13s
+
+
+
+The API process is stopped. Port 55789 is released.
+
+
+10:25 AM
+
+
+
+
+
+
+change the legacy price request schema to
+public class PriceRequest
+{
+    [Required]
+    [JsonPropertyName("action")]
+    public string Action { get; set; } = string.Empty;
+[Required]
+[JsonPropertyName("userId")]
+public string UserId { get; set; } = string.Empty;
+
+[Required]
+[JsonPropertyName("company")]
+public string Company { get; set; } = string.Empty;
+
+[Required]
+[JsonPropertyName("customerId")]
+public string CustomerId { get; set; } = string.Empty;
+
+[Required]
+[JsonPropertyName("shipTo")]
+public string ShipTo { get; set; } = string.Empty;
+
+/// <summary>Date in MM-DD-CCYY format (e.g. 04-21-2026)</summary>
+[Required]
+[JsonPropertyName("pricerDate")]
+public string PricerDate { get; set; } = string.Empty;
+
+[Range(1, 25)]
+[JsonPropertyName("numberOfRequests")]
+public int NumberOfRequests { get; set; }
+
+[Required]
+[MinLength(1)]
+[MaxLength(25)]
+[JsonPropertyName("productNumbers")]
+public List<string> ProductNumbers { get; set; } = new();
+}
+
+
+
+
+Show more
+
+10:59 AM
+
+
+
+
+
+
+Worked for 3m 25s
+
+
+
+Changed /api/v1/legacy/price-operation to accept the direct request schema:
+{
+  "action": "A",
+  "userId": "NC",
+  "company": "OM",
+  "customerId": "98990079",
+  "shipTo": "",
+  "pricerDate": "06-24-2026",
+  "numberOfRequests": 1,
+  "productNumbers": [
+    "23000J346H"
+  ]
+}
+The IN_PRICE wrapper and IN_* request properties are no longer accepted or advertised in OpenAPI. The existing OUT_PRICE response schema remains unchanged.
+Validation messages, Swagger examples, endpoint binding, service mapping, and integration tests were updated. Verification: all 41 integration tests pass. The API remains stopped.
+
+Edited LegacyPriceOperationContracts.cs+37-12Review changesUndoReview
+
+
+
+
+
+11:02 AM
+
+
+
+
+
+
+change the response to advertize as this namespace PricerApi.Models;
+public class PriceResponse
+{
+    public string ErrorFlag { get; set; } = string.Empty;
+    public string ErrorDescription { get; set; } = string.Empty;
+    public List<PriceRow> Rows { get; set; } = new();
+}
+public class PriceRow
+{
+    public string ErrorSwitch { get; set; } = string.Empty;
+    public string ErrorNumber { get; set; } = string.Empty;
+    public string ErrorMessage { get; set; } = string.Empty;
+    public string PartNumber { get; set; } = string.Empty;
+    public string CatalogNumber { get; set; } = string.Empty;
+    public string PartDescription { get; set; } = string.Empty;
+    public string PartExtraDescription { get; set; } = string.Empty;
+    public string ItemIndicator { get; set; } = string.Empty;
+    public string NonStockFlag { get; set; } = string.Empty;
+    public string CustomerPart { get; set; } = string.Empty;
+    public string CustomerPart2 { get; set; } = string.Empty;
+    public string CustomerSuffix { get; set; } = string.Empty;
+    public string VendorName { get; set; } = string.Empty;
+    public PricerInfo Pricer { get; set; } = new();
+    public InboundInventory Inventory { get; set; } = new();
+    public BaseUomPricing Base { get; set; } = new();
+    public int NumberOfAlternateUoms { get; set; }
+    public List<AlternateUomPricing> Alternates { get; set; } = new();
+}
+public class PricerInfo
+{
+    public string VendorContractNumber { get; set; } = string.Empty;
+    public string Omni2Pricing { get; set; } = string.Empty;
+    public string BuyGroupShort { get; set; } = string.Empty;
+    public string GroupContractNumber { get; set; } = string.Empty;
+    public string ContractType { get; set; } = string.Empty;
+    public string SellType { get; set; } = string.Empty;
+    public string SanctionedFlag { get; set; } = string.Empty;
+    public string EffectiveDate { get; set; } = string.Empty;
+    public string ExpirationDate { get; set; } = string.Empty;
+}
+public class InboundInventory
+{
+    public string DefaultUom { get; set; } = string.Empty;
+    public string DefaultEqualBaseUnit { get; set; } = string.Empty;
+    public string QuantityAvailable { get; set; } = string.Empty;
+    public string QuantityOnOrder { get; set; } = string.Empty;
+    public string QuantityReserved { get; set; } = string.Empty;
+    public string QuantityCustomerReserved { get; set; } = string.Empty;
+}
+public class BaseUomPricing
+{
+    public string Uom { get; set; } = string.Empty;
+    public string UomDescription { get; set; } = string.Empty;
+    public string Price { get; set; } = string.Empty;
+    public string JitBreakFee { get; set; } = string.Empty;
+    public string JitLabelFee { get; set; } = string.Empty;
+    public string JitServiceFee { get; set; } = string.Empty;
+    public string JitApplyFee { get; set; } = string.Empty;
+    public string FileCost { get; set; } = string.Empty;
+    public string AcquisitionCost { get; set; } = string.Empty;
+    public string TotalCost { get; set; } = string.Empty;
+    public string VendorUom { get; set; } = string.Empty;
+}
+public class AlternateUomPricing
+{
+    public string DefaultUom { get; set; } = string.Empty;
+    public string Uom { get; set; } = string.Empty;
+    public string Factor { get; set; } = string.Empty;
+    public string Price { get; set; } = string.Empty;
+    public string JitBreakFee { get; set; } = string.Empty;
+    public string JitLabelFee { get; set; } = string.Empty;
+    public string JitServiceFee { get; set; } = string.Empty;
+    public string JitApplyFee { get; set; } = string.Empty;
+    public string FileCost { get; set; } = string.Empty;
+    public string AcquisitionCost { get; set; } = string.Empty;
+    public string TotalCost { get; set; } = string.Empty;
+}
+
+
+
+
+Show more
+
+11:03 AM
+
+
+
+
+
+
+Worked for 3m 17s
+
+
+
+Changed /api/v1/legacy/price-operation to advertise and return PricerApi.Models.PriceResponse.
+The response is now direct camel-case JSON:
+{
+  "errorFlag": "",
+  "errorDescription": "",
+  "rows": [
+    {
+      "partNumber": "23000J346H",
+      "catalogNumber": "J346H",
+      "pricer": {},
+      "inventory": {},
+      "base": {
+        "price": "6.5140",
+        "totalCost": "5.0108"
+      },
+      "numberOfAlternateUoms": 0,
+      "alternates": []
+    }
+  ]
+}
+Changes include:
+Removed the OUT_PRICE response wrapper and all OUT_* response names.
+Added the supplied response classes under PricerApi.Models.
+Missing string values now serialize as "", not null.
+Removed unrounded-price fields because they are absent from the supplied model.
+Updated mapper, endpoint metadata, Swagger example, and tests.
+Verification: all 41 integration tests pass. The API remains stopped.
+
+
+11:07 AM
+
+
+
+
+
+
+remove in solution all thing relate Db2. Because are going to use only SQL server
+
+
+
+
+
+
+11:13 AM
+
+
+
+
+
+
+Worked for 7m 32s
+
+
+
+Removed DB2 from the executable solution.
+Changes:
+Deleted the complete Pricing.Infrastructure/Db2 implementation.
+Deleted Db2InfrastructureTests.
+Removed DB2 API registration, health check, configuration handling, and OpenTelemetry source.
+Replaced IDb2CallCounter with database-neutral IDatabaseCallCounter.
+Updated SQL Server execution and performance metrics to use the neutral counter.
+Removed DB2 terminology from compiled code, tests, tools, and current runtime documentation.
+Confirmed there are no DB2 references in src, tests, tools, packages, or Pricing.sln.
+Verification:
+Solution build: succeeded with 0 warnings and 0 errors.
+Tests: 468 passed, 0 failed.
+API remains stopped.
+Historical COBOL attachments, specifications, and analysis documents still mention DB2 where it describes the authoritative legacy system. Those source records were intentionally preserved.
+
+
+11:20 AM
+
+
+
+
+
+
+change the /api/v1/prices/calculate to be behave like the legacy with multiple products and multiple customers as request
+
+
+
+
+
+
+11:27 AM
+
+
+
+
+
+
+I need one contract decision before changing it: should the endpoint price the cross-product of every customer and every product, or accept a list of explicit customer/product request pairs?
+For example, 2 customers and 3 products would produce either 6 results (cross-product) or only the explicitly paired combinations. This affects pricing behavior and response correlation, so it should not be guessed.
+
+
+11:27 AM
+
+
+
+
+
+
+now do it with only multiple products
+
+
+
+
+
+
+11:29 AM
+
+
+
+
+
+
+Worked for 9m 15s
+
+
+
+Implemented /api/v1/prices/calculate for one customer and multiple products.
+Request format:
+{
+  "division": "98",
+  "account": "990079",
+  "products": [
+    { "vendor": "2300", "product": "0J346H" },
+    { "vendor": "0507", "product": "371611" }
+  ],
+  "quantity": 1,
+  "unitOfMeasure": "EA",
+  "pricingDate": "2026-06-24",
+  "requestType": "Full"
+}
+The response now contains an ordered results array. A product failure is returned in that product’s error property without preventing other products from being priced.
+Key changes are in [PricingContracts.cs (line 5)](C:\\Users\\adiaby\\source\\repos\\omni-pricing-modernization\\src\\Pricing.Api\\Pricing\\PricingContracts.cs:5), [PricingEndpoint.cs (line 44)](C:\\Users\\adiaby\\source\\repos\\omni-pricing-modernization\\src\\Pricing.Api\\Pricing\\PricingEndpoint.cs:44), and [PricingRequestValidator.cs](C:\\Users\\adiaby\\source\\repos\\omni-pricing-modernization\\src\\Pricing.Api\\Pricing\\PricingRequestValidator.cs). Requests accept 1–25 products.
+Added mixed success/failure coverage in [PricingEndpointTests.cs (line 236)](C:\\Users\\adiaby\\source\\repos\\omni-pricing-modernization\\tests\\Pricing.IntegrationTests\\PricingEndpointTests.cs:236).
+Verification: solution build succeeded and all solution tests passed. Integration tests: 38 passed, 0 failed.
+
+Edited 2 files+11-5Review changesUndoReview
+
+tests/Pricing.IntegrationTests/LegacyPriceOperationEndpointTests.cstests/Pricing.IntegrationTests/LegacyPriceOperationEndpointTests.cs+5-3
+tools/PricingLoadRunner/README.mdtools/PricingLoadRunner/README.md+6-2
+
+
+
+
+
+11:38 AM

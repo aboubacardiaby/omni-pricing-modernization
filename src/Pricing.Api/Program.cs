@@ -7,7 +7,7 @@ using Pricing.Api.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Pricing.Application.Kits;
-using Pricing.Infrastructure.Db2;
+using Pricing.Infrastructure.Diagnostics;
 using System.Threading.RateLimiting;
 using System.Text.Json.Serialization;
 using Pricing.Infrastructure.SqlServer;
@@ -72,24 +72,15 @@ builder.Services.AddRateLimiter(options =>
 });
 builder.Services.AddHealthChecks()
     .AddCheck("self", () => HealthCheckResult.Healthy(), tags: ["live", "ready"]);
-builder.Services.AddSingleton<IDb2CallCounter, Db2CallCounter>();
-IConfigurationSection db2Configuration = builder.Configuration.GetSection(Db2Options.SectionName);
-if (db2Configuration.Exists())
-{
-    builder.Services.AddDb2DataAccess(db2Configuration);
-}
+builder.Services.AddSingleton<IDatabaseCallCounter, DatabaseCallCounter>();
 if (!builder.Environment.IsEnvironment("Testing") &&
     !string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString(SqlServerOptions.ConnectionStringName)))
 {
     builder.Services.AddSqlServerDataAccess(builder.Configuration);
 }
 builder.Services.AddEndpointsApiExplorer();
-if (!builder.Environment.IsEnvironment("Testing") &&
-    !string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString(SqlServerOptions.ConnectionStringName)))
-{
-    builder.Services.AddScoped<IPricingCalculationService, SqlServerPricingCalculationService>();
-}
-else
+if (builder.Environment.IsEnvironment("Testing") ||
+    string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString(SqlServerOptions.ConnectionStringName)))
 {
     builder.Services.AddScoped<IPricingCalculationService, UnavailablePricingCalculationService>();
 }
@@ -107,7 +98,6 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService("Pricing.Api"))
     .WithTracing(tracing => tracing
-        .AddSource(DapperDb2QueryExecutor.ActivitySourceName)
         .AddSource(DapperSqlServerQueryExecutor.ActivitySourceName)
         .AddAspNetCoreInstrumentation(options =>
         {

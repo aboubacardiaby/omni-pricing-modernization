@@ -129,7 +129,7 @@ public sealed class PricingModelsTests
         [
             new ValidationPricingError("REQUIRED", "Division is required", "8", "division"),
             new MissingDataPricingError("NOT_FOUND", "Product not found", "6", "product"),
-            new DependencyPricingError("DB2", "Database unavailable", "602", true, "70"),
+            new DependencyPricingError("DATABASE", "Database unavailable", "602", true, "70"),
             new UnsupportedBehaviorPricingError("BLOCKED", "Behavior is not confirmed", null, "A6O013U")
         ];
 

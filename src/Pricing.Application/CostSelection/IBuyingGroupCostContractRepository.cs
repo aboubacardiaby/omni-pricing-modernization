@@ -39,7 +39,8 @@ public sealed record BuyingGroupCostCandidate(
     bool IsMembershipEligible,
     bool IsExcluded,
     ImmutableArray<PricingDateRange> EligibilityDates,
-    RuleProvenance Provenance);
+    RuleProvenance Provenance,
+    bool HasContractFees = false);
 
 public enum BuyingGroupScope
 {

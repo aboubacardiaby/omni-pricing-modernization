@@ -2,11 +2,10 @@ namespace Pricing.Api.Pricing;
 
 using global::Pricing.Domain.Models;
 
-public sealed record CalculatePriceRequest(
+public sealed record CalculatePricesRequest(
     string Division,
     string Account,
-    string Vendor,
-    string Product,
+    IReadOnlyList<CalculateProductRequest> Products,
     decimal Quantity,
     string UnitOfMeasure,
     string? ShipTo,
@@ -14,8 +13,15 @@ public sealed record CalculatePriceRequest(
     DateOnly PricingDate,
     PricingRequestType RequestType);
 
-public sealed record CalculatePriceResponse(
-    string ProductType,
+public sealed record CalculateProductRequest(string Vendor, string Product);
+
+public sealed record CalculatePricesResponse(IReadOnlyList<CalculateProductResponse> Results);
+
+public sealed record CalculateProductResponse(
+    string Vendor,
+    string Product,
+    PricingErrorResponse? Error,
+    string? ProductType,
     decimal? Cost,
     decimal? SellPrice,
     DateOnly? ExpirationDate,
@@ -25,6 +31,8 @@ public sealed record CalculatePriceResponse(
     IReadOnlyList<PriceComponentResponse> Components,
     IReadOnlyList<RuleProvenanceResponse> Provenance,
     IReadOnlyList<PricingWarningResponse> Warnings);
+
+public sealed record PricingErrorResponse(string Code, string Message, string? LegacyErrorCode);
 
 public sealed record PriceComponentResponse(
     string Name,

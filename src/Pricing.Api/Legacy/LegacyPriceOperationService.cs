@@ -1,6 +1,7 @@
 namespace Pricing.Api.Legacy;
 
 using System.Globalization;
+using global::Pricing.Application.Legacy;
 using global::Pricing.Application.Orchestration;
 using global::Pricing.Domain.Models;
 using global::Pricing.Domain.ValueObjects;
@@ -13,7 +14,9 @@ public interface ILegacyPriceOperationService
         CancellationToken cancellationToken);
 }
 
-public sealed class LegacyPriceOperationService(IPricingCalculationService pricing)
+public sealed class LegacyPriceOperationService(
+    IPricingCalculationService pricing,
+    ILegacyPricingDetailsRepository legacyDetails)
     : ILegacyPriceOperationService
 {
     public async ValueTask<PriceResponse> ExecuteAsync(
@@ -38,7 +41,14 @@ public sealed class LegacyPriceOperationService(IPricingCalculationService prici
                 pricingDate,
                 PricingRequestType.Full);
             PricingResult result = await pricing.CalculateAsync(request, cancellationToken).ConfigureAwait(false);
-            rows.Add(ToRow(distributorProductNumber, result));
+            if (result.Errors.IsEmpty)
+            {
+                LegacyPricingDetails? details = await legacyDetails
+                    .FindAsync(division, vendor, product, pricingDate, result.Cost, result.SellPrice, cancellationToken)
+                    .ConfigureAwait(false);
+                result = result with { LegacyDetails = details };
+            }
+            rows.Add(ToRow(distributorProductNumber, result, input.ShipTo));
         }
 
         bool hasErrors = rows.Any(row => row.ErrorSwitch == "Y");
@@ -110,7 +120,7 @@ public sealed class LegacyPriceOperationService(IPricingCalculationService prici
         return (new VendorId(distributorProductNumber[..4]), new ProductId(distributorProductNumber[4..]));
     }
 
-    private static PriceRow ToRow(string distributorProductNumber, PricingResult result)
+    private static PriceRow ToRow(string distributorProductNumber, PricingResult result, string shipTo)
     {
         PricingError? error = result.Errors.IsEmpty ? null : result.Errors[0];
         ContractSelection? contract = result.ContractSelection;
@@ -137,6 +147,7 @@ public sealed class LegacyPriceOperationService(IPricingCalculationService prici
             ErrorNumber = error?.LegacyErrorCode ?? string.Empty,
             ErrorMessage = error?.Message ?? string.Empty,
             PartNumber = distributorProductNumber,
+            CustomerSuffix = shipTo,
             CatalogNumber = details?.CatalogNumber ?? string.Empty,
             PartDescription = details?.Description ?? string.Empty,
             PartExtraDescription = details?.ExtraDescription ?? string.Empty,
@@ -148,10 +159,10 @@ public sealed class LegacyPriceOperationService(IPricingCalculationService prici
                 VendorContractNumber = contract?.Contract.Value ?? details?.VendorContractNumber ?? string.Empty,
                 Omni2Pricing = details?.Omni2Pricing ?? string.Empty,
                 ContractType = contract?.ContractType ?? string.Empty,
-                SellType = result.SellArrangementSelection?.ArrangementType ?? string.Empty,
-                SanctionedFlag = details?.SanctionedFlag ?? string.Empty,
+                SellType = MapSellType(result.SellArrangementSelection),
+                SanctionedFlag = contract is { ContractType: "PRIMARY_GROUP", GroupHasContractFees: true } ? "Y" : "N",
                 EffectiveDate = FormatDate(contract?.Provenance.EffectiveDates?.EffectiveDate),
-                ExpirationDate = FormatDate(result.ExpirationDate),
+                ExpirationDate = FormatDate(contract?.Provenance.EffectiveDates?.ExpirationDate ?? result.ExpirationDate),
             },
             Inventory = new InboundInventory
             {
@@ -193,4 +204,13 @@ public sealed class LegacyPriceOperationService(IPricingCalculationService prici
 
     private static string FormatDate(DateOnly? date) =>
         date?.ToString("MM-dd-yyyy", CultureInfo.InvariantCulture) ?? string.Empty;
+
+    private static string MapSellType(SellArrangementSelection? selection) => selection?.Provenance.HierarchyLevel switch
+    {
+        "Account" => "A",
+        "CustomerNumber" => "N",
+        "SUBGROUP" or "PARENT" => "G",
+        "CORPORATE" => "C",
+        _ => string.Empty,
+    };
 }

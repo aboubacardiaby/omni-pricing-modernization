@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 using Pricing.Application.Orchestration;
 using Pricing.Domain.Models;
 
-/// <summary>A boundary for the unavailable CICS/DB2/COBOL pricing transport.</summary>
+/// <summary>A boundary for the unavailable CICS/COBOL pricing transport.</summary>
 /// <remarks>A live implementation must call COBOL. Fixture implementations are not parity evidence.</remarks>
 public interface ICobolPricingAdapter
 {

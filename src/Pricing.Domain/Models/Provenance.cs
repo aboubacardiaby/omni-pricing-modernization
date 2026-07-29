@@ -28,7 +28,8 @@ public sealed record ContractSelection(
     int? BuyingGroupPriority = null,
     string? BuyingGroupHierarchyLevel = null,
     bool IsBuyingGroupOverride = false,
-    SpecialContractSelection? SpecialContract = null) : ICostSourceSelection;
+    SpecialContractSelection? SpecialContract = null,
+    bool GroupHasContractFees = false) : ICostSourceSelection;
 
 /// <summary>Confirmed early-exit outputs and controls for A6U01 special-contract processing.</summary>
 public sealed record SpecialContractSelection(
@@ -131,4 +132,8 @@ public sealed record SellArrangementSelection(
     string? BuyingGroupMember = null,
     int? PreferredTierLevel = null,
     DateOnly? TierStartDate = null,
-    int? ParentDepth = null);
+    int? ParentDepth = null,
+    string? SellMethodCode = null,
+    decimal? Percentage = null,
+    Money? StatedPrice = null,
+    UnitOfMeasure? StatedPriceUnitOfMeasure = null);

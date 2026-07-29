@@ -23,6 +23,8 @@ flowchart TD
     Final --> Kit["Kit T048–T052"]
     Kit --> Parity["Parity T053–T057"]
     Parity --> Cutover["Performance/cutover T058–T063"]
+    Parity --> Repos["Repository Adapters T064–T069"]
+    Repos --> Cutover
 ```
 
 ## Phase 1 — Discovery and Evidence
@@ -412,6 +414,39 @@ flowchart TD
 
 - [ ] T063 [SHARED] Produce cutover runbook, support guide, approval checklist, rollback drill evidence, and final parity/performance report.
   - Depends on: T061, T062
+
+## Phase 12 — Production Repository Adapters
+
+- [x] T064 [CODEX] Implement IProductClassificationRepository, IProductInformationRepository, and ICustomerPricingContextRepository against SQL Server and a concrete IPricingContextStage.
+  - Owner: Codex
+  - Depends on: T022, current SqlServer infra migration
+  - Acceptance: PricingContext populated from real queries; existing T020-T022 unit tests still pass against the new adapters via integration tests; no behavior change to already-approved rule logic.
+  - Evidence: SQL Server adapters implement A6O016U VNG02/VNG06/ING01/VNG05 product reads and CUP100 A200/A310, A425, A800-A850, 1000, 2000, and 3000 customer aggregate reads with parameterized effective-date queries, typed dependency failures, cancellation, ordered hierarchy/provenance, and DI registration. SqlServerPricingContextStage composes the unchanged T020-T022 services into PricingContext. Two focused integration tests, 410 unit tests, and 471 solution tests pass; solution build has 0 warnings/errors. Live database execution was not claimed because no configured test SQL Server/data set is available.
+
+- [x] T065 [CODEX] Implement IIndividualCostContractRepository, IBuyingGroupCostContractRepository, IHealthcareCostOverrideRepository, and IAcquisitionCostRepository against SQL Server; extract SqlServerPricingCalculationService's VNG03 query into IAcquisitionCostRepository.
+  - Owner: Codex
+  - Depends on: T025-T029, T064
+  - Acceptance: ICostPricingStage implemented and wired; ContractSelection is populated end-to-end for a known-contracted characterization case (no more universal "NOT CONTRACTED").
+  - Evidence: SQL Server adapters implement A6U01 9037/9040 and MIN_INDV CCG01/03/04/06/09/27 individual/special selection, CCG13-16 suggested sell, CCG01/03/04 buying-group candidates mapped through the T022 account/customer priority and parent hierarchy, 9945-9970 HC_OVRD account/customer/product plus VNG03 healthcare selection, and extracted 7105/7575 VNG03 acquisition/dealer fallback. A6U01 7080/7110 VNG02/VNG05 conversion uses T046 intermediate rounding. SqlServerCostPricingStage runs the unchanged T024-T029 ordered rules and populates typed cost/ContractSelection provenance. Two focused integration tests prove DI and a known individual contract no longer becomes NOT CONTRACTED; 410 unit tests and 473 solution tests pass, and the solution builds with 0 warnings/errors. Live SQL Server/COBOL parity is not claimed because no configured test database or runtime is available; the legacy endpoint remains on SqlServerPricingCalculationService until T069.
+
+- [x] T066 [CODEX] Implement IVendorCostAdjustmentRepository and IRebatePricingStage.
+  - Owner: Codex
+  - Depends on: T030, T031, T065
+
+- [x] T067 [CODEX] Implement IAccountCustomerSellArrangementRepository, IBuyingGroupSellArrangementRepository, ICorporateSellArrangementRepository, IPriceLockRepository, and ISellPricingStage.
+  - Owner: Codex
+  - Depends on: T033-T038, T065
+
+- [x] T068 [CODEX] Implement IFreightRepository, ILowUomRepository, IPandacRepository, ISurchargeRepository, and IFeePricingStage.
+  - Owner: Codex
+  - Depends on: T039-T044, T067
+
+- [!] T069 [CODEX] Register Pricing.Application.Orchestration.PricingCalculationService as IPricingCalculationService in Program.cs, replacing SqlServerPricingCalculationService; retire or repurpose SqlServerPricingCalculationService once parity is confirmed.
+  - Owner: Codex
+  - Implementation: configured SQL Server deployments now resolve `IPricingCalculationService` to the application `PricingCalculationService` through the concrete T064-T068 stages; the prior `SqlServerPricingCalculationService` is retained, unregistered, as a rollback path until parity approval. Missing `ILegacyKitExplosionClient` produces an explicit typed kit blocker instead of preventing regular-pipeline service resolution.
+  - Blocked: solution build and all 474 tests pass, including 16 parity-project tests, but G3/G4 cannot be approved or genuinely re-run against COBOL because the repository has no live COBOL runtime/capture, authoritative regular or kit comparison fixtures, or configured A6O012U kit transport. Existing G3/G4 decisions remain NOT APPROVED, so constitutional parity-before-replacement prevents marking T069 complete or retiring the rollback implementation.
+  - Depends on: T064-T068
+  - Acceptance: full solution test suite passes; G3/G4 parity gates re-run against the newly wired service.
 
 ## Final Definition of Done
 

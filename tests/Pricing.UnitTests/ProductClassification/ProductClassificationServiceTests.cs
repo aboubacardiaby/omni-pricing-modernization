@@ -88,7 +88,7 @@ public sealed class ProductClassificationServiceTests
     [Fact]
     public async Task DatabaseFailureReturns61602AndRetainsTransientClassification()
     {
-        var repository = new StubRepository(new ProductClassificationRepositoryException("DB2", true));
+        var repository = new StubRepository(new ProductClassificationRepositoryException("DATABASE", true));
 
         ProductClassificationResult result = await new ProductClassificationService(repository)
             .ClassifyAsync("V001", "P0000001", CancellationToken.None);

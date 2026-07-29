@@ -55,7 +55,9 @@ public sealed class BuyingGroupCostContractRule : ICostRule
                 selected.BuyingGroupId,
                 selected.Priority,
                 selected.HierarchyLevel.ToString().ToUpperInvariant(),
-                selected.SelectionPath != BuyingGroupSelectionPath.Priority));
+                selected.SelectionPath != BuyingGroupSelectionPath.Priority,
+                SpecialContract: null,
+                GroupHasContractFees: selected.HasContractFees));
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {

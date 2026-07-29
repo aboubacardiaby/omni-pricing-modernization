@@ -27,21 +27,20 @@ public sealed class LegacyPriceOperationEndpointTests
             {
                 division = "98",
                 account = "990079",
-                vendor = "2300",
-                product = "0J346H",
+                products = new[] { new { vendor = "2300", product = "0J346H" } },
                 quantity = 1,
                 unitOfMeasure = "EA",
                 pricingDate = "2026-06-24",
                 requestType = "Full",
             },
             CancellationToken.None);
-        using JsonDocument problem = JsonDocument.Parse(
+        using JsonDocument document = JsonDocument.Parse(
             await response.Content.ReadAsStreamAsync(CancellationToken.None));
 
-        Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(
             "PRICING_DATA_ACCESS_NOT_CONFIGURED",
-            problem.RootElement.GetProperty("errorCode").GetString());
+            document.RootElement.GetProperty("results")[0].GetProperty("error").GetProperty("code").GetString());
     }
 
     [Fact]
@@ -96,11 +95,13 @@ public sealed class LegacyPriceOperationEndpointTests
             "/api/v1/legacy/price-operation",
             request,
             CancellationToken.None);
-        using JsonDocument problem = JsonDocument.Parse(
+        using JsonDocument document = JsonDocument.Parse(
             await response.Content.ReadAsStreamAsync(CancellationToken.None));
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        Assert.Equal("INVALID_LEGACY_PRICE_OPERATION", problem.RootElement.GetProperty("errorCode").GetString());
+        Assert.Equal(
+            "INVALID_LEGACY_PRICE_OPERATION",
+            document.RootElement.GetProperty("errorCode").GetString());
         Assert.Null(pricing.Request);
     }
 

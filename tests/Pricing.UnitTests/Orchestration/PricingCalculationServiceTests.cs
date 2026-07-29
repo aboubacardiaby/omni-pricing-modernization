@@ -40,6 +40,23 @@ public sealed class PricingCalculationServiceTests
         Assert.Empty(orchestrator.Operations);
     }
 
+    [Fact]
+    public async Task KitReturnsTypedBlockerWhenLegacyExplosionTransportIsNotRegistered()
+    {
+        var orchestrator = new StubOrchestrator();
+        var service = new PricingCalculationService(
+            new ProductClassificationService(new StubClassificationRepository("O")),
+            new ProductInformationService(new StubProductInformationRepository("O")),
+            orchestrator);
+
+        PricingResult result = await service.CalculateAsync(Request(PricingRequestType.Full), CancellationToken.None);
+
+        UnsupportedBehaviorPricingError error = Assert.IsType<UnsupportedBehaviorPricingError>(Assert.Single(result.Errors));
+        Assert.Equal("KIT_EXPLOSION_NOT_CONFIGURED", error.Code);
+        Assert.Equal("ILegacyKitExplosionClient", error.Blocker);
+        Assert.Empty(orchestrator.Operations);
+    }
+
     private static PricingCalculationService Create(
         string legacyType,
         StubOrchestrator orchestrator,

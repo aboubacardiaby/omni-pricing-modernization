@@ -19,7 +19,7 @@ contains:
 
 The performance headers are disabled by default. Setting
 `Performance:ExposeMetricsHeaders=true` enables request-scoped `X-DB-Call-Count` and
-`X-Process-Working-Set-Bytes` headers. Every call through `DapperDb2QueryExecutor` increments the
+`X-Process-Working-Set-Bytes` headers. Every call through `DapperSqlServerQueryExecutor` increments the
 request counter. If either header is absent or incomplete, the report emits `null` and records the
 metric under `missingMeasurements`; it does not report an invented zero.
 
@@ -43,7 +43,7 @@ calculation and concurrency control, not a pricing capacity baseline.
 
 | Metric | Production-like C# result | Reason |
 |---|---:|---|
-| DB calls/request | Not measured | No configured DB2 test environment or representative data supplied |
+| DB calls/request | Not measured | No configured SQL Server test environment or representative data supplied |
 | p50/p95/p99 latency | Not measured | No production-like pricing endpoint supplied |
 | Throughput | Not measured | No production-like pricing endpoint supplied |
 | Working-set memory | Not measured | No production-like pricing process supplied |

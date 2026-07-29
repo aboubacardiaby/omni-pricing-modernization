@@ -45,7 +45,7 @@ public sealed class OmgprEncoderTests
             null,
             null,
             null,
-            [new DependencyPricingError("DB2", "DB ERROR", "602", false, "70")]);
+            [new DependencyPricingError("DATABASE", "DB ERROR", "602", false, "70")]);
 
         byte[] encoded = new OmgprEncoder(profile).Encode(original, result);
 

@@ -1,10 +1,10 @@
 namespace Pricing.Api.Diagnostics;
 
-using global::Pricing.Infrastructure.Db2;
+using global::Pricing.Infrastructure.Diagnostics;
 
 public sealed class PerformanceMetricsHeaderMiddleware(
     RequestDelegate next,
-    IDb2CallCounter callCounter)
+    IDatabaseCallCounter callCounter)
 {
     public const string DbCallCountHeader = "X-DB-Call-Count";
     public const string WorkingSetHeader = "X-Process-Working-Set-Bytes";
