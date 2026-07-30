@@ -143,6 +143,7 @@ app.MapHealthChecks("/health/ready", new HealthCheckOptions
     Predicate = registration => registration.Tags.Contains("ready")
 });
 app.MapPricingEndpoint(builder.Configuration.GetValue<bool>("Security:RequireAuthentication"));
+app.MapPricingLegacyShapeEndpoint(builder.Configuration.GetValue<bool>("Security:RequireAuthentication"));
 app.MapLegacyPriceOperationEndpoint(builder.Configuration.GetValue<bool>("Security:RequireAuthentication"));
 
 app.Run();

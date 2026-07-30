@@ -1,6 +1,7 @@
 namespace Pricing.Api.Pricing;
 
 using System.Text.Json;
+using global::Pricing.Api.Legacy;
 using global::Pricing.Application.Orchestration;
 using global::Pricing.Domain.Models;
 using global::Pricing.Domain.ValueObjects;
@@ -39,6 +40,117 @@ public static class PricingEndpoint
         }
 
         return endpoints;
+    }
+
+    /// <summary>Accepts the legacy PriceRequest JSON shape and returns the modern CalculatePricesResponse shape.</summary>
+    public static IEndpointRouteBuilder MapPricingLegacyShapeEndpoint(
+        this IEndpointRouteBuilder endpoints,
+        bool requireAuthentication = false)
+    {
+        RouteHandlerBuilder endpoint = endpoints.MapPost("/api/v1/prices/calculate-legacy-shape", CalculateFromLegacyShapeAsync)
+            .WithName("calculatePricesFromLegacyShape")
+            .WithTags("Pricing")
+            .Produces<CalculatePricesResponse>(StatusCodes.Status200OK)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .ProducesProblem(StatusCodes.Status429TooManyRequests)
+            .ProducesProblem(StatusCodes.Status500InternalServerError)
+            .RequireRateLimiting("pricing");
+        if (requireAuthentication)
+        {
+            endpoint.RequireAuthorization("PricingCalculate");
+        }
+
+        return endpoints;
+    }
+
+    private static async Task<IResult> CalculateFromLegacyShapeAsync(
+        PriceRequest request,
+        IPricingCalculationService pricing,
+        HttpContext context,
+        CancellationToken cancellationToken)
+    {
+        DivisionId division;
+        AccountNumber account;
+        DateOnly pricingDate;
+        try
+        {
+            (division, account, pricingDate) = LegacyPriceRequestParser.ParseHeader(request);
+        }
+        catch (ArgumentException exception)
+        {
+            WriteFailureAudit(context, "INVALID_LEGACY_SHAPED_REQUEST", PricingRequestType.Full);
+            return PricingProblemWriter.Result(
+                context, StatusCodes.Status400BadRequest,
+                "The pricing request is invalid.", exception.Message, "INVALID_LEGACY_SHAPED_REQUEST");
+        }
+
+        var responses = new List<CalculateProductResponse>(request.ProductNumbers.Count);
+        foreach (string distributorProductNumber in request.ProductNumbers)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            VendorId vendor;
+            ProductId product;
+            try
+            {
+                (vendor, product) = LegacyPriceRequestParser.ParseProduct(distributorProductNumber);
+            }
+            catch (ArgumentException exception)
+            {
+                WriteFailureAudit(context, "INVALID_PRODUCT_NUMBER", PricingRequestType.Full);
+                responses.Add(ToErrorResponse(null, new ValidationPricingError(
+                    "INVALID_PRODUCT_NUMBER", exception.Message, Field: "productNumbers")));
+                continue;
+            }
+
+            var pricingRequest = new PricingRequest(
+                division,
+                account,
+                vendor,
+                product,
+                new Quantity(1m),
+                new UnitOfMeasure("EA"),
+                request.ShipTo,
+                null,
+                pricingDate,
+                PricingRequestType.Full);
+            var productRequest = new CalculateProductRequest(vendor.Value, product.Value);
+
+            PricingResult result;
+            try
+            {
+                result = await pricing.CalculateAsync(pricingRequest, cancellationToken).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                AuditUnexpectedFailure(
+                    context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("PricingAudit"),
+                    PricingRequestType.Full,
+                    null);
+                responses.Add(ToErrorResponse(productRequest, new DependencyPricingError(
+                    "UNEXPECTED_ERROR", "Pricing failed unexpectedly.", IsTransient: false)));
+                continue;
+            }
+
+            if (!result.Errors.IsEmpty)
+            {
+                WriteFailureAudit(context, result.Errors[0].Code, PricingRequestType.Full);
+                responses.Add(ToErrorResponse(productRequest, result.Errors[0]));
+                continue;
+            }
+
+            AuditSuccess(
+                context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("PricingAudit"),
+                "Success", PricingRequestType.Full, result.ProductType, null);
+            responses.Add(ToResponse(productRequest, result));
+        }
+
+        byte[] payload = JsonSerializer.SerializeToUtf8Bytes(
+            new CalculatePricesResponse(responses), ResponseJsonOptions);
+        return Results.Bytes(payload, "application/json");
     }
 
     private static async Task<IResult> CalculateAsync(
